@@ -65,7 +65,7 @@ export const batchDeleteCheckRule = (params, handleSuccess) => {
  */
 export const validateCheckRule = (ruleCode, value) => {
   value = encodeURIComponent(value);
-  let params = { ruleCode, value };
+  const params = { ruleCode, value };
   return defHttp.get({ url: Api.checkByCode, params }, { isTransformResponse: false });
 };
 

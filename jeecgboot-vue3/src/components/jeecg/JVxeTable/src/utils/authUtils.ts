@@ -9,28 +9,28 @@ const permissionStore = usePermissionStoreWithOut();
  */
 export function getJVxeAuths(prefix) {
   prefix = getPrefix(prefix);
-  let { authList, allAuthList } = permissionStore;
-  let authsMap = new Map<string, typeof allAuthList[0]>();
+  const { authList, allAuthList } = permissionStore;
+  const authsMap = new Map<string, (typeof allAuthList)[0]>();
   if (!prefix || prefix.length == 0) {
     return authsMap;
   }
   // 将所有vxe用到的权限取出来
-  for (let auth of allAuthList) {
+  for (const auth of allAuthList) {
     if (auth.status == '1' && (auth.action || '').startsWith(prefix)) {
       authsMap.set(auth.action, { ...auth, isAuth: false });
     }
   }
   // 设置是否已授权
-  for (let auth of authList) {
-    let getAuth = authsMap.get(auth.action);
+  for (const auth of authList) {
+    const getAuth = authsMap.get(auth.action);
     if (getAuth != null) {
       getAuth.isAuth = true;
     }
   }
   //update-begin-author:taoyan date:2022-6-1 for:  VUEN-1162 子表按钮没控制
-  let onlineButtonAuths = permissionStore.getOnlineSubTableAuth(prefix);
+  const onlineButtonAuths = permissionStore.getOnlineSubTableAuth(prefix);
   if (onlineButtonAuths && onlineButtonAuths.length > 0) {
-    for (let auth of onlineButtonAuths) {
+    for (const auth of onlineButtonAuths) {
       authsMap.set(prefix + 'btn:' + auth, { action: auth, type: 1, status: 1, isAuth: false });
     }
   }

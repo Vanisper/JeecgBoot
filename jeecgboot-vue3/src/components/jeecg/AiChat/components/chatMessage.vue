@@ -26,7 +26,7 @@
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   const { userInfo } = useUserStore();
   const avatar = () => {
-    return getFileAccessHttpUrl(userInfo?.avatar)|| defaultAvatar;
+    return getFileAccessHttpUrl(userInfo?.avatar) || defaultAvatar;
   };
 </script>
 

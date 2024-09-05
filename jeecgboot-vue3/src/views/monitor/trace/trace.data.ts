@@ -18,7 +18,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'request.method',
     width: 20,
     customRender({ record, column }) {
-      let value = _get(record, column.dataIndex!);
+      const value = _get(record, column.dataIndex!);
       let color = '';
       if (value === 'GET') {
         color = '#87d068';
@@ -48,7 +48,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'response.status',
     width: 50,
     customRender({ record, column }) {
-      let value = _get(record, column.dataIndex!);
+      const value = _get(record, column.dataIndex!);
       let color = '';
       if (value < 200) {
         color = 'pink';
@@ -69,7 +69,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'timeTaken',
     width: 50,
     customRender({ record, column }) {
-      let value = _get(record, column.dataIndex!);
+      const value = _get(record, column.dataIndex!);
       let color = 'red';
       if (value < 500) {
         color = 'green';

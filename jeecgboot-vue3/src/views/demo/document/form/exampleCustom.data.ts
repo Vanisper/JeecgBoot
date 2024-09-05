@@ -8,7 +8,7 @@ export const schemas: FormSchema[] = [
     component: 'InputCountDown',
     componentProps: {
       //'default': 默认, 'large': 最大, 'small': 最小
-      size:'default',
+      size: 'default',
       //倒计时
       count: 120,
     },
@@ -120,15 +120,15 @@ export const schemas: FormSchema[] = [
     component: 'JImageUpload',
     componentProps: {
       //按钮显示文字
-      text:'图片上传',
+      text: '图片上传',
       //支持两种基本样式picture和picture-card
-      listType:'picture-card',
+      listType: 'picture-card',
       //用于控制文件上传的业务路径,默认temp
-      bizPath:'temp',
+      bizPath: 'temp',
       //是否禁用
-      disabled:false,
+      disabled: false,
       //最大上传数量
-      fileMax:1,
+      fileMax: 1,
     },
   },
   {
@@ -137,9 +137,9 @@ export const schemas: FormSchema[] = [
     component: 'JDictSelectTag',
     componentProps: {
       //字典code配置，比如通过性别字典编码：sex，也可以使用demo,name,id 表名,名称,值的方式
-      dictCode:'sex',
+      dictCode: 'sex',
       //支持radio(单选按钮)、radioButton(单选按钮 btn风格)、select(下拉框)
-      type:'radioButton'
+      type: 'radioButton',
     },
   },
   {
@@ -165,7 +165,7 @@ export const schemas: FormSchema[] = [
     component: 'JAreaSelect',
     componentProps: {
       //级别 1 只显示省 2 省市 3 省市区
-      level:3
+      level: 3,
     },
   },
   {
@@ -174,7 +174,7 @@ export const schemas: FormSchema[] = [
     component: 'JEditor',
     componentProps: {
       //是否禁用
-      disabled: false
+      disabled: false,
     },
   },
   {
@@ -183,7 +183,7 @@ export const schemas: FormSchema[] = [
     component: 'JMarkdownEditor',
     componentProps: {
       //是否禁用
-      disabled: false
+      disabled: false,
     },
   },
   {
@@ -198,7 +198,7 @@ export const schemas: FormSchema[] = [
       //是否为搜索模式
       showSearch: true,
       //是否禁用
-      disabled: false
+      disabled: false,
     },
   },
   {
@@ -207,19 +207,19 @@ export const schemas: FormSchema[] = [
     component: 'JCodeEditor',
     componentProps: {
       //高度，默认auto
-      height:'150px',
+      height: '150px',
       //是否禁用
-      disabled:false,
+      disabled: false,
       //是否全屏
-      fullScreen:false,
+      fullScreen: false,
       //全屏之后的坐标
       zIndex: 999,
       //代码主题，目前只支持idea,可在组件自行扩展
-      theme:'idea',
+      theme: 'idea',
       //代码提示
-      keywords:['console'],
+      keywords: ['console'],
       //语言如（javascript,vue,markdown）可在组件自行扩展
-      language:'javascript'
+      language: 'javascript',
     },
   },
   {
@@ -228,17 +228,17 @@ export const schemas: FormSchema[] = [
     component: 'JCategorySelect',
     componentProps: {
       //占位内容
-      placeholder:'请选择分类字典树',
+      placeholder: '请选择分类字典树',
       //查询条件，如“{'name':'笔记本'}”
-      condition:"",
+      condition: '',
       //是否多选
       multiple: false,
       //起始选择code，见配置的分类字典的类型编码
       pcode: 'A04',
       //父级id
-      pid:'',
+      pid: '',
       //返回key
-      back:'id',
+      back: 'id',
     },
   },
   {
@@ -247,9 +247,9 @@ export const schemas: FormSchema[] = [
     component: 'JSelectMultiple',
     componentProps: {
       //字典code配置，比如通过性别字典编码：sex，也可以使用demo,name,id 表名,名称,值的方式
-      dictCode:'company_rank',
+      dictCode: 'company_rank',
       //是否只读
-      readOnly:false,
+      readOnly: false,
     },
   },
   {
@@ -257,29 +257,27 @@ export const schemas: FormSchema[] = [
     field: 'popup',
     component: 'JPopup',
     componentProps: ({ formActionType }) => {
-      const {setFieldsValue} = formActionType;
-      return{
-        setFieldsValue:setFieldsValue,
+      const { setFieldsValue } = formActionType;
+      return {
+        setFieldsValue: setFieldsValue,
         //online报表编码
-        code:"demo",
+        code: 'demo',
         //是否为多选
-        multi:false,
+        multi: false,
         //字段配置
-        fieldConfig: [
-          { source: 'name', target: 'popup' },
-        ],
-      }
+        fieldConfig: [{ source: 'name', target: 'popup' }],
+      };
     },
   },
   {
     label: '开关自定义',
     field: 'switch',
     component: 'JSwitch',
-    componentProps:{
+    componentProps: {
       //取值 options
-      options:['Y','N'],
+      options: ['Y', 'N'],
       //文本option
-      labelOptions:['是', '否'],
+      labelOptions: ['是', '否'],
       //是否启用下拉
       query: false,
       //是否禁用
@@ -290,7 +288,7 @@ export const schemas: FormSchema[] = [
     label: '定时表达式选择',
     field: 'timing',
     component: 'JEasyCron',
-    componentProps:{
+    componentProps: {
       //是否隐藏参数秒和年设置，如果隐藏，那么参数秒和年将会全部忽略掉。
       hideSecond: false,
       //是否隐藏参数年设置，如果隐藏，那么参数年将会全部忽略掉
@@ -298,42 +296,42 @@ export const schemas: FormSchema[] = [
       //是否禁用
       disabled: false,
       //获取预览执行时间列表的函数，格式为：remote (cron值, time时间戳, cb回调函数)
-      remote:(cron,time,cb)=>{}
+      remote: (cron, time, cb) => {},
     },
   },
   {
     label: '分类字典树',
     field: 'treeDict',
     component: 'JTreeDict',
-    componentProps:{
+    componentProps: {
       //指定当前组件需要存储的字段 可选: id(主键)和code(编码)
-      field:'id',
+      field: 'id',
       //是否为异步
       async: true,
       //是否禁用
       disabled: false,
       //指定一个节点的编码,加载该节点下的所有字典数据,若不指定，默认加载所有数据
-      parentCode:'A04'
+      parentCode: 'A04',
     },
   },
   {
     label: '多行输入窗口',
     field: 'inputPop',
     component: 'JInputPop',
-    componentProps:{
+    componentProps: {
       //标题
-      title:'多行输入窗口',
+      title: '多行输入窗口',
       //弹窗显示位置
-      position:'bottom',
+      position: 'bottom',
     },
   },
   {
     label: '多选',
     field: 'multipleChoice',
     component: 'JCheckbox',
-    componentProps:{
+    componentProps: {
       //字典code配置，比如通过职位字典编码：company_rank，也可以使用demo,name,id 表名,名称,值的方式
-      dictCode:'company_rank',
+      dictCode: 'company_rank',
       //是否禁用
       disabled: false,
       //没有字典code可以使用option来定义
@@ -361,7 +359,7 @@ export const schemas: FormSchema[] = [
       //是否显示选择按钮
       showButton: true,
       //选择框标题
-      modalTitle: '部门用户选择'
+      modalTitle: '部门用户选择',
     },
   },
   {
@@ -387,7 +385,7 @@ export const schemas: FormSchema[] = [
       //是否异步加载
       async: true,
       //当async设置为true时有效，表示异步查询时，每次获取数据的数量，默认10
-      pageSize:3
+      pageSize: 3,
     },
   },
   {
@@ -396,7 +394,7 @@ export const schemas: FormSchema[] = [
     component: 'JAddInput',
     componentProps: {
       //自定义超过多少行才会显示删除按钮，默认为1
-      min:1
+      min: 1,
     },
   },
   {
@@ -413,32 +411,32 @@ export const schemas: FormSchema[] = [
       //是否禁用
       disabled: false,
     },
-  },  
+  },
   {
     label: '选择角色组件',
     field: 'roleSelect',
     component: 'RoleSelect',
     componentProps: {
-      //最大选择数量  
+      //最大选择数量
       maxSelectCount: 3,
       //是否单选
-      isRadioSelection: false
+      isRadioSelection: false,
     },
-  },  
+  },
   {
     label: '数值范围输入框',
     field: 'rangeNumber',
     component: 'JRangeNumber',
-  }, 
+  },
   {
     label: '远程Api单选框组',
     field: 'apiRadioGroup',
     component: 'ApiRadioGroup',
-    componentProps:{
+    componentProps: {
       //请求接口返回结果{ result:{ list: [ name: '选项0',id: '1' ] }}
-      api:()=> defHttp.get({ url: '/mock/select/getDemoOptions' }),
+      api: () => defHttp.get({ url: '/mock/select/getDemoOptions' }),
       //请求参数
-      params:{},
+      params: {},
       //是否为按钮风格类型，默认false
       isBtn: false,
       //返回集合名称
@@ -447,6 +445,6 @@ export const schemas: FormSchema[] = [
       labelField: 'name',
       //值字段名称
       valueField: 'id',
-    }
+    },
   },
 ];

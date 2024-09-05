@@ -43,9 +43,9 @@
 
   const emit = defineEmits(['register', 'hideUserList']);
   const props = defineProps({
-    disableUserEdit: {type:Boolean,default:false}
-  })
-  
+    disableUserEdit: { type: Boolean, default: false },
+  });
+
   const checkedKeys = ref<Array<string | number>>([]);
   const roleId = ref('');
   const [registerBaseDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
@@ -188,7 +188,7 @@
 
 <style scoped>
   /*update-begin---author:wangshuai ---date:20230703  for：【QQYUN-5685】3、租户角色下,查询居左显示*/
-  :deep(.ant-form-item-control-input-content){
+  :deep(.ant-form-item-control-input-content) {
     text-align: left;
   }
   /*update-end---author:wangshuai ---date:20230703  for：【QQYUN-5685】3、租户角色下,查询居左显示*/

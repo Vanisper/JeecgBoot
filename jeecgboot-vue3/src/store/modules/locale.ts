@@ -15,9 +15,9 @@ interface LocaleState {
   localInfo: LocaleSetting;
   pathTitleMap: object;
   // myapps主题色（低代码应用列表首页）
-  appIndexTheme: string
+  appIndexTheme: string;
   // myapps - 跳转前路由地址
-  appMainPth: string
+  appMainPth: string;
 }
 
 export const useLocaleStore = defineStore({
@@ -26,7 +26,7 @@ export const useLocaleStore = defineStore({
     localInfo: lsLocaleSetting,
     pathTitleMap: {},
     appIndexTheme: '',
-    appMainPth: ''
+    appMainPth: '',
   }),
   getters: {
     getShowPicker(): boolean {

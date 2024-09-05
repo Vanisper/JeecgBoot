@@ -13,8 +13,8 @@ export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
   // 先匹配不包含隐藏菜单的路径
   let menuList = findMenuPath(treeData, path, false);
   // 如果没有匹配到，再匹配包含隐藏菜单的路径
-  if(!(menuList?.length)) {
-    menuList = findMenuPath(treeData, path, true)
+  if (!menuList?.length) {
+    menuList = findMenuPath(treeData, path, true);
   }
   // update-end--author:sunjianlei---date:220230426---for：【issues/478】修复菜单展开合并BUG
   return (menuList || []).map((item) => item.path);
@@ -30,10 +30,10 @@ export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
 function findMenuPath<T = Recordable>(treeData: T[], path: string, matchHide: boolean) {
   return findPath(treeData, (n) => {
     // 隐藏菜单不参与匹配
-    if(!matchHide && n.hideMenu) {
+    if (!matchHide && n.hideMenu) {
       return false;
     }
-    return n.path === path
+    return n.path === path;
   }) as Menu[];
 }
 
@@ -96,7 +96,7 @@ export function transformRouteToMenu(routeModList: AppRouteModule[], routerMappi
         meta: node.meta,
         name: title,
         hideMenu,
-        alwaysShow:node.alwaysShow||false,
+        alwaysShow: node.alwaysShow || false,
         path: node.path,
         ...(node.redirect ? { redirect: node.redirect } : {}),
       };

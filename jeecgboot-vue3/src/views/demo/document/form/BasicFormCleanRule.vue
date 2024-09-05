@@ -8,7 +8,7 @@
     <a-button @click="cancelFormRule('visitor')" class="mr-2"> 只清空来访人员验证 </a-button>
   </div>
   <!-- 自定义表单 -->
-  <BasicForm @register="registerForm" style="margin-top: 20px;" />
+  <BasicForm @register="registerForm" style="margin-top: 20px" />
 </template>
 
 <script lang="ts" setup>

@@ -10,8 +10,8 @@ import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { RootRoute } from '/@/router/routes';
 
 import { isOAuth2AppEnv } from '/@/views/sys/login/useLogin';
-import { OAUTH2_THIRD_LOGIN_TENANT_ID } from "/@/enums/cacheEnum";
-import { setAuthCache } from "/@/utils/auth";
+import { OAUTH2_THIRD_LOGIN_TENANT_ID } from '/@/enums/cacheEnum';
+import { setAuthCache } from '/@/utils/auth';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 //auth2登录路由
@@ -27,7 +27,7 @@ const ROOT_PATH = RootRoute.path;
 
 //update-begin---author:wangshuai ---date:20220629  for：[issues/I5BG1I]vue3不支持auth2登录------------
 //update-begin---author:wangshuai ---date:20221111  for: [VUEN-2472]分享免登录------------
-const whitePathList: PageEnum[] = [LOGIN_PATH, OAUTH2_LOGIN_PAGE_PATH,SYS_FILES_PATH, TOKEN_LOGIN ];
+const whitePathList: PageEnum[] = [LOGIN_PATH, OAUTH2_LOGIN_PAGE_PATH, SYS_FILES_PATH, TOKEN_LOGIN];
 //update-end---author:wangshuai ---date:20221111  for: [VUEN-2472]分享免登录------------
 //update-end---author:wangshuai ---date:20220629  for：[issues/I5BG1I]vue3不支持auth2登录------------
 
@@ -58,12 +58,12 @@ export function createPermissionGuard(router: Router) {
     if (whitePathList.includes(to.path as PageEnum)) {
       if (to.path === LOGIN_PATH && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
-        
+
         //update-begin---author:scott ---date:2023-04-24  for：【QQYUN-4713】登录代码调整逻辑有问题，改造待观察--
         //TODO vben默认写法，暂时不知目的，有问题暂时先注释掉
         //await userStore.afterLoginAction();
         //update-end---author:scott ---date::2023-04-24  for：【QQYUN-4713】登录代码调整逻辑有问题，改造待观察--
-        
+
         try {
           if (!isSessionTimeout) {
             next((to.query?.redirect as string) || '/');
@@ -75,8 +75,8 @@ export function createPermissionGuard(router: Router) {
         //退出登录进入此逻辑
         //如果进入的页面是login页面并且当前是OAuth2app环境，并且token为空，就进入OAuth2登录页面
         //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]新建企业微信和钉钉配置表，通过租户模式隔离------------
-        if(to.query.tenantId){
-          setAuthCache(OAUTH2_THIRD_LOGIN_TENANT_ID,to.query.tenantId)
+        if (to.query.tenantId) {
+          setAuthCache(OAUTH2_THIRD_LOGIN_TENANT_ID, to.query.tenantId);
         }
         next({ path: OAUTH2_LOGIN_PAGE_PATH });
         //update-end---author:wangshuai ---date:20230224  for：[QQYUN-3440]新建企业微信和钉钉配置表，通过租户模式隔离------------
@@ -109,13 +109,13 @@ export function createPermissionGuard(router: Router) {
         //update-begin---author:wangshuai ---date:20230302  for：只有首次登陆并且是企业微信或者钉钉的情况下才会调用------------
         //----------【首次登陆并且是企业微信或者钉钉的情况下才会调用】-----------------------------------------------
         //只有首次登陆并且是企业微信或者钉钉的情况下才会调用
-        let href = window.location.href;
+        const href = window.location.href;
         //判断当前是auth2页面，并且是钉钉/企业微信，并且包含tenantId参数
-        if(isOAuth2AppEnv() && href.indexOf("/tenantId/")!= -1){
-          let params = to.params;
-          if(params && params.path && params.path.length>0){
+        if (isOAuth2AppEnv() && href.indexOf('/tenantId/') != -1) {
+          const params = to.params;
+          if (params && params.path && params.path.length > 0) {
             //直接获取参数最后一位
-            setAuthCache(OAUTH2_THIRD_LOGIN_TENANT_ID,params.path[params.path.length-1])
+            setAuthCache(OAUTH2_THIRD_LOGIN_TENANT_ID, params.path[params.path.length - 1]);
           }
         }
         //---------【首次登陆并且是企业微信或者钉钉的情况下才会调用】------------------------------------------------
@@ -134,21 +134,26 @@ export function createPermissionGuard(router: Router) {
 
       //update-begin---author:scott ---date:2023-04-24  for：【QQYUN-4713】登录代码调整逻辑有问题，改造待观察--
       if (to.fullPath) {
-        console.log("to.fullPath 1",to.fullPath)
-        console.log("to.path 2",to.path)
-        
-        let getFullPath = to.fullPath;
-        if(getFullPath=='/' || getFullPath=='/500' || getFullPath=='/400' || getFullPath=='/login?redirect=/' || getFullPath=='/login?redirect=/login?redirect=/'){
+        console.log('to.fullPath 1', to.fullPath);
+        console.log('to.path 2', to.path);
+
+        const getFullPath = to.fullPath;
+        if (
+          getFullPath == '/' ||
+          getFullPath == '/500' ||
+          getFullPath == '/400' ||
+          getFullPath == '/login?redirect=/' ||
+          getFullPath == '/login?redirect=/login?redirect=/'
+        ) {
           return;
         }
-      //update-end---author:scott ---date:2023-04-24  for：【QQYUN-4713】登录代码调整逻辑有问题，改造待观察--
-        
+        //update-end---author:scott ---date:2023-04-24  for：【QQYUN-4713】登录代码调整逻辑有问题，改造待观察--
+
         redirectData.query = {
           ...redirectData.query,
           // update-begin-author:sunjianlei date:20230306 for: 修复登录成功后，没有正确重定向的问题
           redirect: to.fullPath,
           // update-end-author:sunjianlei date:20230306 for: 修复登录成功后，没有正确重定向的问题
-
         };
       }
       next(redirectData);
@@ -157,12 +162,12 @@ export function createPermissionGuard(router: Router) {
 
     //==============================【首次登录并且是企业微信或者钉钉的情况下才会调用】==================
     //判断是免登录页面,如果页面包含/tenantId/,那么就直接前往主页
-    if(isOAuth2AppEnv() && to.path.indexOf("/tenantId/") != -1){
+    if (isOAuth2AppEnv() && to.path.indexOf('/tenantId/') != -1) {
       next(userStore.getUserInfo.homePath || PageEnum.BASE_HOME);
       return;
     }
     //==============================【首次登录并且是企业微信或者钉钉的情况下才会调用】==================
-    
+
     // Jump to the 404 page after processing the login
     if (from.path === LOGIN_PATH && to.name === PAGE_NOT_FOUND_ROUTE.name && to.fullPath !== (userStore.getUserInfo.homePath || PageEnum.BASE_HOME)) {
       next(userStore.getUserInfo.homePath || PageEnum.BASE_HOME);

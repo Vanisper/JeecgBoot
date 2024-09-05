@@ -213,8 +213,8 @@
         height: 8px;
       }
     }
-    .historyArea ul li:hover{
-      .del{
+    .historyArea ul li:hover {
+      .del {
         display: block;
       }
     }

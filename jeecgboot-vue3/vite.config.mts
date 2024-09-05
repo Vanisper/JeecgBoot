@@ -64,6 +64,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       // Listening on all local IPs
       host: true,
+      // @ts-ignore
       https: false,
       port: VITE_PORT,
       // Load proxy configuration from .env
@@ -84,10 +85,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           manualChunks: {
             // vue vue-router合并打包
             'vue-vendor': ['vue', 'vue-router'],
-            'antd-vue-vendor': ['ant-design-vue','@ant-design/icons-vue','@ant-design/colors'],
-            'vxe-table-vendor': ['vxe-table','vxe-table-plugin-antd','xe-utils'],
+            'antd-vue-vendor': ['ant-design-vue', '@ant-design/icons-vue', '@ant-design/colors'],
+            'vxe-table-vendor': ['vxe-table', 'vxe-table-plugin-antd', 'xe-utils'],
             'emoji-mart-vue-fast': ['emoji-mart-vue-fast'],
-            'china-area-data-vendor': ['china-area-data']
+            'china-area-data-vendor': ['china-area-data'],
           },
         },
       },

@@ -85,7 +85,7 @@
       //展开的节点信息
       await getExpandKeysByPid(values['pid'], unref(treeData));
       //刷新列表(isUpdate:是否编辑;values:表单信息;expandedArr:展开的节点信息)
-      emit('success', { isUpdate: unref(isUpdate), isSubAdd:unref(isSubAdd), values: { ...values }, expandedArr: unref(expandedRowKeys).reverse() });
+      emit('success', { isUpdate: unref(isUpdate), isSubAdd: unref(isSubAdd), values: { ...values }, expandedArr: unref(expandedRowKeys).reverse() });
     } finally {
       setModalProps({ confirmLoading: false });
     }

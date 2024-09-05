@@ -32,7 +32,7 @@ export const getDemoList = (params) => {
  * @param params
  */
 export const saveOrUpdateDemo = (params, isUpdate) => {
-  let url = isUpdate ? Api.edit : Api.save;
+  const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
 

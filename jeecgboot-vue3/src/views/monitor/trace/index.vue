@@ -38,7 +38,7 @@
   });
 
   function loadDate() {
-    getActuatorList(query.value,order.value).then((res) => {
+    getActuatorList(query.value, order.value).then((res) => {
       let filterData = [];
       for (let d of res.traces) {
         if (d.request.method !== 'OPTIONS' && d.request.uri.indexOf('httptrace') === -1) {

@@ -52,7 +52,7 @@ export function copyTextToClipboard(input: string, { target = document.body }: O
   try {
     isSuccess = document.execCommand('copy');
   } catch (e) {
-    throw new Error(e);
+    throw new Error(e as string);
   }
 
   element.remove();

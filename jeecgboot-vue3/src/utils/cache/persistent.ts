@@ -32,7 +32,7 @@ interface BasicStore {
   [DB_DICT_DATA_KEY]: string;
   [TENANT_ID]: string;
   [LOGIN_INFO_KEY]: LoginInfo;
-  [OAUTH2_THIRD_LOGIN_TENANT_ID]: string
+  [OAUTH2_THIRD_LOGIN_TENANT_ID]: string;
 }
 
 type LocalStore = BasicStore;
@@ -60,7 +60,7 @@ export class Persistent {
   static getLocal<T>(key: LocalKeys) {
     //update-begin---author:scott ---date:2022-10-27  for：token过期退出重新登录，online菜单还是提示token过期----------
     const globalCache = ls.get(APP_LOCAL_CACHE_KEY);
-    if(globalCache){
+    if (globalCache) {
       localMemory.setCache(globalCache);
     }
     //update-end---author:scott ---date::2022-10-27  for：token过期退出重新登录，online菜单还是提示token过期----------

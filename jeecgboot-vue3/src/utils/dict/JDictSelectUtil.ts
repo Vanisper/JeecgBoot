@@ -5,6 +5,7 @@
  */
 
 import { ajaxGetDictItems, getDictItemsByCode } from './index';
+import { Result } from '/#/axios';
 
 /**
  * 获取字典数组
@@ -13,13 +14,13 @@ import { ajaxGetDictItems, getDictItemsByCode } from './index';
  * @param isTransformResponse 是否转换返回结果
  * @return List<Map>
  */
-export async function initDictOptions(dictCode, isTransformResponse = true) {
+export async function initDictOptions(dictCode: string, isTransformResponse = true) {
   if (!dictCode) {
     return '字典Code不能为空!';
   }
   //优先从缓存中读取字典配置
   if (getDictItemsByCode(dictCode)) {
-    let res = {};
+    const res = {} as Result;
     res.result = getDictItemsByCode(dictCode);
     res.success = true;
     if (isTransformResponse) {
@@ -38,20 +39,20 @@ export async function initDictOptions(dictCode, isTransformResponse = true) {
  * @param text  字典值
  * @return String
  */
-export function filterDictText(dictOptions, text) {
+export function filterDictText(dictOptions: { value: string; text: string; title: string; label: string }[], text: string | string[] | null) {
   // --update-begin----author:sunjianlei---date:20200323------for: 字典翻译 text 允许逗号分隔 ---
   if (text != null && Array.isArray(dictOptions)) {
-    let result = [];
+    const result = [] as string[];
     // 允许多个逗号分隔，允许传数组对象
-    let splitText;
+    let splitText: string[];
     if (Array.isArray(text)) {
       splitText = text;
     } else {
       splitText = text.toString().trim().split(',');
     }
-    for (let txt of splitText) {
+    for (const txt of splitText) {
       let dictText = txt;
-      for (let dictItem of dictOptions) {
+      for (const dictItem of dictOptions) {
         // update-begin--author:liaozhiyang---date:20240524---for：【TV360X-469】兼容数据null值防止报错
         if (dictItem == null) break;
         // update-end--author:liaozhiyang---date:20240524---for：【TV360X-469】兼容数据null值防止报错
@@ -78,7 +79,7 @@ export function filterMultiDictText(dictOptions, text) {
   //js “!text” 认为0为空，所以做提前处理
   if (text === 0 || text === '0') {
     if (dictOptions) {
-      for (let dictItem of dictOptions) {
+      for (const dictItem of dictOptions) {
         if (text == dictItem.value) {
           return dictItem.text;
         }
@@ -91,7 +92,7 @@ export function filterMultiDictText(dictOptions, text) {
   }
   let re = '';
   text = text.toString();
-  let arr = text.split(',');
+  const arr = text.split(',');
   dictOptions.forEach(function (option) {
     if (option) {
       for (let i = 0; i < arr.length; i++) {
@@ -122,7 +123,7 @@ export function filterDictTextByCache(dictCode, key) {
   }
   //优先从缓存中读取字典配置
   if (getDictItemsByCode(dictCode)) {
-    let item = getDictItemsByCode(dictCode).filter((t) => t['value'] == key);
+    const item = getDictItemsByCode(dictCode).filter((t) => t['value'] == key);
     if (item && item.length > 0) {
       return item[0]['text'];
     }
@@ -134,7 +135,7 @@ export async function getDictItems(dictCode, params) {
   // update-begin--author:liaozhiyang---date:20230809---for：【issues/668】JDictSelectUtil数据字典工具类中的getDictItems方法出错
   //优先从缓存中读取字典配置
   if (getDictItemsByCode(dictCode)) {
-    let desformDictItems = getDictItemsByCode(dictCode).map((item) => ({
+    const desformDictItems = getDictItemsByCode(dictCode).map((item) => ({
       ...item,
       label: item.text,
     }));
@@ -145,11 +146,11 @@ export async function getDictItems(dictCode, params) {
   return await ajaxGetDictItems(dictCode, params)
     .then((result) => {
       if (result.length) {
-        let res = result.map((item) => ({ ...item, label: item.text }));
+        const res = result.map((item) => ({ ...item, label: item.text }));
         console.log('------- 从DB中获取到了字典-------dictCode : ', dictCode, res);
         return Promise.resolve(res);
       } else {
-        console.error('getDictItems error: : ', res);
+        console.error('getDictItems error: : ', result);
         return Promise.resolve([]);
       }
     })

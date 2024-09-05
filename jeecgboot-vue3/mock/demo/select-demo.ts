@@ -7,13 +7,13 @@ const demoList = (keyword, count = 20) => {
   };
   for (let index = 0; index < count; index++) {
     //根据搜索关键词做一下匹配
-    let name = `选项${index}`;
-    if(keyword && name.indexOf(keyword)!=-1){
+    const name = `选项${index}`;
+    if (keyword && name.indexOf(keyword) != -1) {
       result.list.push({
         name: `选项${index}`,
         id: `${index}`,
       });
-    }else if(!keyword){
+    } else if (!keyword) {
       result.list.push({
         name: `选项${index}`,
         id: `${index}`,
@@ -29,9 +29,9 @@ export default [
     timeout: 1000,
     method: 'get',
     response: ({ query }) => {
-      const { keyword,count} = query;
-      console.log("查询条件：", keyword);
-      return resultSuccess(demoList(keyword,count));
+      const { keyword, count } = query;
+      console.log('查询条件：', keyword);
+      return resultSuccess(demoList(keyword, count));
     },
   },
 ] as MockMethod[];

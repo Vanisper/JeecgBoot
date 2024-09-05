@@ -151,7 +151,7 @@
    * 提交数据
    */
   async function handleSubmit() {
-    if (unref(isMultiTenant) && unref(tenantSelected)==null) {
+    if (unref(isMultiTenant) && unref(tenantSelected) == null) {
       validate_status.value = 'error';
       return false;
     }
@@ -165,7 +165,7 @@
           userStore.setTenant(unref(tenantSelected));
         }
         createMessage.success('切换成功');
-        
+
         //切换租户后要刷新首页
         window.location.reload();
       })

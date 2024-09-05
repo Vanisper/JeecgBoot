@@ -3,7 +3,7 @@
     <div class="my-account">账户</div>
     <div class="account-row-item clearfix">
       <div class="account-label gray-75">手机</div>
-      <span class="gray" v-if="userDetail.phoneText">{{ userDetail.phoneText}}</span>
+      <span class="gray" v-if="userDetail.phoneText">{{ userDetail.phoneText }}</span>
       <span class="pointer blue-e5 phone-margin" @click="updatePhone" v-if="userDetail.phone">修改</span>
       <span class="pointer blue-e5 phone-margin" @click="bindPhone" v-else>绑定</span>
       <!--      <span class="pointer blue-e5" @click="unbindPhone" v-if="userDetail.phone">解绑?</span>-->
@@ -66,7 +66,7 @@
     getUserData().then((res) => {
       if (res.success) {
         userDetail.value = res.result;
-        if(res.result.phone){
+        if (res.result.phone) {
           userDetail.value.phoneText = res.result.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
         }
       }
@@ -81,10 +81,10 @@
       record: { phone: userDetail.value.phone, username: userDetail.value.username, id: userDetail.value.id, phoneText: userDetail.value.phoneText },
     });
   }
-  
+
   /**
    * 绑定手机号
-   */ 
+   */
   function bindPhone() {
     openModal(true, {
       record: { username: userDetail.value.username, id: userDetail.value.id },
@@ -147,11 +147,11 @@
   });
 </script>
 <style lang="less">
-    // update-begin-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
+  // update-begin-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
   @prefix-cls: ~'@{namespace}-j-user-account-setting-container';
 
-  .@{prefix-cls}{
-     padding: 30px 40px 0 20px;
+  .@{prefix-cls} {
+    padding: 30px 40px 0 20px;
     .account-row-item {
       align-items: center;
       /*begin 兼容暗夜模式*/
@@ -192,12 +192,12 @@
     }
 
     .clearfix:before {
-      content: "";
+      content: '';
       display: table;
     }
-    .my-account{
+    .my-account {
       font-size: 17px;
-      font-weight: 700!important;
+      font-weight: 700 !important;
       /*begin 兼容暗夜模式*/
       color: @text-color;
       /*end 兼容暗夜模式*/

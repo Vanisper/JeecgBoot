@@ -1,7 +1,7 @@
 import { computed, ref, watch, defineComponent, h } from 'vue';
 import { cloneDeep, debounce } from 'lodash-es';
 import { defHttp } from '/@/utils/http/axios';
-import { filterDictText } from '/@/utils/dict/JDictSelectUtil';
+import { filterDictText } from '../../../../utils/dict/JDictSelectUtil';
 import { ajaxGetDictItems, getDictItemsByCode } from '/@/utils/dict';
 import { JVxeComponent } from '/@/components/jeecg/JVxeTable/types';
 import { dispatchEvent } from '/@/components/jeecg/JVxeTable/utils';
@@ -43,7 +43,7 @@ export const DictSearchInputCell = defineComponent({
     const filterOption = computed(() => {
       if (isAsync.value) {
         //【jeecgboot-vue3/issues/I5QRT8】JVxeTypes.selectDictSearch sync问题
-        return ()=>true;
+        return () => true;
       }
       return (input, option) => option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     });
@@ -65,7 +65,7 @@ export const DictSearchInputCell = defineComponent({
           if (currentRequestId !== requestId) {
             return;
           }
-          let { success, result, message } = res;
+          const { success, result, message } = res;
           if (success) {
             innerOptions.value = result;
             result.forEach((item) => {
@@ -97,7 +97,7 @@ export const DictSearchInputCell = defineComponent({
     }
 
     function renderOptionItem() {
-      let optionItems: any[] = [];
+      const optionItems: any[] = [];
       options.value.forEach(({ value, text, label, title, disabled }) => {
         optionItems.push(
           h(
@@ -176,7 +176,7 @@ function useSelectDictSearch(props) {
   const dict = computed(() => originColumn.value.dict);
   // 是否是异步模式
   const isAsync = computed(() => {
-    let isAsync = originColumn.value.async;
+    const isAsync = originColumn.value.async;
     return isAsync != null && isAsync !== '' ? !!isAsync : true;
   });
   const options = computed(() => {
@@ -208,7 +208,7 @@ function useSelectDictSearch(props) {
         if (LabelMap.has(value)) {
           innerOptions.value = cloneDeep(LabelMap.get(value));
         } else {
-          let result = await loadDictItem(dict.value, value);
+          const result = await loadDictItem(dict.value, value);
           if (result && result.length > 0) {
             innerOptions.value = [{ value: value, text: result[0] }];
             LabelMap.set(value, cloneDeep(innerOptions.value));
@@ -227,22 +227,22 @@ function useSelectDictSearch(props) {
         // 根据字典Code, 初始化字典数组
         let dictStr = '';
         if (dict.value) {
-          let arr = dict.value.split(',');
+          const arr = dict.value.split(',');
           if (arr[0].indexOf('where') > 0) {
-            let tbInfo = arr[0].split('where');
+            const tbInfo = arr[0].split('where');
             dictStr = tbInfo[0].trim() + ',' + arr[1] + ',' + arr[2] + ',' + encodeURIComponent(tbInfo[1]);
           } else {
             dictStr = dict.value;
           }
           if (dict.value.indexOf(',') === -1) {
             //优先从缓存中读取字典配置
-            let cache = getDictItemsByCode(dict.value);
+            const cache = getDictItemsByCode(dict.value);
             if (cache) {
               innerOptions.value = cache;
               return;
             }
           }
-          let { success, result } = await ajaxGetDictItems(dictStr, null);
+          const { success, result } = await ajaxGetDictItems(dictStr, null);
           if (success) {
             innerOptions.value = result;
           }

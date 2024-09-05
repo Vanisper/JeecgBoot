@@ -81,7 +81,7 @@ export const saveDepartPermission = (params) => defHttp.post({ url: Api.saveDepa
  *  查询部门数据权限列表
  */
 export const queryDepartDataRule = (functionId, departId, params?) => {
-  let url = `${Api.dataRule}/${unref(functionId)}/${unref(departId)}`;
+  const url = `${Api.dataRule}/${unref(functionId)}/${unref(departId)}`;
   return defHttp.get({ url, params });
 };
 /**
@@ -101,7 +101,7 @@ export const selectDepart = (params?) => defHttp.put({ url: Api.selectDepart, pa
  * 编辑部门前获取部门相关信息
  * @param id
  */
-export const getUpdateDepartInfo = (id) => defHttp.get({ url: Api.getUpdateDepartInfo, params: {id} });
+export const getUpdateDepartInfo = (id) => defHttp.get({ url: Api.getUpdateDepartInfo, params: { id } });
 
 /**
  * 编辑部门
@@ -113,7 +113,7 @@ export const doUpdateDepartInfo = (params) => defHttp.put({ url: Api.doUpdateDep
  * 删除部门
  * @param id
  */
-export const deleteDepart = (id) => defHttp.delete({ url: Api.delete, params:{ id } }, { joinParamsToUrl: true });
+export const deleteDepart = (id) => defHttp.delete({ url: Api.delete, params: { id } }, { joinParamsToUrl: true });
 
 /**
  * 设置负责人 取消负责人

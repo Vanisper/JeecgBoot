@@ -31,13 +31,7 @@
   import { ref } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { getLogList } from './log.api';
-  import {
-    columns,
-    searchFormSchema,
-    operationLogColumn,
-    operationSearchFormSchema,
-    exceptionColumns
-  } from './log.data';
+  import { columns, searchFormSchema, operationLogColumn, operationSearchFormSchema, exceptionColumns } from './log.data';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useListPage } from '/@/hooks/system/useListPage';
   const { createMessage } = useMessage();
@@ -73,7 +67,7 @@
     if (key == '2') {
       logColumns.value = operationLogColumn;
       searchSchema.value = operationSearchFormSchema;
-    }else if(key == '4'){
+    } else if (key == '4') {
       searchSchema.value = searchFormSchema;
       logColumns.value = exceptionColumns;
     } else {

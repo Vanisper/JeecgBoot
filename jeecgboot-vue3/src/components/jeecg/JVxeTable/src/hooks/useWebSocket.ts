@@ -57,7 +57,7 @@ const vs = {
       const domain = domainURL.replace('https://', 'wss://').replace('http://', 'ws://');
       const url = `${domain}/vxeSocket/${userId}/${this.pageId}`;
       //update-begin-author:taoyan date:2022-4-24 for: v2.4.6 的 websocket 服务端，存在性能和安全问题。 #3278
-      let token = (getToken() || '') as string;
+      const token = (getToken() || '') as string;
       this.ws = new WebSocket(url, [token]);
       //update-end-author:taoyan date:2022-4-24 for: v2.4.6 的 websocket 服务端，存在性能和安全问题。 #3278
       this.ws.onopen = this.on.open.bind(this);
@@ -70,7 +70,7 @@ const vs = {
   // 发送消息
   sendMessage(type, message) {
     try {
-      let ws = this.ws;
+      const ws = this.ws;
       if (ws != null && ws.readyState === ws.OPEN) {
         ws.send(
           JSON.stringify({
@@ -88,7 +88,7 @@ const vs = {
   tableMap: new Map(),
   /** 添加绑定 */
   addBind(map, key, value: VmArgs) {
-    let binds = map.get(key);
+    const binds = map.get(key);
     if (isArray(binds)) {
       binds.push(value);
     } else {
@@ -97,10 +97,10 @@ const vs = {
   },
   /** 移除绑定 */
   removeBind(map, key, value: VmArgs) {
-    let binds = map.get(key);
+    const binds = map.get(key);
     if (isArray(binds)) {
       for (let i = 0; i < binds.length; i++) {
-        let bind = binds[i];
+        const bind = binds[i];
         if (bind === value) {
           binds.splice(i, 1);
           break;
@@ -115,7 +115,7 @@ const vs = {
   },
   // 呼叫绑定的表单
   callBind(map, key, callback) {
-    let binds = map.get(key);
+    const binds = map.get(key);
     if (isArray(binds)) {
       binds.forEach(callback);
     }
@@ -155,8 +155,8 @@ const vs = {
         console.warn('【JVxeWebSocket】收到无法解析的消息:', e.data);
         return;
       }
-      let type = json[this.constants.TYPE];
-      let data = json[this.constants.DATA];
+      const type = json[this.constants.TYPE];
+      const data = json[this.constants.DATA];
       switch (type) {
         // 心跳检测
         case this.constants.TYPE_HB:

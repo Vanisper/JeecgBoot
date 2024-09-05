@@ -13,19 +13,19 @@
               <div class="aui-step-item" :class="activeKey === 1 ? 'activeStep' : ''">
                 <div class="aui-step-tags">
                   <em>1</em>
-                  <p>{{t('sys.login.authentication')}}</p>
+                  <p>{{ t('sys.login.authentication') }}</p>
                 </div>
               </div>
               <div class="aui-step-item" :class="activeKey === 2 ? 'activeStep' : ''">
                 <div class="aui-step-tags">
                   <em>2</em>
-                  <p>{{t('sys.login.resetLoginPassword')}}</p>
+                  <p>{{ t('sys.login.resetLoginPassword') }}</p>
                 </div>
               </div>
               <div class="aui-step-item" :class="activeKey === 3 ? 'activeStep' : ''">
                 <div class="aui-step-tags">
                   <em>3</em>
-                  <p>{{t('sys.login.resetSuccess')}}</p>
+                  <p>{{ t('sys.login.resetSuccess') }}</p>
                 </div>
               </div>
             </div>
@@ -42,8 +42,8 @@
                     <a-form-item>
                       <a-input type="text" :placeholder="t('sys.login.smsCode')" v-model:value="formData.smscode" />
                     </a-form-item>
-                    <div v-if="showInterval" class="aui-code-line" @click="getLoginCode">{{t('component.countdown.normalText')}}</div>
-                    <div v-else class="aui-code-line">{{t('component.countdown.sendText',[unref(timeRuning)])}}</div>
+                    <div v-if="showInterval" class="aui-code-line" @click="getLoginCode">{{ t('component.countdown.normalText') }}</div>
+                    <div v-else class="aui-code-line">{{ t('component.countdown.sendText', [unref(timeRuning)]) }}</div>
                   </div>
                 </div>
                 <!-- 身份验证 end -->
@@ -64,21 +64,21 @@
                 </div>
                 <!-- 重置密码 end -->
               </a-form>
-                <!-- 重置成功 begin -->
-                <div class="aui-success" v-else>
-                  <div class="aui-success-icon">
-                    <img :src="successImg"/>
-                  </div>
-                  <h3>恭喜您，重置密码成功！</h3>
+              <!-- 重置成功 begin -->
+              <div class="aui-success" v-else>
+                <div class="aui-success-icon">
+                  <img :src="successImg" />
                 </div>
-                <!-- 重置成功 end -->
+                <h3>恭喜您，重置密码成功！</h3>
+              </div>
+              <!-- 重置成功 end -->
             </div>
             <div class="aui-formButton" style="padding-bottom: 40px">
               <div class="aui-flex" v-if="activeKey === 1 || activeKey === 2">
-                <a class="aui-link-login aui-flex-box" @click="nextStepClick">{{t('sys.login.nextStep')}}</a>
+                <a class="aui-link-login aui-flex-box" @click="nextStepClick">{{ t('sys.login.nextStep') }}</a>
               </div>
               <div class="aui-flex" v-else>
-                <a class="aui-linek-code aui-flex-box" @click="toLogin">{{t('sys.login.goToLogin')}}</a>
+                <a class="aui-linek-code aui-flex-box" @click="toLogin">{{ t('sys.login.goToLogin') }}</a>
               </div>
               <div class="aui-flex">
                 <a class="aui-linek-code aui-flex-box" @click="goBack"> {{ t('sys.login.backSignIn') }}</a>
@@ -98,12 +98,12 @@
   import { SmsEnum, useFormRules, useFormValid, useLoginState } from '/@/views/sys/login/useLogin';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { getCaptcha, passwordChange, phoneVerify } from '/@/api/sys/user';
-  import logoImg from '/@/assets/loginmini/icon/jeecg_logo.png'
-  import adTextImg from '/@/assets/loginmini/icon/jeecg_ad_text.png'
-  import successImg from '/@/assets/loginmini/icon/icon-success.png'
+  import logoImg from '/@/assets/loginmini/icon/jeecg_logo.png';
+  import adTextImg from '/@/assets/loginmini/icon/jeecg_ad_text.png';
+  import successImg from '/@/assets/loginmini/icon/icon-success.png';
   import CaptchaModal from '@/components/jeecg/captcha/CaptchaModal.vue';
-  import { useModal } from "@/components/Modal";
-  import { ExceptionEnum } from "@/enums/exceptionEnum";
+  import { useModal } from '@/components/Modal';
+  import { ExceptionEnum } from '@/enums/exceptionEnum';
   const [captchaRegisterModal, { openModal: openCaptchaModal }] = useModal();
 
   //下一步控制
@@ -158,9 +158,9 @@
         smscode: formData.smscode,
       });
       activeKey.value = 2;
-      setTimeout(()=>{
+      setTimeout(() => {
         pwdFormRef.value.resetFields();
-      },300)
+      }, 300);
     } else {
       notification.error({
         message: '错误提示',
@@ -242,8 +242,8 @@
       return;
     }
     //update-begin---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
-    const result = await getCaptcha({ mobile: formData.mobile, smsmode: SmsEnum.FORGET_PASSWORD }).catch((res) =>{
-      if(res.code === ExceptionEnum.PHONE_SMS_FAIL_CODE){
+    const result = await getCaptcha({ mobile: formData.mobile, smsmode: SmsEnum.FORGET_PASSWORD }).catch((res) => {
+      if (res.code === ExceptionEnum.PHONE_SMS_FAIL_CODE) {
         openCaptchaModal(true, {});
       }
     });
@@ -274,14 +274,14 @@
     Object.assign(formData, { phone: '', smscode: '' });
     Object.assign(pwdFormData, { password: '', confirmPassword: '' });
     Object.assign(accountInfo, {});
-    if(unref(timer)){
+    if (unref(timer)) {
       clearInterval(unref(timer));
       timer.value = null;
       showInterval.value = true;
     }
-    setTimeout(()=>{
+    setTimeout(() => {
       formRef.value.resetFields();
-    },300)
+    }, 300);
   }
 
   defineExpose({
@@ -289,6 +289,6 @@
   });
 </script>
 <style lang="less" scoped>
-@import '/@/assets/loginmini/style/home.less';
-@import '/@/assets/loginmini/style/base.less';
+  @import '/@/assets/loginmini/style/home.less';
+  @import '/@/assets/loginmini/style/base.less';
 </style>

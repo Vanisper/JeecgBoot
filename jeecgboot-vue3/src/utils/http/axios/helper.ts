@@ -1,5 +1,5 @@
 import { isObject, isString } from '/@/utils/is';
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 // update-begin--author:liaozhiyang---date:20240426---for：【QQYUN-9138】系统用户保存的时间没有秒
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 // update-end--author:liaozhiyang---date:20240426---for：【QQYUN-9138】系统用户保存的时间没有秒

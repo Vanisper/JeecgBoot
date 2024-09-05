@@ -31,7 +31,7 @@ export function useRuleFormItem<T extends Recordable>(props: T, key: keyof T = '
 
   const state: any = computed({
     get() {
-      return innerState.value == null ? "" : innerState.value;
+      return innerState.value == null ? '' : innerState.value;
     },
     set(value) {
       if (isEqual(value, defaultState.value)) return;

@@ -43,8 +43,8 @@
       cursor: grabbing;
     }
 
-    fieldset[disabled]{
-      .anticon-delete{
+    fieldset[disabled] {
+      .anticon-delete {
         display: none !important;
       }
     }

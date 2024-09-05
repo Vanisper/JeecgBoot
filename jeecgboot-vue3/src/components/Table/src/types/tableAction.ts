@@ -2,6 +2,7 @@ import { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
 import { TooltipProps } from 'ant-design-vue/es/tooltip/Tooltip';
 import { RoleEnum } from '/@/enums/roleEnum';
 export interface ActionItem extends ButtonProps {
+  slot?: boolean;
   onClick?: Fn;
   label?: string;
   color?: 'success' | 'error' | 'warning';

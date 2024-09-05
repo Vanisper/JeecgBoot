@@ -2,16 +2,17 @@
   <div ref="editorRootRef" :class="prefixCls" :style="{ width: containerWidth }">
     <!-- update-begin--author:liaozhiyang---date:20240517---for：【TV360X-35】富文本，图片上传遮挡其他按钮 -->
     <Teleport v-if="imgUploadShow" :to="targetElem">
-      <ImgUpload
-        :fullscreen="fullscreen"
-        @uploading="handleImageUploading"
-        @done="handleDone"
-        v-show="editorRef"
-        :disabled="disabled"
-      />
+      <ImgUpload :fullscreen="fullscreen" @uploading="handleImageUploading" @done="handleDone" v-show="editorRef" :disabled="disabled" />
     </Teleport>
     <!-- update-end--author:liaozhiyang---date:20240517---for：【TV360X-35】富文本，图片上传遮挡其他按钮 -->
-    <Editor :id="tinymceId" ref="elRef" :disabled="disabled" :init="initOptions" :style="{ visibility: 'hidden' }" v-if="!initOptions.inline"></Editor>
+    <Editor
+      :id="tinymceId"
+      ref="elRef"
+      :disabled="disabled"
+      :init="initOptions"
+      :style="{ visibility: 'hidden' }"
+      v-if="!initOptions.inline"
+    ></Editor>
     <slot v-else></slot>
   </div>
 </template>
@@ -19,7 +20,7 @@
 <script lang="ts">
   import type { RawEditorOptions } from 'tinymce';
   import tinymce from 'tinymce/tinymce';
-  import Editor from '@tinymce/tinymce-vue'
+  import Editor from '@tinymce/tinymce-vue';
   import 'tinymce/themes/silver';
   import 'tinymce/icons/default/icons';
   import 'tinymce/models/dom';
@@ -33,7 +34,7 @@
   import 'tinymce/plugins/image';
   import { defineComponent, computed, nextTick, ref, unref, watch, onDeactivated, onBeforeUnmount, onMounted } from 'vue';
   import ImgUpload from './ImgUpload.vue';
-  import {simpleToolbar, menubar, simplePlugins} from './tinymce';
+  import { simpleToolbar, menubar, simplePlugins } from './tinymce';
   import { buildShortUUID } from '/@/utils/uuid';
   import { bindHandlers } from './helper';
   import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated';
@@ -83,20 +84,20 @@
       default: true,
     },
     //是否聚焦
-    autoFocus:{
+    autoFocus: {
       type: Boolean,
       default: true,
-    }
+    },
   };
 
   export default defineComponent({
     name: 'Tinymce',
-    components: { ImgUpload,Editor },
+    components: { ImgUpload, Editor },
     inheritAttrs: false,
     props: tinymceProps,
     emits: ['change', 'update:modelValue', 'inited', 'init-error'],
     setup(props, { emit, attrs }) {
-      console.log("---Tinymce---初始化---")
+      console.log('---Tinymce---初始化---');
 
       const editorRef = ref<Nullable<any>>(null);
       const fullscreen = ref(false);
@@ -158,26 +159,26 @@
           skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
           images_upload_handler: (blobInfo, process) =>
             new Promise((resolve, reject) => {
-            let params = {
-              file: blobInfo.blob(),
-              filename: blobInfo.filename(),
-              data: { biz: 'jeditor', jeditor: '1' },
-            };
-            const uploadSuccess = (res) => {
-              if (res.success) {
-                if (res.message == 'local') {
-                  const img = 'data:image/jpeg;base64,' + blobInfo.base64();
-                      resolve(img);
+              let params = {
+                file: blobInfo.blob(),
+                filename: blobInfo.filename(),
+                data: { biz: 'jeditor', jeditor: '1' },
+              };
+              const uploadSuccess = (res) => {
+                if (res.success) {
+                  if (res.message == 'local') {
+                    const img = 'data:image/jpeg;base64,' + blobInfo.base64();
+                    resolve(img);
+                  } else {
+                    let img = getFileAccessHttpUrl(res.message);
+                    resolve(img);
+                  }
                 } else {
-                  let img = getFileAccessHttpUrl(res.message);
-                  resolve(img);
-                }
-              } else {
                   reject('上传失败！');
-              }
-            };
-            uploadFile(params, uploadSuccess);
-        }),
+                }
+              };
+              uploadFile(params, uploadSuccess);
+            }),
           content_css: publicPath + 'resource/tinymce/skins/ui/' + skinName.value + '/content.min.css',
           ...options,
           setup: (editor: any) => {
@@ -209,7 +210,7 @@
           if (!editor) {
             return;
           }
-         editor?.setMode && editor.setMode(attrs.disabled ? 'readonly' : 'design');
+          editor?.setMode && editor.setMode(attrs.disabled ? 'readonly' : 'design');
         }
       );
 
@@ -304,7 +305,7 @@
         });
       }
 
-      function handleImageUploading(name: string) {
+      async function handleImageUploading(name: string) {
         const editor = unref(editorRef);
         if (!editor) {
           return;
@@ -416,7 +417,7 @@
       visibility: hidden;
     }
     .tox:not(.tox-tinymce-inline) .tox-editor-header {
-      padding:0;
+      padding: 0;
     }
     // update-begin--author:liaozhiyang---date:20240527---for：【TV360X-329】富文本禁用状态下工具栏划过边框丢失
     .tox .tox-tbtn--disabled,
@@ -430,7 +431,9 @@
   }
   html[data-theme='dark'] {
     .@{prefix-cls} {
-      .tox .tox-edit-area__iframe {background-color: #141414;}
+      .tox .tox-edit-area__iframe {
+        background-color: #141414;
+      }
     }
   }
 </style>

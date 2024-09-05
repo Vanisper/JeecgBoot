@@ -13,8 +13,8 @@ export function useFinallyProps(props: JVxeTableProps, data: JVxeDataProps, meth
   const vxeEditRules = computed(() => merge({}, props.editRules, data.innerEditRules));
   // vxe 最终 events
   const vxeEvents = computed(() => {
-    let listeners = { ...unref(attrs) };
-    let events = {
+    const listeners = { ...unref(attrs) };
+    const events = {
       onScroll: methods.handleVxeScroll,
       onCellClick: methods.handleCellClick,
       onEditClosed: methods.handleEditClosed,
@@ -47,18 +47,18 @@ export function useFinallyProps(props: JVxeTableProps, data: JVxeDataProps, meth
     if (props.dragSort) {
       rowClass = {
         rowClassName: (params) => {
-          let { row } = params;
-          const find = props.notAllowDrag?.find((item:any) => {
-            const {key, value} = item;
+          const { row } = params;
+          const find = props.notAllowDrag?.find((item: any) => {
+            const { key, value } = item;
             return row[key] == value;
           });
           // 业务传进的来的rowClassName
           const popsRowClassName = props.rowClassName ?? '';
           let outClass = '';
-          if(typeof popsRowClassName==='string'){
+          if (typeof popsRowClassName === 'string') {
             popsRowClassName && (outClass = popsRowClassName);
-          }else if(typeof popsRowClassName==='function'){
-            outClass = popsRowClassName(params)
+          } else if (typeof popsRowClassName === 'function') {
+            outClass = popsRowClassName(params);
           }
           return find ? `not-allow-drag ${outClass}` : `allow-drag ${outClass}`;
         },
@@ -104,7 +104,7 @@ export function useFinallyProps(props: JVxeTableProps, data: JVxeDataProps, meth
         checkboxConfig: {
           checkMethod: methods.handleCheckMethod,
         },
-        ...rowClass
+        ...rowClass,
         // rowClassName:(params)=>{
         //   const { row } = params;
         //   return row.dbFieldName=='id'?"not-allow-drag":"allow-drag"

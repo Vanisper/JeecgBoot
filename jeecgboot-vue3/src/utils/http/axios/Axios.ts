@@ -10,6 +10,7 @@ import { ContentTypeEnum } from '/@/enums/httpEnum';
 import { RequestEnum } from '/@/enums/httpEnum';
 import { useGlobSetting } from '/@/hooks/setting';
 import { useMessage } from '/@/hooks/web/useMessage';
+import { UploadApiResult } from '/@/api/sys/model/uploadModel';
 
 const { createMessage } = useMessage();
 export * from './axiosTransform';
@@ -76,6 +77,7 @@ export class VAxios {
     const axiosCanceler = new AxiosCanceler();
 
     // 请求侦听器配置处理
+    // @ts-ignore
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       // If cancel repeat request is turned on, then cancel repeat request is prohibited
       // @ts-ignore
@@ -114,7 +116,7 @@ export class VAxios {
    * 文件上传
    */
   //--@updateBy-begin----author:liusq---date:20211117------for:增加上传回调参数callback------
-  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams, callback?: UploadFileCallBack) {
+  async uploadFile<T extends Result>(config: AxiosRequestConfig, params: UploadFileParams, callback?: UploadFileCallBack) {
     //--@updateBy-end----author:liusq---date:20211117------for:增加上传回调参数callback------
     const formData = new window.FormData();
     const customFilename = params.name || 'file';
@@ -136,37 +138,32 @@ export class VAxios {
           return;
         }
 
-        formData.append(key, params.data[key]);
+        formData.append(key, params.data?.[key]);
       });
     }
 
-    return this.axiosInstance
-      .request<T>({
-        ...config,
-        method: 'POST',
-        data: formData,
-        headers: {
-          'Content-type': ContentTypeEnum.FORM_DATA,
-          ignoreCancelToken: true,
-        },
-      })
-      .then((res: any) => {
-        //--@updateBy-begin----author:liusq---date:20210914------for:上传判断是否包含回调方法------
-        if (callback?.success && isFunction(callback?.success)) {
-          callback?.success(res?.data);
-          //--@updateBy-end----author:liusq---date:20210914------for:上传判断是否包含回调方法------
-        } else if (callback?.isReturnResponse) {
-          //--@updateBy-begin----author:liusq---date:20211117------for:上传判断是否返回res信息------
-          return Promise.resolve(res?.data);
-          //--@updateBy-end----author:liusq---date:20211117------for:上传判断是否返回res信息------
-        } else {
-          if (res.data.success == true && res.data.code == 200) {
-            createMessage.success(res.data.message);
-          } else {
-            createMessage.error(res.data.message);
-          }
-        }
-      });
+    const res = await this.axiosInstance.request<T>({
+      ...config,
+      method: 'POST',
+      data: formData,
+      headers: {
+        'Content-type': ContentTypeEnum.FORM_DATA,
+        ignoreCancelToken: true,
+      },
+    });
+    //--@updateBy-begin----author:liusq---date:20210914------for:上传判断是否包含回调方法------
+    if (callback?.success && isFunction(callback?.success)) {
+      callback?.success(res?.data);
+    } else if (callback?.isReturnResponse) {
+      //--@updateBy-begin----author:liusq---date:20211117------for:上传判断是否返回res信息------
+      return Promise.resolve(res?.data);
+    } else {
+      if (res.data.success == true && res.data.code == 200) {
+        createMessage.success(res.data.message);
+      } else {
+        createMessage.error(res.data.message);
+      }
+    }
   }
 
   // 支持表单数据
@@ -224,6 +221,7 @@ export class VAxios {
             try {
               const ret = transformRequestHook(res, opt);
               //zhangyafei---添加回调方法
+              // @ts-ignore
               config.success && config.success(res.data);
               //zhangyafei---添加回调方法
               resolve(ret);
@@ -247,7 +245,6 @@ export class VAxios {
     });
   }
 
-
   /**
    * 【用于评论功能】自定义文件上传-请求
    * @param url
@@ -255,16 +252,15 @@ export class VAxios {
    */
   uploadMyFile<T = any>(url, formData) {
     const glob = useGlobSetting();
-    return this.axiosInstance
-      .request<T>({
-        url: url,
-        baseURL: glob.uploadUrl,
-        method: 'POST',
-        data: formData,
-        headers: {
-          'Content-type': ContentTypeEnum.FORM_DATA,
-          ignoreCancelToken: true,
-        },
-      });
+    return this.axiosInstance.request<T>({
+      url: url,
+      baseURL: glob.uploadUrl,
+      method: 'POST',
+      data: formData,
+      headers: {
+        'Content-type': ContentTypeEnum.FORM_DATA,
+        ignoreCancelToken: true,
+      },
+    });
   }
 }

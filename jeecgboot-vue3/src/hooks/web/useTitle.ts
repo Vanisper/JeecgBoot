@@ -1,4 +1,4 @@
-import type {Menu} from "@/router/types";
+import type { Menu } from '@/router/types';
 import { ref, watch, unref } from 'vue';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useTitle as usePageTitle } from '@vueuse/core';
@@ -19,7 +19,7 @@ export function useTitle() {
 
   const pageTitle = usePageTitle();
 
-  const menus = ref<Menu[] | null>(null)
+  const menus = ref<Menu[] | null>(null);
 
   watch(
     [() => currentRoute.value.path, () => localeStore.getLocale],

@@ -38,7 +38,6 @@
   const selectVal = ref<string>();
   const inputVal = ref<string>();
 
-  
   const handleInputChange = (e) => {
     const val = e.target.value;
     setSelectValByInputVal(val);
@@ -55,7 +54,7 @@
     } else {
       selectVal.value = undefined;
     }
-  }
+  };
   watchEffect(() => {
     inputVal.value = props.value;
     setSelectValByInputVal(props.value);

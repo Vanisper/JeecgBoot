@@ -11,8 +11,7 @@
   const currentModal = shallowRef<Nullable<ComponentOptions>>(null);
   const formData = ref<any>(props.formData);
 
-  const componentType = {
-  };
+  const componentType = {};
 
   /**
    * 跟换组件和传值事件

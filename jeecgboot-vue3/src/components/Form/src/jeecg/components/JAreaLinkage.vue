@@ -22,7 +22,7 @@
       showArea: propTypes.bool.def(true),
       //是否是全部
       showAll: propTypes.bool.def(false),
-      // 存储数据 
+      // 存储数据
       saveCode: propTypes.oneOf(['province', 'city', 'region', 'all']).def('all'),
     },
     emits: ['options-change', 'change', 'update:value'],

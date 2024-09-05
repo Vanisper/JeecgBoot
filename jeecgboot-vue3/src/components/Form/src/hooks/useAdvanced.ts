@@ -73,7 +73,7 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
       itemColSum += xxlWidth;
     }
 
-    let autoAdvancedCol = unref(getProps).autoAdvancedCol ?? 3;
+    const autoAdvancedCol = unref(getProps).autoAdvancedCol ?? 3;
 
     if (isLastAction) {
       advanceState.hideAdvanceBtn = unref(getSchema).length <= autoAdvancedCol;

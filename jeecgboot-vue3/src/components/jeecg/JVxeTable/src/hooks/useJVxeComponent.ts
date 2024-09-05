@@ -6,7 +6,7 @@ import { vModel } from '/@/components/jeecg/JVxeTable/utils';
 import { JVxeRenderType } from '../types/JVxeTypes';
 import { isBoolean, isFunction, isObject, isPromise } from '/@/utils/is';
 import { JVxeComponent } from '../types/JVxeComponent';
-import { filterDictText } from '/@/utils/dict/JDictSelectUtil';
+import { filterDictText } from '../../../../../utils/dict/JDictSelectUtil';
 
 export function useJVxeCompProps() {
   return {
@@ -46,20 +46,20 @@ export function useJVxeComponent(props: JVxeComponent.Props) {
   const scrolling = computed(() => !!props.renderOptions.scrolling);
   // 当有formatter时，优先使用formatter
   const innerLabel = computed(() => {
-    if(typeof column.value?.formatter === 'function'){
+    if (typeof column.value?.formatter === 'function') {
       return column.value.formatter({
         cellValue: innerValue.value,
         row: row.value,
         column: column.value,
       });
     }
-    return innerValue.value
+    return innerValue.value;
   });
   const cellProps = computed(() => {
-    let renderOptions = props.renderOptions;
-    let col = originColumn.value;
+    const renderOptions = props.renderOptions;
+    const col = originColumn.value;
 
-    let cellProps = {};
+    const cellProps = {};
 
     // 输入占位符
     cellProps['placeholder'] = replaceProps(col, col.placeholder);
@@ -109,7 +109,7 @@ export function useJVxeComponent(props: JVxeComponent.Props) {
   });
 
   const listeners = computed(() => {
-    let listeners = Object.assign({}, props.renderOptions.listeners || {});
+    const listeners = Object.assign({}, props.renderOptions.listeners || {});
     // 默认change事件
     if (!listeners.change) {
       listeners.change = async (event) => {
@@ -145,7 +145,7 @@ export function useJVxeComponent(props: JVxeComponent.Props) {
     value,
     (newValue) => {
       // 验证值格式
-      let getValue = enhanced.getValue(newValue, ctx);
+      const getValue = enhanced.getValue(newValue, ctx);
       if (newValue !== getValue) {
         // 值格式不正确，重新赋值
         newValue = getValue;
@@ -163,7 +163,7 @@ export function useJVxeComponent(props: JVxeComponent.Props) {
       // 判断是否启用翻译
       if (props.renderType === JVxeRenderType.spaner && enhanced.translate.enabled === true) {
         if (isFunction(enhanced.translate.handler)) {
-          let res = enhanced.translate.handler(newValue, ctx);
+          const res = enhanced.translate.handler(newValue, ctx);
           // 异步翻译，可解决字典查询慢的问题
           if (isPromise(res)) {
             res.then((v) => (innerValue.value = v));
@@ -222,7 +222,7 @@ export function useJVxeComponent(props: JVxeComponent.Props) {
    * @param args 其他附带参数
    */
   function trigger(name, event?, args: any[] = []) {
-    let listener = listeners.value[name];
+    const listener = listeners.value[name];
     if (isFunction(listener)) {
       if (isObject(event)) {
         event = packageEvent(name, event);

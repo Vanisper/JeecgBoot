@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, computed, watch, nextTick, createApp,unref } from 'vue';
+  import { ref, reactive, computed, watch, nextTick, createApp, unref } from 'vue';
   import { Icon } from '/@/components/Icon';
   import { getToken } from '/@/utils/auth';
   import { uploadUrl } from '/@/api/common/api';
@@ -81,18 +81,18 @@
   // 当前是否是上传图片模式
   const isImageMode = computed(() => props.fileType === UploadTypeEnum.image);
   // 上传按钮是否禁用
-  const buttonDisabled = computed(()=>{
-    if(props.disabled === true){
+  const buttonDisabled = computed(() => {
+    if (props.disabled === true) {
       return true;
     }
-    if(isMaxCount.value === true){
-      if(props.replaceLastOne === true){
-        return false
-      }else{
+    if (isMaxCount.value === true) {
+      if (props.replaceLastOne === true) {
+        return false;
+      } else {
         return true;
       }
     }
-    return false
+    return false;
   });
   // 合并 props 和 attrs
   const bindProps = computed(() => {
@@ -295,9 +295,9 @@
           }
           return file;
         });
-      }else{
-        successFileList = fileListTemp.filter(item=>{
-          return item.uid!=info.file.uid;
+      } else {
+        successFileList = fileListTemp.filter((item) => {
+          return item.uid != info.file.uid;
         });
         createMessage.error(`${info.file.name} 上传失败.`);
       }
@@ -321,7 +321,7 @@
               fileSize: item.size,
             };
             newFileList.push(fileJson);
-          }else{
+          } else {
             return;
           }
         }

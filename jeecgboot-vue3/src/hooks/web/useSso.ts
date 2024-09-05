@@ -8,7 +8,7 @@ const globSetting = useGlobSetting();
 const openSso = globSetting.openSso;
 export function useSso() {
   //update-begin---author:wangshuai---date:2024-01-03---for:【QQYUN-7805】SSO登录强制用http #957---
-  let locationUrl = document.location.protocol +"//" + window.location.host + '/';
+  const locationUrl = document.location.protocol + '//' + window.location.host + '/';
   //update-end---author:wangshuai---date:2024-01-03---for:【QQYUN-7805】SSO登录强制用http #957---
 
   /**
@@ -16,8 +16,8 @@ export function useSso() {
    */
   async function ssoLogin() {
     if (openSso == 'true') {
-      let token = getToken();
-      let ticket = getUrlParam('ticket');
+      const token = getToken();
+      const ticket = getUrlParam('ticket');
       if (!token) {
         if (ticket) {
           await validateCasLogin({

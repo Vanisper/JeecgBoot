@@ -138,7 +138,7 @@ export const saveDeptRolePermission = (params) => defHttp.post({ url: DepartRole
  *  查询部门角色数据权限列表
  */
 export const queryDepartRoleDataRule = (functionId, departId, roleId, params?) => {
-  let url = `${DepartRoleApi.dataRule}/${unref(functionId)}/${unref(departId)}/${unref(roleId)}`;
+  const url = `${DepartRoleApi.dataRule}/${unref(functionId)}/${unref(departId)}/${unref(roleId)}`;
   return defHttp.get({ url, params });
 };
 /**

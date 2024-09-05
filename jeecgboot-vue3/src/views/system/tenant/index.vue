@@ -40,7 +40,7 @@
       </template>
     </BasicTable>
     <TenantModal @register="registerModal" @success="reload" />
-    <TenantInviteUserModal @register="registerSelUserModal" @inviteOk="handleInviteUserOk"/>
+    <TenantInviteUserModal @register="registerSelUserModal" @inviteOk="handleInviteUserOk" />
     <TenantUserModal @register="registerTenUserModal" />
     <!--  产品包  -->
     <TenantPackList @register="registerPackModal" />
@@ -80,10 +80,10 @@
         schemas: searchFormSchema,
         fieldMapToTime: [['fieldTime', ['beginDate', 'endDate'], 'YYYY-MM-DD HH:mm:ss']],
       },
-      actionColumn:{
+      actionColumn: {
         width: 150,
-        fixed:'right'
-      }
+        fixed: 'right',
+      },
     },
   });
   const [registerTable, { reload }, { rowSelection, selectedRowKeys, selectedRows }] = tableContext;
@@ -187,7 +187,7 @@
     packModal(true, {
       tenantId: unref(selectedRowKeys.value.join(',')),
       //我的租户显示新增和编辑产品包
-      showPackAddAndEdit: true
+      showPackAddAndEdit: true,
     });
   }
 

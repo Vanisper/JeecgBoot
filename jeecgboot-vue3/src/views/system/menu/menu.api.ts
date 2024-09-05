@@ -20,7 +20,7 @@ enum Api {
  */
 export const list = (params) => {
   return defHttp.get({ url: Api.list, params });
-}
+};
 
 /**
  * 删除菜单
@@ -52,7 +52,7 @@ export const batchDeleteMenu = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdateMenu = (params, isUpdate) => {
-  let url = isUpdate ? Api.edit : Api.save;
+  const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
 /**
@@ -65,7 +65,7 @@ export const dataRuleList = (params) => defHttp.get({ url: Api.ruleList, params 
  * @param params
  */
 export const saveOrUpdateRule = (params, isUpdate) => {
-  let url = isUpdate ? Api.ruleEdit : Api.ruleSave;
+  const url = isUpdate ? Api.ruleEdit : Api.ruleSave;
   return defHttp.post({ url: url, params });
 };
 
@@ -95,7 +95,7 @@ export const getCheckPermDuplication = (params) => defHttp.get({ url: Api.checkP
  * @param schema
  * @param required
  */
-export const checkPermDuplication=(model, schema, required?)=>{
+export const checkPermDuplication = (model, schema, required?) => {
   return [
     {
       validator: (_, value) => {
@@ -108,15 +108,17 @@ export const checkPermDuplication=(model, schema, required?)=>{
         return new Promise<void>((resolve, reject) => {
           getCheckPermDuplication({
             id: model.id,
-            url:model.url,
-            alwaysShow:model.alwaysShow
-          }).then((res) => {
+            url: model.url,
+            alwaysShow: model.alwaysShow,
+          })
+            .then((res) => {
               res.success ? resolve() : reject(res.message || '校验失败');
-          }).catch((err) => {
+            })
+            .catch((err) => {
               reject(err.message || '验证失败');
-          });
+            });
         });
       },
     },
   ];
-}
+};

@@ -2,7 +2,7 @@
   <ConfigProvider :locale="getAntdLocale">
     <Modal v-bind="getProps">
       <Spin :spinning="loading">
-        <div style="padding: 20px;">
+        <div style="padding: 20px">
           <div v-html="options.content" style="margin-bottom: 8px"></div>
           <BasicForm @register="registerForm">
             <template #customInput="{ model, field }">
@@ -114,9 +114,9 @@
       }
 
       function onChange() {
-        validate()
+        validate();
       }
-      
+
       /** 提交表单 */
       async function onSubmit() {
         try {

@@ -1,10 +1,10 @@
 <template>
   <div :class="prefixCls">
     <div v-show="!isEdit" :class="{ [`${prefixCls}__normal`]: true, 'ellipsis-cell': column.ellipsis }" @click="handleEdit">
-      <div class="cell-content" :title="column.ellipsis ? getValues ?? '' : ''">
+      <div class="cell-content" :title="column.ellipsis ? (getValues ?? '') : ''">
         <!-- update-begin--author:liaozhiyang---date:20240731---for：【issues/6957】editableCell组件值长度为0，无法编辑 -->
         <!-- update-begin--author:liaozhiyang---date:20240709---for：【issues/6851】editableCell组件值为0时不展示 -->
-        {{ typeof getValues === 'string' && getValues.length === 0 ? '&nbsp;' : getValues ?? '&nbsp;' }}
+        {{ typeof getValues === 'string' && getValues.length === 0 ? '&nbsp;' : (getValues ?? '&nbsp;') }}
         <!-- update-end--author:liaozhiyang---date:20240709---for：【issues/6851】editableCell组件值为0时不展示 -->
         <!-- update-end--author:liaozhiyang---date:20240731---for：【issues/6957】editableCell组件值长度为0，无法编辑 -->
       </div>
@@ -374,7 +374,7 @@
               const [fn] = Object.values(item);
               fn();
             });
-           // update-end--author:liaozhiyang---date:20240424---for：【issues/1165】解决canResize为true时第一行校验不过
+          // update-end--author:liaozhiyang---date:20240424---for：【issues/1165】解决canResize为true时第一行校验不过
         };
         /* eslint-disable */
         props.record.onSubmitEdit = async () => {

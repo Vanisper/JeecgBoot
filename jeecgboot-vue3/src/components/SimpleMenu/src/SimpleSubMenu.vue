@@ -96,8 +96,8 @@
           !menuTreeItem.meta?.hideChildrenInMenu &&
           Reflect.has(menuTreeItem, 'children') &&
           !!menuTreeItem.children &&
-          menuTreeItem.children.length > 0
-          &&checkChildrenHidden(menuTreeItem)
+          menuTreeItem.children.length > 0 &&
+          checkChildrenHidden(menuTreeItem)
         );
       }
 

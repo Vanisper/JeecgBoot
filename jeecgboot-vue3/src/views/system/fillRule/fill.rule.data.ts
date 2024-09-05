@@ -74,7 +74,7 @@ export const formSchema: FormSchema[] = [
               if (!value) {
                 return reject('请输入规则编码！');
               }
-              let params = {
+              const params = {
                 tableName: 'sys_fill_rule',
                 fieldName: 'rule_code',
                 fieldVal: value,

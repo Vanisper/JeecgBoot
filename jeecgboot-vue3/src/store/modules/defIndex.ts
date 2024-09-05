@@ -1,12 +1,12 @@
-import {store} from '/@/store';
-import {defineStore} from 'pinia';
-import {defHttp} from "@/utils/http/axios";
+import { store } from '/@/store';
+import { defineStore } from 'pinia';
+import { defHttp } from '@/utils/http/axios';
 
 interface DefIndexState {
   // 首页url
-  url: string,
+  url: string;
   // 首页组件
-  component: string
+  component: string;
 }
 
 export const useDefIndexStore = defineStore({
@@ -33,13 +33,13 @@ export const useDefIndexStore = defineStore({
      */
     async update(url: string, component: string, isRoute: boolean) {
       await defIndexApi.update(url, component, isRoute);
-      await this.query()
+      await this.query();
     },
 
     check(url: string) {
       return url === this.url;
-    }
-  }
+    },
+  },
 });
 
 // Need to be used outside the setup
@@ -55,8 +55,8 @@ export const defIndexApi = {
    * 查询默认首页配置
    */
   async query() {
-    const url = '/sys/sysRoleIndex/queryDefIndex'
-    return await defHttp.get({url});
+    const url = '/sys/sysRoleIndex/queryDefIndex';
+    return await defHttp.get({ url });
   },
   /**
    * 更新默认首页配置
@@ -65,11 +65,10 @@ export const defIndexApi = {
    * @param isRoute 是否是路由
    */
   async update(url: string, component: string, isRoute: boolean) {
-    let apiUrl = '/sys/sysRoleIndex/updateDefIndex'
-    apiUrl += '?url=' + url
-    apiUrl += '&component=' + component
-    apiUrl += '&isRoute=' + isRoute
-    return await defHttp.put({url: apiUrl});
+    let apiUrl = '/sys/sysRoleIndex/updateDefIndex';
+    apiUrl += '?url=' + url;
+    apiUrl += '&component=' + component;
+    apiUrl += '&isRoute=' + isRoute;
+    return await defHttp.put({ url: apiUrl });
   },
-
-}
+};

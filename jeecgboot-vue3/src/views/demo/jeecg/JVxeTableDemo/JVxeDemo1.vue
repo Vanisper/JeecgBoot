@@ -311,8 +311,8 @@
   }
 
   // update-begin--author:liaozhiyang---date:20230817---for：【issues/636】JVxeTable加上blur事件
-  function handleBlur(event){
-    console.log("blur",event);
+  function handleBlur(event) {
+    console.log('blur', event);
   }
   // update-end--author:liaozhiyang---date:20230817---for：【issues/636】JVxeTable加上blur事件
   /** 表单验证 */
@@ -390,7 +390,7 @@
         // 注：如果启用了表格的 loading 状态，则必须先停止再删除，否则会导致无法从表格上删除数据
         // 2. 调用 event.confirmRemove 方法确认删除成功
         // await tableRef.value!.removeSelection();
-        await event.confirmRemove()
+        await event.confirmRemove();
         createMessage.success('删除成功！');
       } else {
         // 3. 若删除失败，不调用 event.confirmRemove() 方法就不会删除数据

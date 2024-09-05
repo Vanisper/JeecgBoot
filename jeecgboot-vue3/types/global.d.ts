@@ -15,6 +15,10 @@ declare global {
   //   __APP__: App<Element>;
   // }
 
+  interface Navigator {
+    msSaveBlob?: (blob: Blob, defaultName?: string) => boolean;
+  }
+
   // vue
   declare type PropType<T> = VuePropType<T>;
   declare type VueNode = VNodeChild | JSX.Element;

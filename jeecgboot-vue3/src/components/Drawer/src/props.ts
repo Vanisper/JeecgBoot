@@ -25,7 +25,7 @@ export const footerProps = {
   },
 };
 export const basicProps = {
-  class: {type: [String, Object, Array]},
+  class: { type: [String, Object, Array] },
   isDetail: { type: Boolean },
   title: { type: String, default: '' },
   loadingText: { type: String },

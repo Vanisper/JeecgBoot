@@ -52,7 +52,7 @@
 
   import DepartRoleDataRuleDrawer from './DepartRoleDataRuleDrawer.vue';
   import { queryTreeListForDeptRole, queryDeptRolePermission, saveDeptRolePermission } from '../depart.user.api';
-  import { translateTitle } from "@/utils/common/compUtils";
+  import { translateTitle } from '@/utils/common/compUtils';
 
   defineEmits(['register']);
   const { createMessage } = useMessage();

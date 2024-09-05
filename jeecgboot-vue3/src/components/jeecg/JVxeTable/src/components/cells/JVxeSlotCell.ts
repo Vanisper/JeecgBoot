@@ -24,7 +24,7 @@ export default defineComponent({
       };
     });
     return () => {
-      let { slot } = props.renderOptions;
+      const { slot } = props.renderOptions;
       if (slot) {
         return h('div', {}, slot(slotProps.value));
       } else {

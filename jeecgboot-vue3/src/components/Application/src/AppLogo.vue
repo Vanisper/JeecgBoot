@@ -38,7 +38,7 @@
   const { getCollapsedShowTitle } = useMenuSetting();
   const userStore = useUserStore();
   const { title, shortTitle } = useGlobSetting();
-  
+
   const go = useGo();
 
   const getAppLogoClass = computed(() => [prefixCls, props.theme, { 'collapsed-show-title': unref(getCollapsedShowTitle) }]);
@@ -64,8 +64,9 @@
     cursor: pointer;
     transition: all 0.2s ease;
     //左侧菜单模式和左侧菜单混合模式加渐变背景色
-    &.jeecg-layout-mix-sider-logo,&.jeecg-layout-menu-logo{
-      background:@sider-logo-bg-color;
+    &.jeecg-layout-mix-sider-logo,
+    &.jeecg-layout-menu-logo {
+      background: @sider-logo-bg-color;
     }
     // &.light {
     //   border-bottom: 1px solid @border-color-base;

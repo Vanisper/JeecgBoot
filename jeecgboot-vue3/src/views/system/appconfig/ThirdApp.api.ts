@@ -16,7 +16,7 @@ enum Api {
  * 第三方配置保存或者更新
  */
 export const saveOrUpdateThirdConfig = (params, isUpdate) => {
-  let url = isUpdate ? Api.editThirdAppConfig : Api.addThirdAppConfig;
+  const url = isUpdate ? Api.editThirdAppConfig : Api.addThirdAppConfig;
   return defHttp.post({ url: url, params }, { joinParamsToUrl: true });
 };
 
@@ -65,5 +65,5 @@ export const getThirdUserBindByWechat = () => {
  * @param params
  */
 export const deleteThirdAccount = (params) => {
-  return defHttp.delete({ url: Api.deleteThirdAccount, params }, { isTransformResponse:false, joinParamsToUrl: true });
+  return defHttp.delete({ url: Api.deleteThirdAccount, params }, { isTransformResponse: false, joinParamsToUrl: true });
 };

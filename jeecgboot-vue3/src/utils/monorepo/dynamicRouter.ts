@@ -9,10 +9,10 @@ export const packageViews: DynamicViewsRecord = {};
  */
 export function registerDynamicRouter(getViews: () => DynamicViewsRecord) {
   if (typeof getViews === 'function') {
-    let dynamicViews = getViews();
+    const dynamicViews = getViews();
     Object.keys(dynamicViews).forEach((key) => {
       // 处理动态页面的key，使其可以让路由识别
-      let newKey = key.replace('./src/views', '../../views');
+      const newKey = key.replace('./src/views', '../../views');
       packageViews[newKey] = dynamicViews[key];
     });
   }

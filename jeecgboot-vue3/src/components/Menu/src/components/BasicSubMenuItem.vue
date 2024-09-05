@@ -22,7 +22,7 @@
   import { useBasicRootMenuContext } from '../useBasicMenuContext';
   import { useLocaleStore } from '/@/store/modules/locale';
   import { getMenus } from '/@/router/menus';
-  
+
   export default defineComponent({
     name: 'BasicSubMenuItem',
     isSubMenu: true,
@@ -36,15 +36,15 @@
       const { prefixCls } = useDesign('basic-subMenu');
       const { menuState } = useBasicRootMenuContext();
       const localeStore = useLocaleStore();
-      
+
       const getShowMenu = computed(() => !props.item.meta?.hideMenu);
       function menuHasChildren(menuTreeItem: MenuType): boolean {
         return (
           !menuTreeItem.meta?.hideChildrenInMenu &&
           Reflect.has(menuTreeItem, 'children') &&
           !!menuTreeItem.children &&
-          menuTreeItem.children.length > 0
-          &&checkChildrenHidden(menuTreeItem)
+          menuTreeItem.children.length > 0 &&
+          checkChildrenHidden(menuTreeItem)
         );
       }
       // update-begin--author:liaozhiyang---date:20230326---for：【QQYUN-8691】顶部菜单模式online不显示菜单名显示默认的auto在线表单
@@ -112,7 +112,7 @@
   // update-end--author:liaozhiyang---date:20240407---for：【QQYUN-8762】顶部模式下拉菜单颜色统一
   // update-begin--author:liaozhiyang---date:20240429---for：【QQYUN-9128】暗黑主题顶部模式下拉菜单颜色统一
   html[data-theme='dark'] {
-    @bgcolor:#212121;
+    @bgcolor: #212121;
     .@{prefix-cls}.ant-menu-dark {
       background-color: @bgcolor;
       &.ant-menu-submenu {

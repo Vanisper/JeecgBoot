@@ -29,7 +29,7 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
   watch(
     selectValues,
     ({ value: values }: Recordable) => {
-      if(!values){
+      if (!values) {
         return;
       }
       if (openModal.value == false && values.length > 0) {
@@ -74,7 +74,7 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
     if (props.checkable == false) {
       checkedKeys.value = props.checkStrictly ? keys.checked : keys;
       const { selectedNodes } = info;
-      let rows = <any[]>[];
+      const rows = <any[]>[];
       selectedNodes.forEach((item) => {
         rows.push(item);
       });
@@ -92,8 +92,8 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
         if (info.checked) {
           //update-begin-author:taoyan date:20220408 for: 单选模式下，设定rowKey，无法选中数据-
           checkedKeys.value = [info.node.eventKey];
-          let rowKey = props.rowKey;
-          let temp = info.checkedNodes.find((n) => n[rowKey] === info.node.eventKey);
+          const rowKey = props.rowKey;
+          const temp = info.checkedNodes.find((n) => n[rowKey] === info.node.eventKey);
           selectRows.value = [temp];
           //update-end-author:taoyan date:20220408 for: 单选模式下，设定rowKey，无法选中数据-
         } else {
@@ -104,7 +104,7 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
       }
       checkedKeys.value = props.checkStrictly ? keys.checked : keys;
       const { checkedNodes } = info;
-      let rows = <any[]>[];
+      const rows = <any[]>[];
       checkedNodes.forEach((item) => {
         rows.push(item);
       });
@@ -120,9 +120,9 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
     //update-begin---author:wangshuai ---date:20230403  for：【issues/394】所属部门树操作全部勾选不生效/【issues/4646】部门全部勾选后，点击确认按钮，部门信息丢失------------
     await nextTick();
     checkedKeys.value = getTree().getCheckedKeys();
-    if(checkAll){
+    if (checkAll) {
       getTreeRow();
-    }else{
+    } else {
       selectRows.value = [];
     }
     //update-end---author:wangshuai ---date:20230403  for：【issues/394】所属部门树操作全部勾选不生效/【issues/4646】部门全部勾选后，点击确认按钮，部门信息丢失------------
@@ -133,13 +133,13 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
    * @param res
    */
   function getTreeRow() {
-    let ids = "";
-    if(unref(checkedKeys).length>0){
-      ids = checkedKeys.value.join(",");
+    let ids = '';
+    if (unref(checkedKeys).length > 0) {
+      ids = checkedKeys.value.join(',');
     }
-    getList({ids:ids}).then((res) =>{
+    getList({ ids: ids }).then((res) => {
       selectRows.value = res;
-    })
+    });
   }
 
   /**
@@ -153,7 +153,7 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
    * 加载树数据
    */
   async function onLoadData(treeNode, ids) {
-    let params = {};
+    const params = {};
     let startPid = '';
     if (treeNode) {
       startPid = treeNode.eventKey;
@@ -166,7 +166,7 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
       params['ids'] = ids;
     }
     let record = await getList(params);
-    let optionData = record;
+    const optionData = record;
     if (!props.serverTreeData) {
       //前端处理数据为tree结构
       record = listToTree(record, props, startPid);
@@ -213,7 +213,7 @@ export function useTreeBiz(treeRef, getList, props, realProps, emit) {
    */
   function checkHasChild(pid, treeArray) {
     if (treeArray && treeArray.length > 0) {
-      for (let item of treeArray) {
+      for (const item of treeArray) {
         if (item.key == pid) {
           if (!item.child) {
             item.isLeaf = true;

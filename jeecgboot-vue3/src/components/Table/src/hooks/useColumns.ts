@@ -152,7 +152,7 @@ export function useColumns(
       })
       .map((column) => {
         // update-begin--author:liaozhiyang---date:20230718---for: 【issues-179】antd3 一些警告以及报错(针对表格)
-        if(column.slots?.customRender) {
+        if (column.slots?.customRender) {
           // slots的备份，兼容老的写法，转成新写法避免控制台警告
           column.slotsBak = column.slots;
           delete column.slots;

@@ -99,7 +99,9 @@
       :deep(.ant-select) {
         color: #606266 !important;
       }
-      :deep(.ant-select-selection-item-content),:deep(.ant-select-selection-item),:deep(input) {
+      :deep(.ant-select-selection-item-content),
+      :deep(.ant-select-selection-item),
+      :deep(input) {
         color: #606266 !important;
       }
 
@@ -117,7 +119,8 @@
         border-color: rgba(51, 51, 51, 0.25) !important;
         background-color: rgba(51, 51, 51, 0.04) !important;
       }
-      :deep(.ant-checkbox-checked .ant-checkbox-inner::after), :deep(.ant-tree-checkbox-checked .ant-tree-checkbox-inner::after){
+      :deep(.ant-checkbox-checked .ant-checkbox-inner::after),
+      :deep(.ant-tree-checkbox-checked .ant-tree-checkbox-inner::after) {
         border-color: rgba(51, 51, 51, 0.25) !important;
       }
       :deep(.ant-switch) {
@@ -147,12 +150,14 @@
       :deep(.ant-select) {
         color: rgba(255, 255, 255, 0.25) !important;
       }
-      :deep(.ant-select-selection-item-content),:deep(.ant-select-selection-item),:deep(input) {
+      :deep(.ant-select-selection-item-content),
+      :deep(.ant-select-selection-item),
+      :deep(input) {
         color: rgba(255, 255, 255, 0.25) !important;
       }
 
       :deep(.ant-radio-wrapper),
-      :deep(.ant-checkbox-wrapper){
+      :deep(.ant-checkbox-wrapper) {
         color: rgba(255, 255, 255, 0.25);
       }
       :deep(.ant-radio-wrapper .ant-radio-inner:after),
@@ -185,7 +190,7 @@
   .jeecg-form-container-disabled :deep(.ant-upload-list) {
     cursor: grabbing;
   }
-  .jeecg-form-container-disabled fieldset[disabled] :deep(.ant-upload-list){
+  .jeecg-form-container-disabled fieldset[disabled] :deep(.ant-upload-list) {
     // -ms-pointer-events: auto !important;
     // pointer-events: auto !important;
   }

@@ -17,7 +17,7 @@ export const options = {
     pre: ['style'],
     code: ['style'],
     a: ['style', 'target', 'href', 'title', 'rel'],
-    img: ['style', 'src', 'title','width','height'],
+    img: ['style', 'src', 'title', 'width', 'height'],
     div: ['style'],
     table: ['style', 'width', 'border', 'height'],
     tr: ['style'],

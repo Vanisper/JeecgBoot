@@ -11,9 +11,9 @@
   import { useCountdown } from './useCountdown';
   import { isFunction } from '/@/utils/is';
   import { useI18n } from '/@/hooks/web/useI18n';
-  import { useModal } from "@/components/Modal";
-  import { createAsyncComponent } from "@/utils/factory/createAsyncComponent";
-  import { ExceptionEnum } from "@/enums/exceptionEnum";
+  import { useModal } from '@/components/Modal';
+  import { createAsyncComponent } from '@/utils/factory/createAsyncComponent';
+  import { ExceptionEnum } from '@/enums/exceptionEnum';
   const CaptchaModal = createAsyncComponent(() => import('/@/components/jeecg/captcha/CaptchaModal.vue'));
   const [captchaRegisterModal, { openModal: openCaptchaModal }] = useModal();
 
@@ -53,8 +53,8 @@
           loading.value = true;
           try {
             //update-begin---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
-            const canStart = await beforeStartFunc().catch((res) =>{
-              if(res.code === ExceptionEnum.PHONE_SMS_FAIL_CODE){
+            const canStart = await beforeStartFunc().catch((res) => {
+              if (res.code === ExceptionEnum.PHONE_SMS_FAIL_CODE) {
                 openCaptchaModal(true, {});
               }
             });

@@ -2,10 +2,10 @@
 <template>
   <!-- 自定义表单 -->
   <BasicForm @register="registerForm" style="margin-top: 20px" @submit="handleSubmit">
-      <!--  #name对应的是formSchemas对应slot(name)插槽    -->
-      <template #name="{ model, field }">
-        <JInput v-model:value="model[field]" />
-      </template>
+    <!--  #name对应的是formSchemas对应slot(name)插槽    -->
+    <template #name="{ model, field }">
+      <JInput v-model:value="model[field]" />
+    </template>
   </BasicForm>
 </template>
 
@@ -13,7 +13,7 @@
   //引入依赖
   import { useForm, BasicForm, FormSchema } from '/@/components/Form';
   //引入CustomDemo自定义组件
-  import JInput from "/@/components/Form/src/jeecg/components/JInput.vue";
+  import JInput from '/@/components/Form/src/jeecg/components/JInput.vue';
 
   //自定义表单字段
   const formSchemas: FormSchema[] = [
@@ -21,7 +21,7 @@
       field: 'name',
       label: '姓名',
       component: 'Input',
-      slot:'name'
+      slot: 'name',
     },
     {
       field: 'phone',
@@ -51,7 +51,7 @@
    * 提交信息
    */
   function handleSubmit(values) {
-    console.log("values::",values);
+    console.log('values::', values);
   }
 </script>
 

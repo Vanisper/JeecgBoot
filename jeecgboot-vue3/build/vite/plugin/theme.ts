@@ -2,11 +2,11 @@
  * Vite plugin for website theme color switching
  * https://github.com/anncwb/vite-plugin-theme
  */
-import type { PluginOption } from 'vite';
+import type { IndexHtmlTransform, Plugin, PluginOption } from 'vite';
 import path from 'path';
 import { viteThemePlugin, antdDarkThemePlugin, mixLighten, mixDarken, tinycolor } from '@rys-fe/vite-plugin-theme';
 import { getThemeColors, generateColors } from '../../config/themeConfig';
-import { generateModifyVars } from '../../generate/generateModifyVars';
+import { generateModifyVars } from '../../generate/generateModifyVars.js';
 
 export function configThemePlugin(isBuild: boolean): PluginOption[] {
   const colors = generateColors({
@@ -64,7 +64,7 @@ export function configThemePlugin(isBuild: boolean): PluginOption[] {
       filter: (id) => (isBuild ? !id.endsWith('antd.less') : true),
       // extractCss: false,
       darkModifyVars: {
-        ...generateModifyVars(true),
+        ...generateModifyVars(),
         'text-color': '#c9d1d9',
         'primary-1': 'rgb(255 255 255 / 8%)',
         'text-color-base': '#c9d1d9',

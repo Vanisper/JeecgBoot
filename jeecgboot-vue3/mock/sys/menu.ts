@@ -1,4 +1,4 @@
-import { resultSuccess, resultError, getRequestToken, requestParams,baseUrl} from '../_util';
+import { resultSuccess, resultError, getRequestToken, requestParams, baseUrl } from '../_util';
 import { MockMethod } from 'vite-plugin-mock';
 import { createFakeUserList } from './user';
 
@@ -267,4 +267,4 @@ export default [
       return resultSuccess(menu);
     },
   },
-] as MockMethod[];
+] as unknown as MockMethod[];

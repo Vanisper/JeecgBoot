@@ -1,7 +1,7 @@
 <!-- 操作表单值 -->
 <template>
   <!-- 自定义表单 -->
-  <BasicForm @register="registerForm" style="margin-top: 20px;" />
+  <BasicForm @register="registerForm" style="margin-top: 20px" />
 </template>
 
 <script lang="ts" setup>

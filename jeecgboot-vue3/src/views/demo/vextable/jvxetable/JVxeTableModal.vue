@@ -178,7 +178,7 @@
       }
       // update-begin--author:liaozhiyang---date:20230804---for：【QQYUN-5866】放大行数自适应
       const handleFullScreen = (val) => {
-        tableH.value=val ? document.documentElement.clientHeight - 387 :  300;
+        tableH.value = val ? document.documentElement.clientHeight - 387 : 300;
       };
       // update-end--author:liaozhiyang---date:20230804---for：【QQYUN-5866】放大行数自适应
       return {

@@ -150,8 +150,9 @@
 
 <style lang="less" scoped>
   .ant-table-wrapper {
-    :deep(.ant-table){
-      td,th {
+    :deep(.ant-table) {
+      td,
+      th {
         padding: 10px;
       }
     }

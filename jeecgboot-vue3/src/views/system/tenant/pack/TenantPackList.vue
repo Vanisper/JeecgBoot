@@ -2,7 +2,9 @@
   <BasicModal v-bind="$attrs" @register="registerModal" :title="title" @ok="handleSubmit" width="800px" :showCancelBtn="false" :showOkBtn="false">
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px" v-if="showPackAddAndEdit">新增 </a-button>
+        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px" v-if="showPackAddAndEdit"
+          >新增
+        </a-button>
         <a-button
           v-if="selectedRowKeys.length > 0"
           preIcon="ant-design:delete-outlined"
@@ -28,9 +30,9 @@
   import { useListPage } from '/@/hooks/system/useListPage';
   import { BasicTable, TableAction } from '/@/components/Table';
   import TenantPackMenuModal from './TenantPackMenuModal.vue';
-  import {Modal} from "ant-design-vue";
+  import { Modal } from 'ant-design-vue';
   import TenantPackUserModal from './TenantPackUserModal.vue';
-  import {useMessage} from "/@/hooks/web/useMessage";
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   const [registerPackMenu, { openModal }] = useModal();
   const [registerPackUser, { openModal: packUserOpenModal }] = useModal();
@@ -57,7 +59,7 @@
         },
       },
       beforeFetch: (params) => {
-        return Object.assign(params, { tenantId: unref(tenantId), packType:'custom' });
+        return Object.assign(params, { tenantId: unref(tenantId), packType: 'custom' });
       },
     },
   });
@@ -89,7 +91,9 @@
       {
         label: '编辑',
         onClick: handleEdit.bind(null, record),
-        ifShow: ()=>{ return showPackAddAndEdit.value }
+        ifShow: () => {
+          return showPackAddAndEdit.value;
+        },
       },
     ];
   }
@@ -110,24 +114,24 @@
       isUpdate: true,
       record: record,
       tenantId: unref(tenantId),
-      packType:'custom',
-      showFooter: true
+      packType: 'custom',
+      showFooter: true,
     });
   }
 
   //默认系统产品包不允许删除,包含(超级管理员、组织账户管理员、组织应用管理员)
-  const packCode = reactive<any>(['superAdmin','accountAdmin','appAdmin']);
+  const packCode = reactive<any>(['superAdmin', 'accountAdmin', 'appAdmin']);
   const { createMessage } = useMessage();
-  
+
   /**
    * 删除产品包
    * @param 删除
    */
   async function handleDelete(record) {
     //update-begin---author:wangshuai ---date:20230222  for：系统默认产品包不允许删除------------
-    if(packCode.indexOf(record.packCode) != -1){
-        createMessage.warning("默认系统产品包不允许删除");
-       return;
+    if (packCode.indexOf(record.packCode) != -1) {
+      createMessage.warning('默认系统产品包不允许删除');
+      return;
     }
     //update-end---author:wangshuai ---date:20230222  for：系统默认产品包不允许删除------------
     await deleteTenantPack({ ids: record.id }, success);
@@ -138,10 +142,10 @@
    */
   async function handlePackBatch() {
     let value = selectedRows.value;
-    if(value && value.length>0){
+    if (value && value.length > 0) {
       for (let i = 0; i < value.length; i++) {
-        if(packCode.indexOf(value[i].packCode) != -1){
-          createMessage.warning("默认系统产品包不允许删除");
+        if (packCode.indexOf(value[i].packCode) != -1) {
+          createMessage.warning('默认系统产品包不允许删除');
           return;
         }
       }
@@ -152,9 +156,9 @@
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
-        await deleteTenantPack({ ids: selectedRowKeys.value.join(',')}, success);
-      }
-    })
+        await deleteTenantPack({ ids: selectedRowKeys.value.join(',') }, success);
+      },
+    });
   }
 
   /**
@@ -165,8 +169,8 @@
     openModal(true, {
       isUpdate: false,
       tenantId: unref(tenantId),
-      packType:'custom',
-      showFooter: true
+      packType: 'custom',
+      showFooter: true,
     });
   }
 
@@ -175,9 +179,9 @@
    * @param record
    */
   function seeTenantPackUser(record) {
-    packUserOpenModal(true,{
-      record:record
-    })
+    packUserOpenModal(true, {
+      record: record,
+    });
   }
 
   /**
@@ -197,7 +201,7 @@
           confirm: handleDelete.bind(null, record),
         },
       },
-    ]
+    ];
   }
 
   /**
@@ -209,8 +213,8 @@
       isUpdate: true,
       record: record,
       tenantId: unref(tenantId),
-      packType:'custom',
-      showFooter: false
+      packType: 'custom',
+      showFooter: false,
     });
   }
 </script>

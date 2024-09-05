@@ -85,6 +85,6 @@ export function useHeaderSetting() {
     getShowInsetHeaderRef,
     getUnFixedAndFull,
     getHeaderBgColor,
-    getShowBreadTitle
+    getShowBreadTitle,
   };
 }

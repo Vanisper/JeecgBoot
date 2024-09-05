@@ -1,0 +1,93 @@
+diff --git a/dist/index.js b/dist/index.cjs
+similarity index 99%
+rename from dist/index.js
+rename to dist/index.cjs
+index 3a7903eaa3c33f5401961c2a32888dbd2b9f3f17..6504a564637526d137ccdc9e49d64b4feb6e2805 100644
+--- a/dist/index.js
++++ b/dist/index.cjs
+@@ -23057,10 +23057,13 @@ var _crypto = require('crypto');
+ 
+ // src/constants.ts
+ 
+-var _vite = require('vite');
++function normalizePath(filename) {
++  return filename.split(_path.win32.sep).join(_path.posix.sep);
++};
++
+ var VITE_CLIENT_ENTRY = "/@vite/client";
+-var VITE_PLUGIN_THEME_CLIENT_ENTRY = _vite.normalizePath.call(void 0, _path2.default.resolve(process.cwd(), "node_modules/@rys-fe/vite-plugin-theme/es/"));
+-var CLIENT_PUBLIC_ABSOLUTE_PATH = _vite.normalizePath.call(void 0, VITE_PLUGIN_THEME_CLIENT_ENTRY + "/client.js");
++var VITE_PLUGIN_THEME_CLIENT_ENTRY = normalizePath.call(void 0, _path2.default.resolve(process.cwd(), "node_modules/@rys-fe/vite-plugin-theme/es/"));
++var CLIENT_PUBLIC_ABSOLUTE_PATH = normalizePath.call(void 0, VITE_PLUGIN_THEME_CLIENT_ENTRY + "/client.js");
+ var CLIENT_PUBLIC_PATH = `/${VITE_PLUGIN_THEME_CLIENT_ENTRY}/client.js`;
+ var commentRE = /\\\\?n|\n|\\\\?r|\/\*[\s\S]+?\*\//g;
+ var cssLangs = `\\.(css|less|sass|scss|styl|stylus|postcss)($|\\?)`;
+@@ -23224,8 +23227,8 @@ function injectClientPlugin(type, {
+       needSourcemap = !!resolvedConfig.build.sourcemap;
+     },
+     transformIndexHtml: {
+-      enforce: "pre",
+-      async transform(html) {
++      order: "pre",
++      async handler(html) {
+         if (html.includes(CLIENT_PUBLIC_PATH)) {
+           return html;
+         }
+@@ -23245,8 +23248,8 @@ function injectClientPlugin(type, {
+       }
+     },
+     transform(code, id) {
+-      const nid = _vite.normalizePath.call(void 0, id);
+-      const path6 = _vite.normalizePath.call(void 0, "vite-plugin-theme/es/client");
++      const nid = normalizePath.call(void 0, id);
++      const path6 = normalizePath.call(void 0, "vite-plugin-theme/es/client");
+       const getMap = () => needSourcemap ? this.getCombinedSourcemap() : null;
+       if (nid === CLIENT_PUBLIC_ABSOLUTE_PATH || nid.endsWith(path6) || nid.includes(path6) || nid.includes(path6.replace(/\//gi, "_"))) {
+         debug("transform client file:", id, code);
+@@ -23369,7 +23372,7 @@ async function rebaseUrls(file, rootFile, alias) {
+     }
+     const absolute = _path2.default.resolve(fileDir, url);
+     const relative = _path2.default.relative(rootDir, absolute);
+-    return _vite.normalizePath.call(void 0, relative);
++    return normalizePath.call(void 0, relative);
+   });
+   return {
+     file,
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 1fb7c18e093c7c3cf654e4d4d57ab1f2d3845783..8d995dd77c6fbccd63e838fe90235353712c410f 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -23224,8 +23224,8 @@ function injectClientPlugin(type, {
+       needSourcemap = !!resolvedConfig.build.sourcemap;
+     },
+     transformIndexHtml: {
+-      enforce: "pre",
+-      async transform(html) {
++      order: "pre",
++      async handler(html) {
+         if (html.includes(CLIENT_PUBLIC_PATH)) {
+           return html;
+         }
+diff --git a/package.json b/package.json
+index b237913636dc0a0e9b12417c71eb1f67e77d1688..367c9681a1e44288a07600a387092505ae7b7957 100644
+--- a/package.json
++++ b/package.json
+@@ -2,8 +2,8 @@
+   "name": "@rys-fe/vite-plugin-theme",
+   "version": "0.8.6",
+   "description": "Vite plugin for dynamically changing the theme color of the interface",
+-  "main": "dist/index.js",
+-  "module": "dist/index.js",
++  "main": "dist/index.cjs",
++  "module": "dist/index.mjs",
+   "types": "dist/index.d.ts",
+   "files": [
+     "dist",
+@@ -12,6 +12,7 @@
+     "README.md",
+     "README.zh_CN.md"
+   ],
++  "type": "module",
+   "scripts": {
+     "clean": "rimraf dist && rimraf es",
+     "dev": " tsup src/index.ts --dts --format cjs,esm --watch",

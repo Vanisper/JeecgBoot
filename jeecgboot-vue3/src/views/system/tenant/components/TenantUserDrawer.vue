@@ -57,7 +57,7 @@
         }
         // 隐藏底部时禁用整个表单
         setProps({ disabled: !data?.showFooter });
-        if(!data?.showFooter){
+        if (!data?.showFooter) {
           await clearValidate();
         }
       });

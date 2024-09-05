@@ -237,8 +237,8 @@ export const schemas: FormSchema[] = [
       showToday: true,
       //不可选择日期
       disabledDate: (currentDate) => {
-        let date = dayjs(currentDate).format('YYYY-MM-DD');
-        let nowDate = dayjs(new Date()).format('YYYY-MM-DD');
+        const date = dayjs(currentDate).format('YYYY-MM-DD');
+        const nowDate = dayjs(new Date()).format('YYYY-MM-DD');
         //当天不可选择
         if (date == nowDate) {
           return true;
@@ -254,8 +254,8 @@ export const schemas: FormSchema[] = [
     componentProps: {
       //不可选择日期
       disabledDate: (currentDate) => {
-        let date = dayjs(currentDate).format('YYYY-MM');
-        let nowDate = dayjs(new Date()).format('YYYY-MM');
+        const date = dayjs(currentDate).format('YYYY-MM');
+        const nowDate = dayjs(new Date()).format('YYYY-MM');
         //当天不可选择
         if (date == nowDate) {
           return true;

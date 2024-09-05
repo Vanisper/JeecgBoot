@@ -1,6 +1,6 @@
 import { ref, computed, watch } from 'vue';
 
-import {getTenantId, getToken} from '/@/utils/auth';
+import { getTenantId, getToken } from '/@/utils/auth';
 import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
 import { JVxeComponent } from '../../types/JVxeComponent';
 import { useJVxeComponent } from '../useJVxeComponent';
@@ -18,11 +18,11 @@ export function useJVxeUploadCell(props: JVxeComponent.Props, options?) {
 
   /** upload headers */
   const uploadHeaders = computed(() => {
-    let headers = {};
+    const headers = {};
     if ((originColumn.value.token ?? options?.token ?? false) === true) {
       headers['X-Access-Token'] = getToken();
     }
-    let tenantId = getTenantId();
+    const tenantId = getTenantId();
     headers['X-Tenant-Id'] = tenantId ? tenantId : '0';
     return headers;
   });
@@ -51,8 +51,8 @@ export function useJVxeUploadCell(props: JVxeComponent.Props, options?) {
   );
 
   function handleChangeUpload(info) {
-    let { file } = info;
-    let value = {
+    const { file } = info;
+    const value = {
       name: file.name,
       type: file.type,
       size: file.size,
@@ -90,6 +90,7 @@ export function useJVxeUploadCell(props: JVxeComponent.Props, options?) {
   }
 
   function handleClickDownloadFile() {
+    // eslint-disable-next-line prefer-const
     let { url, path } = innerFile.value || {};
     if (!url || url.length === 0) {
       if (path && path.length > 0) {
@@ -127,8 +128,8 @@ export function fileGetValue(value) {
 
 export function fileSetValue(value) {
   if (value) {
-    let first = value.split(',')[0];
-    let name = first.substring(first.lastIndexOf('/') + 1);
+    const first = value.split(',')[0];
+    const name = first.substring(first.lastIndexOf('/') + 1);
     return {
       name: name,
       path: value,

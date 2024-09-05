@@ -29,15 +29,15 @@ export function useMethods() {
       return;
     }
     //update-begin---author:wangshuai---date:2024-04-18---for: 导出excel失败提示，不进行导出---
-    let reader = new FileReader()
-    reader.readAsText(data, 'utf-8')
+    const reader = new FileReader();
+    reader.readAsText(data, 'utf-8');
     reader.onload = async () => {
-      if(reader.result){
-        if(reader.result.toString().indexOf("success") !=-1){
+      if (reader.result) {
+        if (reader.result.toString().indexOf('success') != -1) {
           const { success, message } = JSON.parse(reader.result.toString());
           if (!success) {
-            createMessage.warning("导出失败，失败原因："+ message);
-          }else{
+            createMessage.warning('导出失败，失败原因：' + message);
+          } else {
             exportExcel(name, isXlsx, data);
           }
           return;
@@ -45,7 +45,7 @@ export function useMethods() {
       }
       exportExcel(name, isXlsx, data);
       //update-end---author:wangshuai---date:2024-04-18---for: 导出excel失败提示，不进行导出---
-    }
+    };
   }
 
   /**
@@ -58,11 +58,11 @@ export function useMethods() {
     const isReturn = (fileInfo) => {
       try {
         if (fileInfo.code === 201) {
-          let {
+          const {
             message,
             result: { msg, fileUrl, fileName },
           } = fileInfo;
-          let href = glob.uploadUrl + fileUrl;
+          const href = glob.uploadUrl + fileUrl;
           createWarningModal({
             title: message,
             centered: false,
@@ -103,7 +103,7 @@ export function useMethods() {
     if (!name || typeof name != 'string') {
       name = '导出文件';
     }
-    let blobOptions = { type: 'application/vnd.ms-excel' };
+    const blobOptions = { type: 'application/vnd.ms-excel' };
     let fileSuffix = '.xls';
     if (isXlsx) {
       blobOptions['type'] = XLSX_MIME_TYPE;
@@ -112,8 +112,8 @@ export function useMethods() {
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
       window.navigator.msSaveBlob(new Blob([data], blobOptions), name + fileSuffix);
     } else {
-      let url = window.URL.createObjectURL(new Blob([data], blobOptions));
-      let link = document.createElement('a');
+      const url = window.URL.createObjectURL(new Blob([data], blobOptions));
+      const link = document.createElement('a');
       link.style.display = 'none';
       link.href = url;
       link.setAttribute('download', name + fileSuffix);

@@ -15,7 +15,7 @@
 <script lang="ts">
   import { ref, computed, defineComponent } from 'vue';
   import { LoadingOutlined } from '@ant-design/icons-vue';
-  import { filterDictText } from '/@/utils/dict/JDictSelectUtil';
+  import { filterDictText } from '../../../../../../utils/dict/JDictSelectUtil';
   import { JVxeComponent, JVxeTypes } from '/@/components/jeecg/JVxeTable/types';
   import { useJVxeComponent, useJVxeCompProps } from '/@/components/jeecg/JVxeTable/hooks';
   import { dispatchEvent } from '/@/components/jeecg/JVxeTable/utils';
@@ -61,7 +61,9 @@
           let res = getLinkageOptionsSibling(row.value, originColumn.value, config, true);
           // 当返回Promise时，说明是多级联动
           if (res instanceof Promise) {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
             loading.value = true;
+            // eslint-disable-next-line vue/no-async-in-computed-properties
             res
               .then((opt) => {
                 asyncOptions.value = opt;
@@ -72,6 +74,7 @@
                 loading.value = false;
               });
           } else {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
             asyncOptions.value = null;
             return res;
           }
@@ -133,7 +136,6 @@
 
       /** 用于搜索下拉框中的内容 */
       function handleSelectFilterOption(input, option) {
-      
         let { allowSearch, allowInput } = originColumn.value;
         if (allowSearch === true || allowInput === true) {
           // update-begin--author:liaozhiyang---date:20240321---for：【QQYUN-5806】js增强改变下拉搜索options (防止option.title为null报错)

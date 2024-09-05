@@ -2,7 +2,7 @@
   <div :class="prefixCls">
     <template v-for="color in colorList || []" :key="color">
       <span
-        @click=" !isDisabledColor && handleClick(color)"
+        @click="!isDisabledColor && handleClick(color)"
         :class="[
           `${prefixCls}__item`,
           {
@@ -64,7 +64,7 @@
       return {
         prefixCls,
         handleClick,
-        isDisabledColor
+        isDisabledColor,
       };
     },
   });

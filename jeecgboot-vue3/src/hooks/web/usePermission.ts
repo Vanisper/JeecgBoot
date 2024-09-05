@@ -33,10 +33,10 @@ export function usePermission() {
   function hasBpmPermission(code, type) {
     // 禁用-type=2
     // 显示-type=1
-    let codeList: string[] = [];
-    let permissionList = formData.permissionList;
+    const codeList: string[] = [];
+    const permissionList = formData.permissionList;
     if (permissionList && permissionList.length > 0) {
-      for (let item of permissionList) {
+      for (const item of permissionList) {
         if (item.type == type) {
           codeList.push(item.action);
         }
@@ -95,7 +95,7 @@ export function usePermission() {
       if (!isArray(value) && allCodeList && allCodeList.length > 0) {
         //=============================工作流权限判断-显示-begin==============================================
         if (formData) {
-          let code = value as string;
+          const code = value as string;
           if (hasBpmPermission(code, '1') === true) {
             return true;
           }
@@ -113,7 +113,7 @@ export function usePermission() {
   function isDisabledAuth(value?: RoleEnum | RoleEnum[] | string | string[], def = true): boolean {
     //=============================工作流权限判断-禁用-begin==============================================
     if (formData) {
-      let code = value as string;
+      const code = value as string;
       if (hasBpmPermission(code, '2') === true) {
         return true;
       }
@@ -155,9 +155,9 @@ export function usePermission() {
    * 判断是不是 代码里写了逻辑但是没有配置权限这种情况
    */
   function isCodingButNoConfig(code) {
-    let all = permissionStore.allAuthList;
+    const all = permissionStore.allAuthList;
     if (all && all instanceof Array) {
-      let temp = all.filter((item) => item.action == code);
+      const temp = all.filter((item) => item.action == code);
       if (temp && temp.length > 0) {
         if (temp[0].status == '0') {
           return true;

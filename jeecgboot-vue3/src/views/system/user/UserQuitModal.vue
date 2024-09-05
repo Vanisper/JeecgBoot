@@ -104,7 +104,7 @@
 </script>
 
 <style scoped lang="less">
-:deep(.ant-popover-inner-content){
-  width: 185px !important;
-}
+  :deep(.ant-popover-inner-content) {
+    width: 185px !important;
+  }
 </style>

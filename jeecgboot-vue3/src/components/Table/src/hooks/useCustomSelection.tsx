@@ -143,16 +143,16 @@ export function useCustomSelection(
     },
     {
       immediate: true,
-      deep: true
+      deep: true,
     }
   );
   // update-end--author:liaozhiyang---date:20240306---for：【QQYUN-8390】部门人员组件点击重置未清空（selectedRowKeys.value=[]，watch没监听到加deep）
 
   /**
-  * 2024-03-06
-  * liaozhiyang
-  * 判断是否同一个数组 (引用地址，长度，元素位置信息相同才是同一个数组。数组元素只有字符串)
-  */
+   * 2024-03-06
+   * liaozhiyang
+   * 判断是否同一个数组 (引用地址，长度，元素位置信息相同才是同一个数组。数组元素只有字符串)
+   */
   function sameArray(a, b) {
     if (a === b) {
       if (a.length === b.length) {
@@ -186,7 +186,7 @@ export function useCustomSelection(
     if (bodyEl.value) {
       // 监听div高度变化
       bodyResizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
+        for (const entry of entries) {
           if (entry.target === bodyEl.value && entry.contentRect) {
             const { height } = entry.contentRect;
             bodyHeight.value = Math.ceil(height);
@@ -249,7 +249,7 @@ export function useCustomSelection(
       }
       let showCount = 0;
       // 最小选中数量
-      let minSelect = 100;
+      const minSelect = 100;
       const hidden: Recordable[] = [];
       flattedData.value.forEach((item, index, array) => {
         if (array.length > 120) {
@@ -299,7 +299,7 @@ export function useCustomSelection(
             setTimeout(() => {
               emitChange('all');
               // update-begin--author:liaozhiyang---date:20230811---for：【QQYUN-5687】批量选择，提示成功后，又来一个提示
-              setTimeout(() =>resolve(), 0);
+              setTimeout(() => resolve(), 0);
               // update-end--author:liaozhiyang---date:20230811---for：【QQYUN-5687】批量选择，提示成功后，又来一个提示
             }, 500);
           }
@@ -633,4 +633,3 @@ function flattenData<RecordType>(data: RecordType[] | undefined, childrenColumnN
 
   return list;
 }
-

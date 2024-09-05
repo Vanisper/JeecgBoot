@@ -11,7 +11,7 @@
             <a-avatar v-if="item.avatar" :src="getFileAccessHttpUrl(item.avatar)"></a-avatar>
             <a-avatar v-else-if="item.avatarIcon" class="ant-btn-primary">
               <template #icon>
-                <Icon :icon=" 'ant-design:'+item.avatarIcon " style="margin-top: 4px;font-size: 24px;"/>
+                <Icon :icon="'ant-design:' + item.avatarIcon" style="margin-top: 4px; font-size: 24px" />
               </template>
             </a-avatar>
             <a-avatar v-else>
@@ -35,7 +35,7 @@
   import { UserOutlined } from '@ant-design/icons-vue';
   import { computed, toRaw, reactive, watchEffect, ref } from 'vue';
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
-  
+
   export default {
     name: 'UserList',
     props: {
@@ -56,10 +56,10 @@
         type: Array,
         default: () => [],
       },
-      excludeUserIdList:{
+      excludeUserIdList: {
         type: Array,
         default: () => [],
-      }
+      },
     },
     components: {
       UserOutlined,
@@ -114,7 +114,7 @@
         console.error('onChangeChecked', e);
       }
 
-     // const showDataList = ref<any[]>([])
+      // const showDataList = ref<any[]>([])
       const checkStatus = reactive<any>({});
       watchEffect(() => {
         let arr1 = props.dataList;
@@ -129,16 +129,14 @@
             checkStatus[item.id] = false;
           }
         }
-        
-      
       });
 
       function prevent(e) {
         e.preventDefault();
         e.stopPropagation();
       }
-//update-begin---author:wangshuai---date:2024-02-02---for:【QQYUN-8239】用户角色，添加用户 返回2页数据，实际只显示一页---
-/*      function records2DataList() {
+      //update-begin---author:wangshuai---date:2024-02-02---for:【QQYUN-8239】用户角色，添加用户 返回2页数据，实际只显示一页---
+      /*      function records2DataList() {
         let arr:any[] = [];
         let excludeList = props.excludeUserIdList;
         let records = props.dataList;
@@ -151,13 +149,13 @@
         }
         return arr;
       }*/
-      
-      const showDataList = computed(()=>{
-/*        let excludeList = props.excludeUserIdList;
+
+      const showDataList = computed(() => {
+        /*        let excludeList = props.excludeUserIdList;
         if(excludeList && excludeList.length>0){
           return records2DataList();
         }*/
-//update-end---author:wangshuai---date:2024-02-02---for:【QQYUN-8239】用户角色，添加用户 返回2页数据，实际只显示一页---
+        //update-end---author:wangshuai---date:2024-02-02---for:【QQYUN-8239】用户角色，添加用户 返回2页数据，实际只显示一页---
         return props.dataList;
       });
 
@@ -169,7 +167,7 @@
         onChangeChecked,
         checkStatus,
         showDataList,
-        getFileAccessHttpUrl
+        getFileAccessHttpUrl,
       };
     },
   };

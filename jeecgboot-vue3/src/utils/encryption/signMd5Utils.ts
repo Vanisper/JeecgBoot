@@ -8,19 +8,19 @@ export default class signMd5Utils {
    * @param jsonObj 发送参数
    */
 
-  static sortAsc(jsonObj) {
-    let arr = new Array();
+  static sortAsc(jsonObj: any) {
+    const arr = [] as string[];
     let num = 0;
-    for (let i in jsonObj) {
+    for (const i in jsonObj) {
       arr[num] = i;
       num++;
     }
-    let sortArr = arr.sort();
-    let sortObj = {};
-    for (let i in sortArr) {
+    const sortArr = arr.sort();
+    const sortObj = {};
+    for (const i in sortArr) {
       sortObj[sortArr[i]] = jsonObj[sortArr[i]];
     }
-    return sortObj;
+    return sortObj as any;
   }
 
   /**
@@ -29,15 +29,15 @@ export default class signMd5Utils {
    * @param requestBodyParams 请求参数(@RequestBody(post)参数)
    * @returns {string} 获取签名
    */
-  static getSign(url, requestParams, requestBodyParams) {
-    let urlParams = this.parseQueryString(url);
+  static getSign(url: string, requestParams: any, requestBodyParams: any) {
+    const urlParams = this.parseQueryString(url);
     let jsonObj = this.mergeObject(urlParams, requestParams);
     //update-begin---author:wangshuai---date:2024-04-16---for:【QQYUN-9005】发送短信加签---
-    if(requestBodyParams){
-      jsonObj = this.mergeObject(jsonObj, requestBodyParams)
+    if (requestBodyParams) {
+      jsonObj = this.mergeObject(jsonObj, requestBodyParams);
     }
     //update-end---author:wangshuai---date:2024-04-16---for:【QQYUN-9005】发送短信加签---
-    let requestBody = this.sortAsc(jsonObj);
+    const requestBody = this.sortAsc(jsonObj);
     delete requestBody._t;
     console.log('sign requestBody:', requestBody);
     return md5(JSON.stringify(requestBody) + signatureSecret).toUpperCase();
@@ -48,7 +48,7 @@ export default class signMd5Utils {
    * @returns {{}} 将url中请求参数组装成json对象(url的?后面的参数)
    */
   static parseQueryString(url) {
-    let urlReg = /^[^\?]+\?([\w\W]+)$/,
+    const urlReg = /^[^\?]+\?([\w\W]+)$/,
       paramReg = /([^&=]+)=([\w\W]*?)(&|$|#)/g,
       urlArray = urlReg.exec(url),
       result = {};
@@ -67,8 +67,8 @@ export default class signMd5Utils {
       //update-end---author:wangshuai ---date:20221103  for：[issues/183]下拉搜索，使用动态字典，在线页面不报错，生成的代码报错 ------------
     }
     if (urlArray && urlArray[1]) {
-      let paramString = urlArray[1],
-        paramResult;
+      const paramString = urlArray[1];
+      let paramResult: RegExpExecArray | null;
       while ((paramResult = paramReg.exec(paramString)) != null) {
         //数字值转为string类型，前后端加密规则保持一致
         if (this.myIsNaN(paramResult[2])) {
@@ -85,7 +85,7 @@ export default class signMd5Utils {
    */
   static mergeObject(objectOne, objectTwo) {
     if (objectTwo && Object.keys(objectTwo).length > 0) {
-      for (let key in objectTwo) {
+      for (const key in objectTwo) {
         if (objectTwo.hasOwnProperty(key) === true) {
           //数字值转为string类型，前后端加密规则保持一致
           if (this.myIsNaN(objectTwo[key])) {
@@ -105,12 +105,12 @@ export default class signMd5Utils {
   static urlEncode(param, key, encode) {
     if (param == null) return '';
     let paramStr = '';
-    let t = typeof param;
+    const t = typeof param;
     if (t == 'string' || t == 'number' || t == 'boolean') {
       paramStr += '&' + key + '=' + (encode == null || encode ? encodeURIComponent(param) : param);
     } else {
-      for (let i in param) {
-        let k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
+      for (const i in param) {
+        const k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
         paramStr += this.urlEncode(param[i], k, encode);
       }
     }

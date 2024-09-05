@@ -24,7 +24,7 @@ export const getEnabledTypes = async () => {
   if (enabledTypes != null) {
     return cloneObject(enabledTypes);
   } else {
-    let { success, result } = await defHttp.get({ url: backEndUrl.getEnabledType }, { isTransformResponse: false });
+    const { success, result } = await defHttp.get({ url: backEndUrl.getEnabledType }, { isTransformResponse: false });
     if (success) {
       // 在此缓存
       enabledTypes = cloneObject(result);

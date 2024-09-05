@@ -1,0 +1,20 @@
+diff --git a/lib/theme/convertLegacyToken.js b/lib/theme/convertLegacyToken.js
+index dc45d0a0cfe99838382707e999d7d38207a5460d..5a02358fdd63ea22dd850d21e378519bb87ed1a2 100644
+--- a/lib/theme/convertLegacyToken.js
++++ b/lib/theme/convertLegacyToken.js
+@@ -1,10 +1,11 @@
+ "use strict";
+ 
+ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+-Object.defineProperty(exports, "__esModule", {
+-  value: true
+-});
+-exports.default = convertLegacyToken;
++// Object.defineProperty(exports, "__esModule", {
++//   value: true
++// });
++// exports.default = convertLegacyToken;
++module.exports = convertLegacyToken;
+ var _alias = _interopRequireDefault(require("./util/alias"));
+ function convertLegacyToken(mapToken) {
+   const token = (0, _alias.default)(mapToken);

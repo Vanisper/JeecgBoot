@@ -31,24 +31,24 @@ export function registerJVxeTable(app: App) {
   app.component('JVxeTable', JVxeTable);
 }
 
-
 /**
  * 阻止行编辑中关闭弹窗
  * @param params
  */
 function preventClosingPopUp(this: any, params) {
   // 获取组件增强
-  let col = params.column.params;
-  let { $event } = params;
+  const col = params.column.params;
+  const { $event } = params;
   const interceptor = getEnhanced(col.type).interceptor;
   // 执行增强
-  let flag = interceptor['event.clearActived']?.call(this, ...arguments);
+  // eslint-disable-next-line prefer-rest-params
+  const flag = interceptor['event.clearActived']?.call(this, ...arguments);
   if (flag === false) {
     return false;
   }
 
-  let path = getEventPath($event);
-  for (let p of path) {
+  const path = getEventPath($event);
+  for (const p of path) {
     let className: any = p.className || '';
     className = typeof className === 'string' ? className : className.toString();
 
@@ -67,7 +67,8 @@ function preventClosingPopUp(this: any, params) {
       return false;
     }
     // 执行增强
-    let flag = interceptor['event.clearActived.className']?.call(this, className, ...arguments);
+    // eslint-disable-next-line prefer-rest-params
+    const flag = interceptor['event.clearActived.className']?.call(this, className, ...arguments);
     if (flag === false) {
       return false;
     }

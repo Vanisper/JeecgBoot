@@ -1,5 +1,5 @@
-const whiteColor = '#ffffff'
-const blackColor = '#666666'
+const whiteColor = '#ffffff';
+const blackColor = '#666666';
 
 export const Colors = [
   // 背景颜色，文字颜色
@@ -24,9 +24,9 @@ export const Colors = [
   ['#DEC2FA', blackColor],
   ['#CCD2F1', blackColor],
   ['#D3D3D3', blackColor],
-]
+];
 
-export const NONE_COLOR = ['#e9e9e9', blackColor]
+export const NONE_COLOR = ['#e9e9e9', blackColor];
 
 /**
  * 返回一个颜色迭代器，每次调用返回一个颜色，当颜色用完后，再从头开始
@@ -45,20 +45,20 @@ export function getColorIterator(initIndex = 0) {
       index = (index + 1) % Colors.length;
       return color;
     },
-  }
+  };
 }
 
 /**
  * 根据颜色获取当前坐标和颜色
  */
 export function getItemColor(color) {
-  if(!color){
+  if (!color) {
     return NONE_COLOR[1];
   }
-  let colorIndex = Colors.findIndex((value)=>{
+  const colorIndex = Colors.findIndex((value) => {
     return value[0] === color;
-  })
-  if(colorIndex === -1){
+  });
+  if (colorIndex === -1) {
     return NONE_COLOR[1];
   }
   return Colors[colorIndex][1];

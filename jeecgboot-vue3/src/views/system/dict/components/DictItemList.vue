@@ -4,12 +4,11 @@
       <template #tableTitle>
         <a-button type="primary" @click="handleCreate"> 新增</a-button>
       </template>
-      <template v-slot:bodyCell="{column, record, index}">
-        <template v-if="column.dataIndex ==='action'">
+      <template v-slot:bodyCell="{ column, record, index }">
+        <template v-if="column.dataIndex === 'action'">
           <TableAction :actions="getTableAction(record)" />
         </template>
       </template>
-     
     </BasicTable>
   </BasicDrawer>
   <DictItemModal @register="registerModal" @success="reload" :dictId="dictId" />
@@ -45,7 +44,7 @@
   };
   const [registerTable, { reload, setProps }] = useTable({
     //需要配置rowKey，否则会有警告
-    rowKey:'dictId',
+    rowKey: 'dictId',
     api: itemList,
     columns: dictItemColumns,
     formConfig: {
@@ -64,8 +63,8 @@
       schemas: dictItemSearchFormSchema,
       autoSubmitOnEnter: true,
       actionColOptions: {
-        span: 8
-      }
+        span: 8,
+      },
     },
     striped: true,
     useSearchForm: true,

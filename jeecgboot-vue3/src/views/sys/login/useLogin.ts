@@ -4,8 +4,8 @@ import { ref, computed, unref, Ref } from 'vue';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { checkOnlyUser } from '/@/api/sys/user';
 import { defHttp } from '/@/utils/http/axios';
-import { OAUTH2_THIRD_LOGIN_TENANT_ID } from "/@/enums/cacheEnum";
-import { getAuthCache } from "/@/utils/auth";
+import { OAUTH2_THIRD_LOGIN_TENANT_ID } from '/@/enums/cacheEnum';
+import { getAuthCache } from '/@/utils/auth';
 
 export enum LoginStateEnum {
   LOGIN,
@@ -154,7 +154,7 @@ function checkUsername(rule, value, callback) {
 }
 async function checkPhone(rule, value, callback) {
   const { t } = useI18n();
-  var reg = /^1[3456789]\d{9}$/;
+  const reg = /^1[3456789]\d{9}$/;
   if (!reg.test(value)) {
     return Promise.reject(new Error('请输入正确手机号'));
   } else {
@@ -183,8 +183,8 @@ export function sysOAuth2Login(source) {
   let url = `${window._CONFIG['domianURL']}/sys/thirdLogin/oauth2/${source}/login`;
   url += `?state=${encodeURIComponent(window.location.origin)}`;
   //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]新建企业微信和钉钉配置表，通过租户模式隔离------------
-  let tenantId = getAuthCache(OAUTH2_THIRD_LOGIN_TENANT_ID);
-  if(tenantId){
+  const tenantId = getAuthCache(OAUTH2_THIRD_LOGIN_TENANT_ID);
+  if (tenantId) {
     url += `&tenantId=${tenantId}`;
   }
   //update-end---author:wangshuai ---date:20230224  for：[QQYUN-3440]新建企业微信和钉钉配置表，通过租户模式隔离------------

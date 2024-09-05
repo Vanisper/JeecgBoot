@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { Modal } from 'ant-design-vue';
-import { getTenantId } from "/@/utils/auth";
+import { getTenantId } from '/@/utils/auth';
 
 enum Api {
   list = '/sys/tenant/list',
@@ -26,7 +26,7 @@ enum Api {
   addTenantPackUser = '/sys/tenant/addTenantPackUser',
   //获取用户租户列表
   getTenantPageListByUserId = '/sys/tenant/getTenantPageListByUserId',
-  
+
   //新增、编辑用户租户
   saveUser = '/sys/user/add',
   editUser = '/sys/user/editTenantUser',
@@ -45,7 +45,7 @@ export const getTenantList = (params) => {
  * @param params
  */
 export const saveOrUpdateTenant = (params, isUpdate) => {
-  let url = isUpdate ? Api.edit : Api.save;
+  const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
 
@@ -168,22 +168,25 @@ export const recycleBinPageList = (params) => {
  * 租户彻底删除
  * @param params
  */
-export const deleteLogicDeleted = (params,handleSuccess) => {
-  return defHttp.delete({ url: Api.deleteLogicDeleted, params },{ joinParamsToUrl: true }).then(() => {
-    handleSuccess();
-  }).catch(()=>{
-    handleSuccess();
-  });
+export const deleteLogicDeleted = (params, handleSuccess) => {
+  return defHttp
+    .delete({ url: Api.deleteLogicDeleted, params }, { joinParamsToUrl: true })
+    .then(() => {
+      handleSuccess();
+    })
+    .catch(() => {
+      handleSuccess();
+    });
 };
 
 /**
  * 租户还原
  * @param params
  */
-export const revertTenantLogic = (params,handleSuccess) => {
-  return defHttp.put({ url: Api.revertTenantLogic, params },{ joinParamsToUrl: true }).then(() => {
+export const revertTenantLogic = (params, handleSuccess) => {
+  return defHttp.put({ url: Api.revertTenantLogic, params }, { joinParamsToUrl: true }).then(() => {
     handleSuccess();
-  })
+  });
 };
 
 /**
@@ -198,17 +201,17 @@ export const queryTenantPackUserList = (params) => {
  * 移除用户和产品包的关系数据
  * @param params
  */
-export const deleteTenantPackUser = (params)=>{
+export const deleteTenantPackUser = (params) => {
   return defHttp.put({ url: Api.deleteTenantPackUser, params });
-}
+};
 
 /**
  * 添加用户和产品包的关系数据
  * @param params
  */
-export const addTenantPackUser = (params)=>{
+export const addTenantPackUser = (params) => {
   return defHttp.post({ url: Api.addTenantPackUser, params });
-}
+};
 
 /**
  * 查询用户租户列表
@@ -218,19 +221,18 @@ export const getTenantPageListByUserId = (params) => {
   return defHttp.get({ url: Api.getTenantPageListByUserId, params });
 };
 
-
 /**
  * 获取当前登录租户名称
  */
 export async function getLoginTenantName() {
-  let tenantId = getTenantId();
-  if(tenantId){
-    let result = await getTenantById({ id:tenantId });
-    if(result){
+  const tenantId = getTenantId();
+  if (tenantId) {
+    const result = await getTenantById({ id: tenantId });
+    if (result) {
       return result.name;
     }
   }
-  return "空";
+  return '空';
 }
 
 /**
@@ -238,6 +240,6 @@ export async function getLoginTenantName() {
  * @param params
  */
 export const saveOrUpdateTenantUser = (params, isUpdate) => {
-  let url = isUpdate ? Api.editUser : Api.saveUser;
-  return defHttp.post({ url: url, params },{ joinParamsToUrl: true });
+  const url = isUpdate ? Api.editUser : Api.saveUser;
+  return defHttp.post({ url: url, params }, { joinParamsToUrl: true });
 };

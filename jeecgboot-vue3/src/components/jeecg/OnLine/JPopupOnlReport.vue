@@ -64,7 +64,7 @@
   import { usePopBiz } from '/@/components/jeecg/OnLine/hooks/usePopBiz';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useRoute } from 'vue-router';
-  
+
   export default defineComponent({
     name: 'JPopupOnlReport',
     components: {
@@ -91,9 +91,9 @@
       const attrs = useAttrs();
       const tableScroll = ref({ x: true });
       const route = useRoute();
-      console.log('route.query = ',route.query)
-      const getBindValue = Object.assign({}, {routeQuery: route.query}, unref(props), unref(attrs));
-      
+      console.log('route.query = ', route.query);
+      const getBindValue = Object.assign({}, { routeQuery: route.query }, unref(props), unref(attrs));
+
       const [
         {
           visibleChange,
@@ -245,10 +245,10 @@
     }
   }
 
-  :deep(.jeecg-basic-table .ant-table-wrapper .ant-table-title){
+  :deep(.jeecg-basic-table .ant-table-wrapper .ant-table-title) {
     min-height: 0;
   }
-  :deep(.ant-select-selector){
+  :deep(.ant-select-selector) {
     min-width: 95px;
   }
 </style>

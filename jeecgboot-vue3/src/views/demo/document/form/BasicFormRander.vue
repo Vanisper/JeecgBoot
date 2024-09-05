@@ -61,7 +61,7 @@
       },
       //渲染 values当前表单所有值
       render: ({ values }) => {
-        let productName = values.productName?values.productName:'';
+        let productName = values.productName ? values.productName : '';
         let price = values.price ? values.price : 0;
         let buyNums = values.buyNums ? values.buyNums : 0;
         return '购买商品名称：' + productName + ', 总价格: ' + price * buyNums + '元';

@@ -34,10 +34,10 @@ interface OnlineColumn {
   ellipsis?: boolean;
   // 是否固定列
   fixed?: boolean | 'left' | 'right';
-  //字段类型 int/string 
-  dbType?:string;
+  //字段类型 int/string
+  dbType?: string;
   //他表字段用
-  linkField?:string;
+  linkField?: string;
 }
 
 export { OnlineColumn, HrefSlots };

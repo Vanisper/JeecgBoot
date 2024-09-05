@@ -16,14 +16,16 @@
           <Icon icon="mdi:chevron-down"></Icon>
         </a-button>
       </a-dropdown>
-      <div style="margin-left: 10px;margin-top: 5px">当前登录租户: <span class="tenant-name">{{loginTenantName}}</span> </div>
+      <div style="margin-left: 10px; margin-top: 5px"
+        >当前登录租户: <span class="tenant-name">{{ loginTenantName }}</span>
+      </div>
     </template>
     <template #action="{ record }">
       <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
     </template>
   </BasicTable>
   <!--角色用户表格-->
-  <RoleUserTable @register="roleUserDrawer" :disableUserEdit="true"/>
+  <RoleUserTable @register="roleUserDrawer" :disableUserEdit="true" />
   <!--角色编辑抽屉-->
   <RoleDrawer @register="registerDrawer" @success="reload" :showFooter="showFooter" />
   <!--角色详情-->
@@ -40,15 +42,15 @@
   import { columns, searchFormSchema } from './role.data';
   import { listByTenant, deleteRole, batchDeleteRole, getExportUrl, getImportUrl } from './role.api';
   import { useListPage } from '/@/hooks/system/useListPage';
-  import { getLoginTenantName } from "/@/views/system/tenant/tenant.api";
-  import { tenantSaasMessage } from "@/utils/common/compUtils";
-  
+  import { getLoginTenantName } from '/@/views/system/tenant/tenant.api';
+  import { tenantSaasMessage } from '@/utils/common/compUtils';
+
   const showFooter = ref(true);
   const [roleUserDrawer, { openDrawer: openRoleUserDrawer }] = useDrawer();
   const [registerDrawer, { openDrawer }] = useDrawer();
   const [registerModal, { openModal }] = useModal();
   const [registerDesc, { openDrawer: openRoleDesc }] = useDrawer();
-  
+
   // 列表页面公共参数、方法
   const { prefixCls, tableContext, onImportXls, onExportXls } = useListPage({
     designScope: 'role-template',
@@ -163,21 +165,21 @@
   }
 
   const loginTenantName = ref<string>('');
-  
+
   getTenantName();
-  
-  async function getTenantName(){
+
+  async function getTenantName() {
     loginTenantName.value = await getLoginTenantName();
   }
 
-  onMounted(()=>{
-    tenantSaasMessage('租户角色')
-  })
+  onMounted(() => {
+    tenantSaasMessage('租户角色');
+  });
 </script>
 
 <style scoped lang="less">
-  .tenant-name{
-    text-decoration:underline;
+  .tenant-name {
+    text-decoration: underline;
     margin: 5px;
     font-size: 15px;
   }

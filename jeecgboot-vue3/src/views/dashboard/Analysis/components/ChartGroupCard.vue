@@ -31,7 +31,6 @@
           <Bar :seriesColor="seriesColor" v-if="index === 2" :option="option" :chartData="chartData" height="50px"></Bar>
 
           <Progress v-if="index === 3" :percent="78" :show-info="false"></Progress>
-
         </div>
         <template #footer v-if="type === 'chart'">
           <span v-if="index !== 3"
@@ -100,7 +99,7 @@
   ]);
   const seriesColor = computed(() => {
     return getThemeColor.value;
-  })
+  });
   const dataList = computed(() => (props.type === 'dbc' ? bdcCardList : chartCardList));
 
   function getTotal(total, index) {

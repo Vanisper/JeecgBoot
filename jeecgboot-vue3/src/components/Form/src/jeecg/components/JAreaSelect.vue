@@ -47,7 +47,7 @@
         default: (node) => node?.parentNode,
       },
     },
-    emits: ['change', 'update:value','update:area','update:city','update:province'],
+    emits: ['change', 'update:value', 'update:area', 'update:city', 'update:province'],
     setup(props, { emit, refs }) {
       const emitData = ref<any[]>([]);
       //下拉框的选择值
@@ -154,10 +154,10 @@
     width: 100%;
 
     /* update-begin-author:taoyan date:2023-2-18 for: QQYUN-4292【online表单】高级查询 2.省市县样式问题 */
-   /* display: flex;*/
+    /* display: flex;*/
 
     .ant-select {
-      width: calc(33.3% - 7px)
+      width: calc(33.3% - 7px);
     }
     /* update-end-author:taoyan date:2023-2-18 for:  QQYUN-4292【online表单】高级查询 2.省市县样式问题 */
 

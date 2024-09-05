@@ -12,14 +12,14 @@ const enhancedMap = new Map<JVxeTypes, JVxeComponent.Enhanced>();
  * @param type JVxeTypes
  */
 export function getEnhanced(type: JVxeTypes | string): JVxeComponent.Enhanced {
-  let $type: JVxeTypes = <JVxeTypes>type;
+  const $type: JVxeTypes = <JVxeTypes>type;
   if (!enhancedMap.has($type)) {
-    let defaultEnhanced = useDefaultEnhanced();
+    const defaultEnhanced = useDefaultEnhanced();
     if (componentMap.has($type)) {
-      let enhanced = componentMap.get($type)?.enhanced ?? {};
+      const enhanced = componentMap.get($type)?.enhanced ?? {};
       if (isObject(enhanced)) {
         Object.keys(defaultEnhanced).forEach((key) => {
-          let def = defaultEnhanced[key];
+          const def = defaultEnhanced[key];
           if (enhanced.hasOwnProperty(key)) {
             // 方法如果存在就不覆盖
             if (!isFunction(def) && !isString(def)) {
@@ -51,5 +51,3 @@ export function replaceProps(col, value) {
   }
   return value;
 }
-
-

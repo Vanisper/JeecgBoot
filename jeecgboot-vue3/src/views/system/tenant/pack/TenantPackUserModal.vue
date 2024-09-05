@@ -39,10 +39,10 @@
     components: { BasicModal, BasicTable, TableAction, TenantUserSelectModal },
     setup() {
       //获取租户id
-      const getTenantId = computed(()=>{
+      const getTenantId = computed(() => {
         return tenantPackData.tenantId;
-      })
-      
+      });
+
       //产品包信息
       const tenantPackData = reactive<any>({});
       //表单赋值
@@ -96,7 +96,7 @@
             popConfirm: {
               title: '是否确认移除',
               confirm: handleDelete.bind(null, record),
-            }
+            },
           },
         ];
       }

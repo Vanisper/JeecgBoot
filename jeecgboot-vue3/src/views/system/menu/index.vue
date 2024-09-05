@@ -31,15 +31,16 @@
 </template>
 <script lang="ts" name="system-menu" setup>
   import { nextTick, ref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, TableAction, ActionItem } from '/@/components/Table';
+  import { TableRowSelection } from '/@/components/Table/src/types/table';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { useDrawer } from '/@/components/Drawer';
   import MenuDrawer from './MenuDrawer.vue';
   import DataRuleList from './DataRuleList.vue';
-  import { columns,searchFormSchema } from './menu.data';
+  import { columns, searchFormSchema } from './menu.data';
   import { list, deleteMenu, batchDeleteMenu } from './menu.api';
-  import { useDefIndexStore } from "@/store/modules/defIndex";
-  import { useI18n } from "/@/hooks/web/useI18n";
+  import { useDefIndexStore } from '@/store/modules/defIndex';
+  import { useI18n } from '/@/hooks/web/useI18n';
 
   const checkedKeys = ref<Array<string | number>>([]);
   const showFooter = ref(true);
@@ -48,18 +49,18 @@
   const { t } = useI18n();
 
   // 自定义菜单名称列渲染
-  columns[0].customRender = function ({text, record}) {
-    const isDefIndex = checkDefIndex(record)
+  columns[0].customRender = function ({ text, record }) {
+    const isDefIndex = checkDefIndex(record);
     if (isDefIndex) {
-      text += '（默认首页）'
+      text += '（默认首页）';
     }
     // update-begin--author:liaozhiyang---date:20240306---for：【QQYUN-8379】菜单管理页菜单国际化
     if (text.includes("t('") && t) {
       return new Function('t', `return ${text}`)(t);
     }
     // update-end--author:liaozhiyang---date:20240306---for：【QQYUN-8379】菜单管理页菜单国际化
-    return text
-  }
+    return text;
+  };
 
   // 列表页面公共参数、方法
   const { prefixCls, tableContext } = useListPage({
@@ -78,8 +79,8 @@
       tableSetting: { fullScreen: true },
       formConfig: {
         // update-begin--author:liaozhiyang---date:20230803---for：【QQYUN-5873】查询区域lablel默认居左
-        labelWidth:60,
-        owProps: { gutter: 24 },
+        labelWidth: 60,
+        rowProps: { gutter: 24 },
         // update-end--author:liaozhiyang---date:20230803---for：【QQYUN-5873】查询区域lablel默认居左
         schemas: searchFormSchema,
         autoAdvancedCol: 4,
@@ -97,10 +98,10 @@
   /**
    * 选择列配置
    */
-  const rowSelection = {
+  const rowSelection: TableRowSelection = {
     type: 'checkbox',
     columnWidth: 30,
-    selectedRowKeys: checkedKeys,
+    selectedRowKeys: checkedKeys.value,
     onChange: onSelectChange,
   };
 
@@ -184,11 +185,11 @@
 
   // --------------- begin 默认首页配置 ------------
 
-  const defIndexStore = useDefIndexStore()
+  const defIndexStore = useDefIndexStore();
 
   // 设置默认主页
   async function handleSetDefIndex(record: Recordable) {
-    defIndexStore.update(record.url, record.component, record.route)
+    defIndexStore.update(record.url, record.component, record.route);
   }
 
   /**
@@ -196,19 +197,19 @@
    * @param record
    */
   function checkDefIndex(record: Recordable) {
-    return defIndexStore.check(record.url)
+    return defIndexStore.check(record.url);
   }
 
-  // 重新加载默认首页配置
+  // 重新加载默认首页配置 | TODO: 待优化
   function reloadDefIndex() {
     try {
       defIndexStore.query();
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
   }
 
-  reloadDefIndex()
+  reloadDefIndex();
 
   // --------------- end 默认首页配置 ------------
 
@@ -254,6 +255,6 @@
           confirm: handleDelete.bind(null, record),
         },
       },
-    ];
+    ] as ActionItem[];
   }
 </script>

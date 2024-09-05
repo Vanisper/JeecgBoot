@@ -80,7 +80,7 @@
 </script>
 
 <style lang="less" scoped>
-   .infoArea {
+  .infoArea {
     display: flex;
     justify-content: space-between;
     padding: 0 10%;

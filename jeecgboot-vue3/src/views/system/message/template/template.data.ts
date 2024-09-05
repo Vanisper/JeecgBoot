@@ -1,6 +1,6 @@
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { rules } from '/@/utils/helper/validator';
-import { filterDictTextByCache } from '/@/utils/dict/JDictSelectUtil';
+import { filterDictTextByCache } from '../../../../utils/dict/JDictSelectUtil';
 
 export const columns: BasicColumn[] = [
   {
@@ -77,7 +77,7 @@ export const formSchemas: FormSchema[] = [
     field: 'templateCode',
     component: 'Input',
     dynamicRules: ({ model, schema }) => {
-      return [ ...rules.duplicateCheckRule('sys_sms_template', 'template_code', model, schema, true)];
+      return [...rules.duplicateCheckRule('sys_sms_template', 'template_code', model, schema, true)];
     },
     // 编辑模式下不可修改编码
     dynamicDisabled: (params) => !!params.values.id,
@@ -169,8 +169,8 @@ export const sendTestFormSchemas: FormSchema[] = [
     field: 'msgType',
     component: 'JDictSelectTag',
     required: true,
-    defaultValue:'system',
-    componentProps: { dictCode: 'messageType',type:'radio' },
+    defaultValue: 'system',
+    componentProps: { dictCode: 'messageType', type: 'radio' },
   },
   {
     label: '消息接收方',

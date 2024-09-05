@@ -193,7 +193,7 @@
         searchState.searchData = filter(
           unref(treeDataRef),
           (node) => {
-            const result = filterFn ? filterFn(searchValue, node, unref(getReplaceFields)) : node[titleField]?.includes(searchValue) ?? false;
+            const result = filterFn ? filterFn(searchValue, node, unref(getReplaceFields)) : (node[titleField]?.includes(searchValue) ?? false);
             if (result) {
               searchKeys.push(node[keyField]);
             }

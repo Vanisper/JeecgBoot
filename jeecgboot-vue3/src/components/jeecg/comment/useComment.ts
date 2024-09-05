@@ -14,8 +14,8 @@ import word from '/@/assets/svg/fileType/word.svg';
 import image from '/@/assets/svg/fileType/image.png';
 import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
 import { createImgPreview } from '/@/components/Preview';
-import data from "emoji-mart-vue-fast/data/apple.json";
-import { EmojiIndex } from "emoji-mart-vue-fast/src";
+import data from 'emoji-mart-vue-fast/data/apple.json';
+import { EmojiIndex } from 'emoji-mart-vue-fast/src';
 import { encryptByBase64 } from '/@/utils/cipher';
 
 enum Api {
@@ -42,17 +42,17 @@ const getViewFileDomain = () => defHttp.get({ url: Api.getFileViewDomain });
  */
 export const list = (params) => defHttp.get({ url: Api.list, params });
 
-export function getGloablEmojiIndex(){
-  if(window['myEmojiIndex']){
-    console.log("----走window['myEmojiIndex']缓存，不new新对象！")
+export function getGloablEmojiIndex() {
+  if (window['myEmojiIndex']) {
+    console.log("----走window['myEmojiIndex']缓存，不new新对象！");
     return window['myEmojiIndex'];
   }
-  
+
   window['myEmojiIndex'] = new EmojiIndex(data, {
     function() {
       return true;
     },
-    exclude:['recent','people','nature','foods','activity','places','objects','symbols','flags']
+    exclude: ['recent', 'people', 'nature', 'foods', 'activity', 'places', 'objects', 'symbols', 'flags'],
   });
   return window['myEmojiIndex'];
 }
@@ -62,8 +62,8 @@ export function getGloablEmojiIndex(){
  * @param params
  */
 export const queryById = (id) => {
-  let params = { id: id };
-  return defHttp.get({ url: Api.queryById, params },{ isTransformResponse: false });
+  const params = { id: id };
+  return defHttp.get({ url: Api.queryById, params }, { isTransformResponse: false });
 };
 
 /**
@@ -84,7 +84,7 @@ export const deleteOne = (params) => {
  * @param params
  */
 export const saveOne = (params) => {
-  let url = Api.addText;
+  const url = Api.addText;
   return defHttp.post({ url: url, params }, { isTransformResponse: false });
 };
 
@@ -92,8 +92,7 @@ export const saveOne = (params) => {
  * 数据日志列表接口
  * @param params
  */
-export const getLogList = (params) => defHttp.get({ url: Api.logList, params }, {isTransformResponse: false});
-
+export const getLogList = (params) => defHttp.get({ url: Api.logList, params }, { isTransformResponse: false });
 
 /**
  * 文件上传接口
@@ -101,7 +100,7 @@ export const getLogList = (params) => defHttp.get({ url: Api.logList, params }, 
 export const uploadFileUrl = `${baseUploadUrl}/sys/comment/addFile`;
 
 export function useCommentWithFile(props) {
-  let uploadData = {
+  const uploadData = {
     biz: 'comment',
     commentId: '',
   };
@@ -122,19 +121,19 @@ export function useCommentWithFile(props) {
    * 保存评论
    */
   async function saveComment(obj) {
-    const {fromUserId, toUserId, commentId, commentContent} = obj;
-    let commentData = {
+    const { fromUserId, toUserId, commentId, commentContent } = obj;
+    const commentData = {
       tableName: props.tableName,
       tableDataId: props.dataId,
       fromUserId,
       commentContent,
       toUserId: '',
-      commentId: ''
+      commentId: '',
     };
-    if(toUserId){
+    if (toUserId) {
       commentData.toUserId = toUserId;
     }
-    if(commentId){
+    if (commentId) {
       commentData.commentId = commentId;
     }
     uploadData.commentId = '';
@@ -148,7 +147,7 @@ export function useCommentWithFile(props) {
   }
 
   async function uploadOne(file) {
-    let url = uploadFileUrl;
+    const url = uploadFileUrl;
     const formData = new FormData();
     formData.append('file', file);
     formData.append('tableName', props.tableName);
@@ -177,22 +176,22 @@ export function useCommentWithFile(props) {
    * QQYUN-4310【文件】从文件库选择文件功能未做
    * @param file
    */
-  async function saveSysFormFile(file){
-    let url = '/sys/comment/addFile';
-    let params = {
+  async function saveSysFormFile(file) {
+    const url = '/sys/comment/addFile';
+    const params = {
       fileId: file.id,
-      commentId: uploadData.commentId
-    }
-    await defHttp.post({url, params}, { joinParamsToUrl: true, isTransformResponse: false });
+      commentId: uploadData.commentId,
+    };
+    await defHttp.post({ url, params }, { joinParamsToUrl: true, isTransformResponse: false });
   }
 
   async function uploadFiles(fileList) {
     if (fileList && fileList.length > 0) {
       for (let i = 0; i < fileList.length; i++) {
-        let file = toRaw(fileList[i]);
-        if(file.exist === true){
+        const file = toRaw(fileList[i]);
+        if (file.exist === true) {
           await saveSysFormFile(file);
-        }else{
+        } else {
           await uploadOne(file.originFileObj);
         }
       }
@@ -208,11 +207,11 @@ export function useCommentWithFile(props) {
 export function uploadMu(fileList) {
   const formData = new FormData();
   // let arr = []
-  for(let file of fileList){
+  for (const file of fileList) {
     formData.append('files[]', file.originFileObj);
   }
-  console.log(formData)
-  let url = `${baseUploadUrl}/sys/comment/addFile2`;
+  console.log(formData);
+  const url = `${baseUploadUrl}/sys/comment/addFile2`;
   uploadMyFile(url, formData).then((res: any) => {
     console.log('uploadMyFile', res);
   });
@@ -230,19 +229,19 @@ export function useFileList() {
     txt: txt,
     docx: word,
     doc: word,
-    image
+    image,
   };
-   function getBackground(item) {
+  function getBackground(item) {
     console.log('获取文件背景图', item);
     if (isImage(item)) {
-      return 'none'
+      return 'none';
     } else {
       const name = item.name;
-      if(!name){
+      if (!name) {
         return 'none';
       }
       const suffix = name.substring(name.lastIndexOf('.') + 1);
-      console.log('suffix', suffix)
+      console.log('suffix', suffix);
       let bg = typeMap[suffix];
       if (!bg) {
         bg = other;
@@ -250,51 +249,51 @@ export function useFileList() {
       return bg;
     }
   }
-  
+
   function getImageTypeIcon() {
     return typeMap['image'];
   }
 
-  function getBase64(file, id){
+  function getBase64(file, id) {
     return new Promise((resolve, reject) => {
       //声明js的文件流
-      let reader = new FileReader();
-      if(file){
+      const reader = new FileReader();
+      if (file) {
         //通过文件流将文件转换成Base64字符串
         reader.readAsDataURL(file);
         //转换成功后
         reader.onload = function () {
-          let base = reader.result;
-          console.log('base', base)
+          const base = reader.result;
+          console.log('base', base);
           imageSrcMap[id] = base;
-          console.log('imageSrcMap', imageSrcMap)
-          resolve(base)
-        }
-      }else{
+          console.log('imageSrcMap', imageSrcMap);
+          resolve(base);
+        };
+      } else {
         reject();
       }
-    })
+    });
   }
-  function handleImageSrc(file){
-    if(isImage(file)){
-      let id = file.uid;
+  function handleImageSrc(file) {
+    if (isImage(file)) {
+      const id = file.uid;
       getBase64(file, id);
     }
   }
 
   function downLoad(file) {
-    let url = getFileAccessHttpUrl(file.url);
+    const url = getFileAccessHttpUrl(file.url);
     if (url) {
       window.open(url);
     }
   }
 
   function getFileSize(item) {
-    let size = item.fileSize;
+    const size = item.fileSize;
     if (!size) {
       return '0B';
     }
-    let temp = Math.round(size / 1024);
+    const temp = Math.round(size / 1024);
     return temp + ' KB';
   }
 
@@ -303,7 +302,7 @@ export function useFileList() {
     handleImageSrc(file);
     selectFileList.value = [...selectFileList.value, file];
     console.log('selectFileList', unref(selectFileList));
-    return false
+    return false;
   }
 
   function handleRemove(file) {
@@ -313,50 +312,50 @@ export function useFileList() {
     selectFileList.value = newFileList;
   }
 
-  function isImage(item){
-    const type = item.type||'';
+  function isImage(item) {
+    const type = item.type || '';
     if (type.indexOf('image') >= 0) {
       return true;
     }
     return false;
   }
 
-  function getImageSrc(file){
-    if(file.exist){
+  function getImageSrc(file) {
+    if (file.exist) {
       return getFileAccessHttpUrl(file.url);
     }
-    if(isImage(file)){
-      let id = file.uid;
-      if(id){
-        if(imageSrcMap[id]){
+    if (isImage(file)) {
+      const id = file.uid;
+      if (id) {
+        if (imageSrcMap[id]) {
           return imageSrcMap[id];
         }
-      }else if(file.url){
+      } else if (file.url) {
         //数据库中地址
-        let url = getFileAccessHttpUrl(file.url);
+        const url = getFileAccessHttpUrl(file.url);
         return url;
       }
     }
-    return ''
+    return '';
   }
 
   /**
    * 显示图片
    * @param item
    */
-  function getImageAsBackground(item){
+  function getImageAsBackground(item) {
     let url;
-    if(item.exist){
+    if (item.exist) {
       url = getFileAccessHttpUrl(item.url);
-    }else{
+    } else {
       url = getImageSrc(item);
     }
-    if(url){
+    if (url) {
       return {
-        "backgroundImage": "url('"+url+"')"
-      }
+        backgroundImage: "url('" + url + "')",
+      };
     }
-    return {}
+    return {};
   }
 
   /**
@@ -364,22 +363,22 @@ export function useFileList() {
    * @param text
    */
   async function viewImage(file) {
-    if(isImage(file)){
-      let text = getImageSrc(file)
+    if (isImage(file)) {
+      const text = getImageSrc(file);
       if (text) {
-        let imgList = [text];
+        const imgList = [text];
         createImgPreview({ imageList: imgList });
       }
-    }else{
-      if(file.url){
+    } else {
+      if (file.url) {
         //数据库中地址
-        let url = getFileAccessHttpUrl(file.url);
+        const url = getFileAccessHttpUrl(file.url);
         await initViewDomain();
         //本地测试需要将文件地址的localhost/127.0.0.1替换成IP, 或是直接修改全局domain
         //url = url.replace('localhost', '192.168.1.100')
         //update-begin---author:scott ---date:2024-06-03  for：【TV360X-952】升级到kkfileview4.1.0---
-        let previewUrl = encodeURIComponent(encryptByBase64(url));
-        window.open(onlinePreviewDomain+'?url='+previewUrl);
+        const previewUrl = encodeURIComponent(encryptByBase64(url));
+        window.open(onlinePreviewDomain + '?url=' + previewUrl);
         //update-end---author:scott ---date::2024-06-03  for：【TV360X-952】升级到kkfileview4.1.0----
       }
     }
@@ -388,12 +387,12 @@ export function useFileList() {
   /**
    * 初始化domain
    */
-  async function initViewDomain(){
-    if(!onlinePreviewDomain){
+  async function initViewDomain() {
+    if (!onlinePreviewDomain) {
       onlinePreviewDomain = await getViewFileDomain();
     }
-    if(!onlinePreviewDomain.startsWith('http')){
-      onlinePreviewDomain = 'http://'+ onlinePreviewDomain;
+    if (!onlinePreviewDomain.startsWith('http')) {
+      onlinePreviewDomain = 'http://' + onlinePreviewDomain;
     }
   }
 
@@ -408,52 +407,52 @@ export function useFileList() {
     getImageSrc,
     getImageAsBackground,
     viewImage,
-    getImageTypeIcon
+    getImageTypeIcon,
   };
 }
 
 /**
  * 用于emoji渲染
  */
-export function useEmojiHtml(globalEmojiIndex){
-  const COLONS_REGEX = new RegExp('([^:]+)?(:[a-zA-Z0-9-_+]+:(:skin-tone-[2-6]:)?)','g');
+export function useEmojiHtml(globalEmojiIndex) {
+  const COLONS_REGEX = new RegExp('([^:]+)?(:[a-zA-Z0-9-_+]+:(:skin-tone-[2-6]:)?)', 'g');
 
   function getHtml(text) {
-    if(!text){
-      return ''
+    if (!text) {
+      return '';
     }
     return text.replace(COLONS_REGEX, function (match, p1, p2) {
-      const before = p1 || ''
+      const before = p1 || '';
       if (endsWith(before, 'alt="') || endsWith(before, 'data-text="')) {
-        return match
+        return match;
       }
-      let emoji = globalEmojiIndex.findEmoji(p2)
+      const emoji = globalEmojiIndex.findEmoji(p2);
       if (!emoji) {
-        return match
+        return match;
       }
-      return before + emoji2Html(emoji)
-    })
+      return before + emoji2Html(emoji);
+    });
     return text;
   }
 
-  function endsWith(str, temp){
-    return str.endsWith(temp)
+  function endsWith(str, temp) {
+    return str.endsWith(temp);
   }
 
   function emoji2Html(emoji) {
-    let style = `position: absolute;top: -3px;left: 3px;width: 18px; height: 18px;background-position: ${emoji.getPosition()}`
-    return `<span style="width: 24px" class="emoji-mart-emoji"><span class="my-emoji-icon emoji-set-apple emoji-type-image" style="${style}"> </span> </span>`
+    const style = `position: absolute;top: -3px;left: 3px;width: 18px; height: 18px;background-position: ${emoji.getPosition()}`;
+    return `<span style="width: 24px" class="emoji-mart-emoji"><span class="my-emoji-icon emoji-set-apple emoji-type-image" style="${style}"> </span> </span>`;
   }
-  
+
   return {
     globalEmojiIndex,
-    getHtml
-  }
+    getHtml,
+  };
 }
 
 /**
  * 获取modal窗体高度
  */
-export function getModalHeight(){
+export function getModalHeight() {
   return window.innerHeight;
 }

@@ -56,6 +56,5 @@ export const syncNotic = (params) => {
  * @param sendId
  */
 export const getOne = (sendId) => {
-  return defHttp.get({ url: Api.getOne, params:{sendId} });
+  return defHttp.get({ url: Api.getOne, params: { sendId } });
 };
-

@@ -38,7 +38,7 @@ export async function registerThirdComp(app: App) {
   dayjs.locale('zh-cn');
   dayjs.extend(relativeTime);
   dayjs.extend(customParseFormat);
-  app.config.globalProperties.$dayjs = dayjs
-  app.provide('$dayjs', dayjs)
+  app.config.globalProperties.$dayjs = dayjs;
+  app.provide('$dayjs', dayjs);
   //---------------------------------------------------------------------
 }

@@ -11,7 +11,7 @@
           <div class="aui-formWell">
             <form>
               <div class="aui-flex aui-form-nav investment_title" style="padding-bottom: 19px">
-                <div class="aui-flex-box activeNav">{{t('sys.login.qrSignInFormTitle')}}</div>
+                <div class="aui-flex-box activeNav">{{ t('sys.login.qrSignInFormTitle') }}</div>
               </div>
               <div class="aui-form-box">
                 <div class="aui-account" style="padding: 30px 0">
@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="aui-formButton">
-                <a class="aui-linek-code aui-link-register" @click="goBackHandleClick">{{t('sys.login.backSignIn')}}</a>
+                <a class="aui-linek-code aui-link-register" @click="goBackHandleClick">{{ t('sys.login.backSignIn') }}</a>
               </div>
             </form>
           </div>
@@ -69,7 +69,7 @@
   import logoImg from '/@/assets/loginmini/icon/jeecg_logo.png';
   import adTextImg from '/@/assets/loginmini/icon/jeecg_ad_text.png';
   import { useI18n } from '/@/hooks/web/useI18n';
-  import { useDesign } from "/@/hooks/web/useDesign";
+  import { useDesign } from '/@/hooks/web/useDesign';
   import { GithubFilled, WechatFilled, DingtalkCircleFilled, createFromIconfontCN } from '@ant-design/icons-vue';
 
   const IconFont = createFromIconfontCN({
@@ -160,6 +160,6 @@
   });
 </script>
 <style lang="less" scoped>
-@import '/@/assets/loginmini/style/home.less';
-@import '/@/assets/loginmini/style/base.less';
+  @import '/@/assets/loginmini/style/home.less';
+  @import '/@/assets/loginmini/style/base.less';
 </style>

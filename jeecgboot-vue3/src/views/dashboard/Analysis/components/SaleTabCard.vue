@@ -16,7 +16,12 @@
         <a-tab-pane loading="true" tab="销售额" key="1">
           <a-row>
             <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-              <Bar :chartData="barData" :option="{ title: { text: '', textStyle: { fontWeight: 'lighter' } } }" height="40vh" :seriesColor="seriesColor"  />
+              <Bar
+                :chartData="barData"
+                :option="{ title: { text: '', textStyle: { fontWeight: 'lighter' } } }"
+                height="40vh"
+                :seriesColor="seriesColor"
+              />
             </a-col>
             <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
               <RankList title="门店销售排行榜" :list="rankList" />
@@ -26,7 +31,12 @@
         <a-tab-pane tab="销售趋势" key="2">
           <a-row>
             <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-              <Bar :chartData="barData.reverse()" :option="{ title: { text: '', textStyle: { fontWeight: 'lighter' } } }" height="40vh" :seriesColor="seriesColor" />
+              <Bar
+                :chartData="barData.reverse()"
+                :option="{ title: { text: '', textStyle: { fontWeight: 'lighter' } } }"
+                height="40vh"
+                :seriesColor="seriesColor"
+              />
             </a-col>
             <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
               <RankList title="门店销售排行榜" :list="rankList" />
@@ -42,7 +52,6 @@
   import Bar from '/@/components/chart/Bar.vue';
   import RankList from '/@/components/chart/RankList.vue';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-    
 
   defineProps({
     loading: {
@@ -66,8 +75,8 @@
     });
   }
   const seriesColor = computed(() => {
-    return getThemeColor.value
-  })
+    return getThemeColor.value;
+  });
 </script>
 
 <style lang="less" scoped>

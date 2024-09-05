@@ -5,11 +5,13 @@ export default {
   moduleDirectories: ['node_modules', 'src'],
   moduleFileExtensions: ['js', 'ts', 'vue', 'tsx', 'jsx', 'json', 'node'],
   modulePaths: ['<rootDir>/src', '<rootDir>/node_modules'],
+  // eslint-disable-next-line prettier/prettier
   testMatch: [
     '**/tests/**/*.[jt]s?(x)',
     '**/?(*.)+(spec|test).[tj]s?(x)',
     '(/__tests__/.*|(\\.|/)(test|spec))\\.(js|ts)$',
   ],
+  // eslint-disable-next-line prettier/prettier
   testPathIgnorePatterns: [
     '<rootDir>/tests/server/',
     '<rootDir>/tests/__mocks__/',

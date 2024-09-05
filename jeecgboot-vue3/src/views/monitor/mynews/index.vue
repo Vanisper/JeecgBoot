@@ -34,7 +34,7 @@
   import { useMessageHref } from '/@/views/system/message/components/useSysMessage';
   const appStore = useAppStore();
 
-  const {goPage} = useMessageHref()
+  const { goPage } = useMessageHref();
 
   const { prefixCls, tableContext } = useListPage({
     designScope: 'mynews-list',
@@ -71,14 +71,13 @@
       reload();
       syncNotic({ anntId: anntId });
     });
-    const openModalFun = ()=>{
+    const openModalFun = () => {
       openDetail(true, {
         record,
         isUpdate: true,
       });
-    }
+    };
     goPage(record, openModalFun);
-   
   }
   // 日志类型
   function callback(key) {
@@ -97,35 +96,33 @@
   function onSelectChange(selectedRowKeys: (string | number)[]) {
     checkedKeys.value = selectedRowKeys;
   }
-  
+
   //update-begin-author:taoyan date:2022-8-23 for: 消息跳转，打开详情表单
-  onMounted(()=>{
+  onMounted(() => {
     initHrefModal();
   });
-  function initHrefModal(){
+  function initHrefModal() {
     let params = appStore.getMessageHrefParams;
-    if(params){
+    if (params) {
       let anntId = params.id;
-      if(anntId){
+      if (anntId) {
         editCementSend({ anntId: anntId }).then(() => {
           reload();
           syncNotic({ anntId: anntId });
         });
       }
       let detailId = params.detailId;
-      if(detailId){
-        getOne(detailId).then(data=>{
-          console.log('getOne', data)
+      if (detailId) {
+        getOne(detailId).then((data) => {
+          console.log('getOne', data);
           openDetail(true, {
             record: data,
             isUpdate: true,
           });
-          appStore.setMessageHrefParams('')
-        })
+          appStore.setMessageHrefParams('');
+        });
       }
     }
   }
   //update-end-author:taoyan date:2022-8-23 for: 消息跳转，打开详情表单
-
-  
 </script>

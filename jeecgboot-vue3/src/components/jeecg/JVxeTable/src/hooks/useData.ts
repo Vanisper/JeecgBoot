@@ -25,9 +25,9 @@ export function useData(props: JVxeTableProps): JVxeDataProps {
 
       // --- 【issues/209】自带的tooltip会错位，所以替换成原生的title ---
       // 溢出隐藏并显示tooltip
-      showOverflow: "title",
+      showOverflow: 'title',
       // 表头溢出隐藏并显示tooltip
-      showHeaderOverflow: "title",
+      showHeaderOverflow: 'title',
       // --- 【issues/209】自带的tooltip会错位，所以替换成原生的title ---
 
       showFooterOverflow: true,

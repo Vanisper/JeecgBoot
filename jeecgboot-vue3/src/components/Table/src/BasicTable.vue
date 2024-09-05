@@ -20,7 +20,14 @@
     <a-form-item-rest>
       <!-- 【TV360X-377】关联记录必填影响到了table的输入框和页码样式 -->
       <a-form-item>
-        <Table ref="tableElRef" v-bind="getBindValues" :rowClassName="getRowClassName" v-show="getEmptyDataIsShowTable" @resizeColumn="handleResizeColumn" @change="handleTableChange">
+        <Table
+          ref="tableElRef"
+          v-bind="getBindValues"
+          :rowClassName="getRowClassName"
+          v-show="getEmptyDataIsShowTable"
+          @resizeColumn="handleResizeColumn"
+          @change="handleTableChange"
+        >
           <!-- antd的原生插槽直接传递 -->
           <template #[item]="data" v-for="item in slotNamesGroup.native" :key="item">
             <!-- update-begin--author:liaozhiyang---date:20240424---for：【issues/1146】BasicTable使用headerCell全选框出不来 -->
@@ -33,7 +40,7 @@
           </template>
           <template #headerCell="{ column }">
             <!-- update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题 -->
-            <CustomSelectHeader v-if="isCustomSelection(column)" v-bind="selectHeaderProps"/>
+            <CustomSelectHeader v-if="isCustomSelection(column)" v-bind="selectHeaderProps" />
             <HeaderCell v-else :column="column" />
             <!-- update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题 -->
           </template>
@@ -42,7 +49,7 @@
             <!-- update-begin--author:liaozhiyang---date:220230717---for：【issues-179】antd3 一些警告以及报错(针对表格) -->
             <!-- update-begin--author:liusq---date:20230921---for：【issues/770】slotsBak异常报错的问题,增加判断column是否存在 -->
             <template v-if="data.column?.slotsBak?.customRender">
-            <!-- update-end--author:liusq---date:20230921---for：【issues/770】slotsBak异常报错的问题,增加判断column是否存在 -->
+              <!-- update-end--author:liusq---date:20230921---for：【issues/770】slotsBak异常报错的问题,增加判断column是否存在 -->
               <slot :name="data.column.slotsBak.customRender" v-bind="data || {}"></slot>
             </template>
             <template v-else>
@@ -69,7 +76,7 @@
   import { Table } from 'ant-design-vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { PageWrapperFixedHeightKey } from '/@/components/Page/injectionKey';
-  import CustomSelectHeader from './components/CustomSelectHeader.vue'
+  import CustomSelectHeader from './components/CustomSelectHeader.vue';
   import expandIcon from './components/ExpandIcon';
   import HeaderCell from './components/HeaderCell.vue';
   import TableSummary from './components/TableSummary';
@@ -88,7 +95,7 @@
   import { useTableFooter } from './hooks/useTableFooter';
   import { useTableForm } from './hooks/useTableForm';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { useCustomSelection } from "./hooks/useCustomSelection";
+  import { useCustomSelection } from './hooks/useCustomSelection';
 
   import { omit, pick } from 'lodash-es';
   import { basicProps } from './props';
@@ -168,14 +175,7 @@
         clearSelectedRowKeys,
         deleteSelectRowByKey,
         getExpandIconColumnIndex,
-      } = useCustomSelection(
-        getProps,
-        emit,
-        wrapRef,
-        getPaginationInfo,
-        tableData,
-        childrenColumnName
-      )
+      } = useCustomSelection(getProps, emit, wrapRef, getPaginationInfo, tableData, childrenColumnName);
       // update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
 
       const {
@@ -218,7 +218,7 @@
         getProps,
         getPaginationInfo,
         // update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
-        handleCustomSelectColumn,
+        handleCustomSelectColumn
         // update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
       );
 
@@ -291,11 +291,11 @@
         /*if (slots.expandedRowRender) {
           propsData = omit(propsData, 'scroll');
         }*/
-        //update-end---author:wangshuai ---date:20230214  for：[QQYUN-4237]代码生成 内嵌子表模式 没有滚动条------------ 
+        //update-end---author:wangshuai ---date:20230214  for：[QQYUN-4237]代码生成 内嵌子表模式 没有滚动条------------
 
         // update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
         // 自定义选择列，需要去掉原生的
-        delete propsData.rowSelection
+        delete propsData.rowSelection;
         // update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
 
         // update-begin--author:liaozhiyang---date:20230919---for：【QQYUN-6387】展开写法（去掉报错）
@@ -404,12 +404,11 @@
       // update-begin--author:liaozhiyang---date:20231226---for：【issues/945】BasicTable组件设置默认展开不生效
       nextTick(() => {
         getProps.value.defaultExpandAllRows && expandAll();
-      })
+      });
       // update-end--author:sunjianlei---date:20231226---for：【issues/945】BasicTable组件设置默认展开不生效
       expose(tableAction);
 
       emit('register', tableAction, formActions);
-
 
       return {
         tableElRef,

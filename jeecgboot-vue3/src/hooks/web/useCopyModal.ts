@@ -19,7 +19,7 @@ const { createMessage, createConfirm } = useMessage();
 
 /** 创建复制弹窗 */
 function createCopyModal(options: Partial<IOptions>) {
-  let modal = createConfirm({
+  const modal = createConfirm({
     ...options,
     iconType: options.iconType ?? 'info',
     width: options.width ?? 500,

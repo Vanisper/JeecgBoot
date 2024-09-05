@@ -2,7 +2,7 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { dictItemCheck } from './dict.api';
 import { rules } from '/@/utils/helper/validator';
-import { h } from "vue";
+import { h } from 'vue';
 
 export const columns: BasicColumn[] = [
   {
@@ -99,12 +99,12 @@ export const dictItemColumns: BasicColumn[] = [
     title: '字典颜色',
     dataIndex: 'itemColor',
     width: 80,
-    align:'center',
-    customRender:({ text }) => {
+    align: 'center',
+    customRender: ({ text }) => {
       return h('div', {
-        style: {"background": text, "width":"18px","height":"18px","border-radius":"50%","margin":"0 auto"}
-      })
-    }
+        style: { background: text, width: '18px', height: '18px', 'border-radius': '50%', margin: '0 auto' },
+      });
+    },
   },
 ];
 
@@ -154,7 +154,7 @@ export const itemFormSchema: FormSchema[] = [
               return Promise.reject('数据值不能包含特殊字符！');
             }
             return new Promise<void>((resolve, reject) => {
-              let params = {
+              const params = {
                 dictId: values.dictId,
                 id: model.id,
                 itemValue: value,
@@ -176,7 +176,7 @@ export const itemFormSchema: FormSchema[] = [
     label: '颜色值',
     field: 'itemColor',
     component: 'Input',
-    slot:'itemColor'
+    slot: 'itemColor',
   },
   {
     label: '描述',

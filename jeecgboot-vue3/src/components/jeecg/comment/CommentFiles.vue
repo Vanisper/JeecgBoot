@@ -15,7 +15,7 @@
       <div class="selected-file-list">
         <div class="item" v-for="item in selectFileList">
           <div class="complex">
-            <div class="content" >
+            <div class="content">
               <!-- 图片 -->
               <div v-if="isImage(item)" class="content-top" style="height: 100%">
                 <div class="content-image" :style="getImageAsBackground(item)">
@@ -32,8 +32,10 @@
                 </div>
               </template>
             </div>
-            <div class="layer" :class="{'layer-image':isImage(item)}">
-              <div class="next" @click="viewImage(item)"><div class="text">{{ item.name }} </div></div>
+            <div class="layer" :class="{ 'layer-image': isImage(item) }">
+              <div class="next" @click="viewImage(item)"
+                ><div class="text">{{ item.name }} </div></div
+              >
               <div class="buttons">
                 <div class="opt-icon">
                   <Tooltip title="删除">
@@ -44,7 +46,8 @@
             </div>
           </div>
         </div>
-        <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div> <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div>
+        <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div> <div class="item empty"></div
+        ><div class="item empty"></div><div class="item empty"></div>
       </div>
 
       <div style="margin-bottom: 24px; margin-top: 18px; text-align: right">
@@ -69,7 +72,7 @@
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   import { useUserStore } from '/@/store/modules/user';
   import { saveOne, useCommentWithFile, useFileList } from './useComment';
-  import {useModal} from "/@/components/Modal";
+  import { useModal } from '/@/components/Modal';
 
   import { Tooltip } from 'ant-design-vue';
   import HistoryFileList from './HistoryFileList.vue';
@@ -89,7 +92,7 @@
     props: {
       tableName: propTypes.string.def(''),
       dataId: propTypes.string.def(''),
-      datetime:  propTypes.number.def(1)
+      datetime: propTypes.number.def(1),
     },
     setup(props) {
       // const { createMessage } = useMessage();
@@ -104,7 +107,7 @@
           tableDataId: props.dataId,
         };
         const data = await fileList(params);
-        console.log('1111', data)
+        console.log('1111', data);
         if (!data || !data.records || data.records.length == 0) {
           dataList.value = [];
         } else {
@@ -117,7 +120,7 @@
 
       watchEffect(() => {
         // 每次切换tab都会刷新文件列表--- VUEN-1884 评论里上传的图片未在文件中显示
-        if(props.datetime){
+        if (props.datetime) {
           if (props.tableName && props.dataId) {
             loadFileList();
           }
@@ -133,17 +136,17 @@
       async function queding() {
         let obj = {
           fromUserId: userInfo.id,
-          commentContent: '上传了附件'
-        }
-        await saveCommentAndFiles(obj, selectFileList.value)
+          commentContent: '上传了附件',
+        };
+        await saveCommentAndFiles(obj, selectFileList.value);
         selectFileList.value = [];
         await loadFileList();
       }
-      
+
       function showFileModal() {
-        openModal(true, {})
+        openModal(true, {});
       }
-      
+
       function onSelectFileOk(temp) {
         // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-935】从知识库选择文件判断下是否没选
         if (temp.id === '') return;
@@ -151,8 +154,8 @@
         let arr = selectFileList.value;
         arr.push({
           ...temp,
-          exist: true
-        })
+          exist: true,
+        });
         selectFileList.value = arr;
       }
 
@@ -172,7 +175,6 @@
         registerModel,
         showFileModal,
         onSelectFileOk,
-
       };
     },
   };

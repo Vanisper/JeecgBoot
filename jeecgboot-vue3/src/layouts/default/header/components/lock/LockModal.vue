@@ -45,8 +45,8 @@
       const [registerForm, { validateFields, resetFields }] = useForm({
         //update-begin---author:wangshuai---date:2024-04-08---for:【QQYUN-8895】锁屏样式修改---
         labelWidth: 74,
-        labelAlign:'left',
-        wrapperCol:{},
+        labelAlign: 'left',
+        wrapperCol: {},
         //update-end---author:wangshuai---date:2024-04-08---for:【QQYUN-8895】锁屏样式修改---
         showActionButtonGroup: false,
         schemas: [
@@ -55,7 +55,7 @@
             label: t('layout.header.lockScreenPassword'),
             component: 'InputPassword',
             componentProps: {
-              autocomplete: "new-password",
+              autocomplete: 'new-password',
             },
           },
         ],

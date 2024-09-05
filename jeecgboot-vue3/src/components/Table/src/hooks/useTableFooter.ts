@@ -20,17 +20,20 @@ export function useTableFooter(
   });
 
   // 是否有展开行
-  const hasExpandedRow = computed(() => Object.keys(slots).includes('expandedRowRender'))
+  const hasExpandedRow = computed(() => Object.keys(slots).includes('expandedRowRender'));
 
   const getFooterProps = computed((): Recordable | undefined => {
     const { summaryFunc, showSummary, summaryData, bordered } = unref(propsRef);
-    return showSummary && !unref(getIsEmptyData) ? () => h(TableFooter, {
-      bordered,
-      summaryFunc,
-      summaryData,
-      scroll: unref(scrollRef),
-      hasExpandedRow: hasExpandedRow.value
-    }) : undefined;
+    return showSummary && !unref(getIsEmptyData)
+      ? () =>
+          h(TableFooter, {
+            bordered,
+            summaryFunc,
+            summaryData,
+            scroll: unref(scrollRef),
+            hasExpandedRow: hasExpandedRow.value,
+          })
+      : undefined;
   });
 
   watchEffect(() => {

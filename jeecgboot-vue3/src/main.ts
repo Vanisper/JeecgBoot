@@ -63,7 +63,7 @@ async function bootstrap() {
   // 挂载应用
   app.mount('#app', true);
 
-  console.log(" vue3 app 加载完成！")
+  console.log(' vue3 app 加载完成！');
 }
 
 bootstrap();

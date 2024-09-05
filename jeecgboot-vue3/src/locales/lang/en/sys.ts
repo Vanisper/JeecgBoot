@@ -102,10 +102,10 @@ export default {
     mobile: 'Mobile',
 
     //重置密码页面英文
-    authentication:'authentication',
-    resetLoginPassword:'reset login password',
-    resetSuccess:'reset succeeded',
-    nextStep:'next step',
-    goToLogin:'go to login'
+    authentication: 'authentication',
+    resetLoginPassword: 'reset login password',
+    resetSuccess: 'reset succeeded',
+    nextStep: 'next step',
+    goToLogin: 'go to login',
   },
 };

@@ -20,7 +20,7 @@
               </div>
             </template>
           </div>
-          <div class="layer" :class="{'layer-image':isImage(item)}">
+          <div class="layer" :class="{ 'layer-image': isImage(item) }">
             <div class="next" @click="viewImage(item)">
               <div class="text">
                 {{ item.name }}
@@ -39,7 +39,8 @@
           </div>
         </div>
       </div>
-      <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div> <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div>
+      <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div> <div class="item empty"></div
+      ><div class="item empty"></div><div class="item empty"></div>
     </div>
   </div>
 </template>
@@ -77,7 +78,7 @@
         getFileSize,
         isImage,
         getImageAsBackground,
-        viewImage
+        viewImage,
       };
     },
   };

@@ -115,7 +115,6 @@
         //update-begin-author:liusq date:20230517 for:选择职务组件v-model方式绑定值不生效
         emit('update:value', values.join(','));
         //update-begin-author:liusq date:20230517 for:选择职务组件v-model方式绑定值不生效
-
       }
 
       const getBindValue = Object.assign({}, unref(props), unref(attrs));

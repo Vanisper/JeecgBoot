@@ -1,5 +1,5 @@
 <template>
-    <a-cascader v-bind="getProps" class="pca-select" @change="handleChange" />
+  <a-cascader v-bind="getProps" class="pca-select" @change="handleChange" />
 </template>
 
 <script lang="ts">
@@ -18,7 +18,7 @@
       const selectedValue = computed(() => {
         let val: any = innerValue.value;
         if (!val) {
-          return []
+          return [];
         }
         let arr = getRealCode(val, 3);
         return arr;
@@ -32,10 +32,10 @@
           value: selectedValue.value,
         };
       });
-      
+
       function handleChange(arr) {
         let str = '';
-        if(arr && arr.length==3){
+        if (arr && arr.length == 3) {
           str = arr[2];
         }
         handleChangeCommon(str);
@@ -44,7 +44,7 @@
       return {
         handleChange,
         selectedValue,
-        getProps
+        getProps,
       };
     },
     // 【组件增强】注释详见：JVxeComponent.Enhanced
@@ -69,9 +69,9 @@
   });
 </script>
 <style lang="less">
-    .pca-select{
-        .ant-select-selection-placeholder{
-            color: #bfbfbf !important;
-        }
+  .pca-select {
+    .ant-select-selection-placeholder {
+      color: #bfbfbf !important;
     }
+  }
 </style>

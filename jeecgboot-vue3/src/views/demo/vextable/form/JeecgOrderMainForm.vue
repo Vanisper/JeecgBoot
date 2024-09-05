@@ -7,7 +7,18 @@
       </a-tab-pane>
 
       <a-tab-pane tab="机票信息" key="jeecgOrderTicket" :forceRender="true">
-        <JVxeTable v-if="ok" ref="jeecgOrderTicketRef" stripe rowSelection keepSource :maxHeight="300" :loading="table2.loading" :columns="table2.columns" :dataSource="table2.dataSource"> </JVxeTable>
+        <JVxeTable
+          v-if="ok"
+          ref="jeecgOrderTicketRef"
+          stripe
+          rowSelection
+          keepSource
+          :maxHeight="300"
+          :loading="table2.loading"
+          :columns="table2.columns"
+          :dataSource="table2.dataSource"
+        >
+        </JVxeTable>
       </a-tab-pane>
     </a-tabs>
   </div>

@@ -34,7 +34,7 @@ export function getBackMenuAndPerms() {
 /**
  * 切换成vue3菜单
  */
- // update-begin--author:liaozhiyang---date:20240313---for：【QQYUN-8487】注释掉判断菜单是否vue2版本逻辑代码
+// update-begin--author:liaozhiyang---date:20240313---for：【QQYUN-8487】注释掉判断菜单是否vue2版本逻辑代码
 // export const switchVue3Menu = () => {
 //   return new Promise((resolve) => {
 //     defHttp.get({ url: Api.SwitchVue3Menu });

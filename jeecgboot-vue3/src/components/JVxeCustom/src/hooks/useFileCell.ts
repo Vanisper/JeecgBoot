@@ -16,8 +16,8 @@ export function useFileCell(props, fileType: UploadTypeEnum, options?) {
 
   // 截取文件名
   const ellipsisFileName = computed(() => {
-    let length = 5;
-    let file = innerFile.value;
+    const length = 5;
+    const file = innerFile.value;
     if (!file || !file.name) {
       return '';
     }
@@ -42,7 +42,7 @@ export function useFileCell(props, fileType: UploadTypeEnum, options?) {
     let maxCount = originColumn.value.maxCount;
     // online 扩展JSON
     if (originColumn.value && originColumn.value.fieldExtendJson) {
-      let json = JSON.parse(originColumn.value.fieldExtendJson);
+      const json = JSON.parse(originColumn.value.fieldExtendJson);
       maxCount = json.uploadnum ? json.uploadnum : 0;
     }
     return maxCount ?? 0;

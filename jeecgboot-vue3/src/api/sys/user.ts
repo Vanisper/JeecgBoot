@@ -8,7 +8,7 @@ import { setAuthCache } from '/@/utils/auth';
 import { TOKEN_KEY } from '/@/enums/cacheEnum';
 import { router } from '/@/router';
 import { PageEnum } from '/@/enums/pageEnum';
-import { ExceptionEnum } from "@/enums/exceptionEnum";
+import { ExceptionEnum } from '@/enums/exceptionEnum';
 
 const { createErrorModal } = useMessage();
 enum Api {
@@ -93,10 +93,9 @@ export function getUserInfo() {
         query: {
           // 传入当前的路由，登录成功后跳转到当前路由
           redirect: router.currentRoute.value.fullPath,
-        }
+        },
       });
       // update-end-author:sunjianlei date:20230306 for: 修复登录成功后，没有正确重定向的问题
-
     }
     // update-end--author:zyf---date:20220425---for:【VUEN-76】捕获接口超时异常,跳转到登录界面
   });
@@ -111,31 +110,34 @@ export function doLogout() {
 }
 
 export function getCodeInfo(currdatetime) {
-  let url = Api.getInputCode + `/${currdatetime}`;
+  const url = Api.getInputCode + `/${currdatetime}`;
   return defHttp.get({ url: url });
 }
 /**
  * @description: 获取短信验证码
  */
 export function getCaptcha(params) {
-  return new Promise((resolve, reject) => {
-    defHttp.post({ url: Api.getCaptcha, params }, { isTransformResponse: false }).then((res) => {
-      console.log(res);
-      if (res.success) {
-        resolve(true);
-      } else {
-        //update-begin---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
-        if(res.code != ExceptionEnum.PHONE_SMS_FAIL_CODE){
-          createErrorModal({ title: '错误提示', content: res.message || '未知问题' });
-          reject();
+  return new Promise<boolean>((resolve, reject) => {
+    defHttp
+      .post({ url: Api.getCaptcha, params }, { isTransformResponse: false })
+      .then((res) => {
+        console.log(res);
+        if (res.success) {
+          resolve(true);
+        } else {
+          //update-begin---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
+          if (res.code != ExceptionEnum.PHONE_SMS_FAIL_CODE) {
+            createErrorModal({ title: '错误提示', content: res.message || '未知问题' });
+            reject();
+          }
+          reject(res);
+          //update-end---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
         }
-        reject(res);
-        //update-end---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
-      }
-    }).catch((res)=>{
-      createErrorModal({ title: '错误提示', content: res.message || '未知问题' });
-      reject();
-    });
+      })
+      .catch((res) => {
+        createErrorModal({ title: '错误提示', content: res.message || '未知问题' });
+        reject();
+      });
   });
 }
 
@@ -166,8 +168,8 @@ export const passwordChange = (params) => defHttp.get({ url: Api.passwordChange,
  */
 export function thirdLogin(params, mode: ErrorMessageMode = 'modal') {
   //==========begin 第三方登录/auth2登录需要传递租户id===========
-  let tenantId = "0";
-  if(!params.tenantId){
+  let tenantId = '0';
+  if (!params.tenantId) {
     tenantId = params.tenantId;
   }
   //==========end 第三方登录/auth2登录需要传递租户id===========
@@ -201,7 +203,7 @@ export function setThirdCaptcha(params) {
  * 获取登录二维码信息
  */
 export function getLoginQrcode() {
-  let url = Api.getLoginQrcode;
+  const url = Api.getLoginQrcode;
   return defHttp.get({ url: url });
 }
 
@@ -209,7 +211,7 @@ export function getLoginQrcode() {
  * 监控扫码状态
  */
 export function getQrcodeToken(params) {
-  let url = Api.getQrcodeToken;
+  const url = Api.getQrcodeToken;
   return defHttp.get({ url: url, params });
 }
 
@@ -217,6 +219,6 @@ export function getQrcodeToken(params) {
  * SSO登录校验
  */
 export async function validateCasLogin(params) {
-  let url = Api.validateCasLogin;
+  const url = Api.validateCasLogin;
   return defHttp.get({ url: url, params });
 }

@@ -38,7 +38,7 @@
 <script lang="ts" name="icon-list">
   import SvgIcon from '@/components/Icon/src/SvgIcon.vue';
   import Icon from '@/components/Icon/src/Icon.vue';
-  import { defineComponent, ref, unref, watchEffect} from 'vue';
+  import { defineComponent, ref, unref, watchEffect } from 'vue';
   import { useDebounceFn } from '@vueuse/core';
   import { usePagination } from '@/hooks/web/usePagination';
   import { propTypes } from '@/utils/propTypes';
@@ -86,7 +86,7 @@
        */
       function handleSearchChange(e: ChangeEvent) {
         const value = e.target.value;
-        console.log("value::::",value)
+        console.log('value::::', value);
         //update-begin---author:wangshuai ---date:20230522  for：【issues/4947】菜单编辑页面菜单图标选择模板，每页显示数量切换无效------------
         setCurrentPage(1);
         current.value = 1;

@@ -13,7 +13,14 @@
         </div>
       </div>
     </div>
-    <RoleSelectModal :appId="currentAppId" :multi="multi" :getContainer="getContainer" title="选择组织角色" @register="registerRoleModal" @selected="onSelected" />
+    <RoleSelectModal
+      :appId="currentAppId"
+      :multi="multi"
+      :getContainer="getContainer"
+      title="选择组织角色"
+      @register="registerRoleModal"
+      @selected="onSelected"
+    />
   </div>
 </template>
 
@@ -167,7 +174,7 @@
         const url = '/sys/role/listByTenant';
         let params = {
           [props.store]: ids,
-          pageSize: 200
+          pageSize: 200,
         };
         // 特殊条件处理（因为后台实体是roleCode，所以折中一下，不能直接改，会出问题）
         if (props.store === 'code') {

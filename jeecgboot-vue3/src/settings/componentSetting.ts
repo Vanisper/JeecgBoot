@@ -26,20 +26,20 @@ export default {
     // 默认排序方法
     defaultSortFn: (sortInfo: SorterResult) => {
       //update-begin-author:taoyan date:2022-10-21 for: VUEN-2199【表单设计器】多字段排序
-      if(sortInfo instanceof Array){
-        let sortInfoArray:any[] = []
-        for(let item of sortInfo){
-          let info = getSort(item);
-          if(info){
-            sortInfoArray.push(info)
+      if (sortInfo instanceof Array) {
+        const sortInfoArray: any[] = [];
+        for (const item of sortInfo) {
+          const info = getSort(item);
+          if (info) {
+            sortInfoArray.push(info);
           }
         }
         return {
-          sortInfoString: JSON.stringify(sortInfoArray)
-        }
-      }else{
-        let info = getSort(sortInfo)
-        return info || {}
+          sortInfoString: JSON.stringify(sortInfoArray),
+        };
+      } else {
+        const info = getSort(sortInfo);
+        return info || {};
       }
       //update-end-author:taoyan date:2022-10-21 for: VUEN-2199【表单设计器】多字段排序
     },
@@ -78,10 +78,10 @@ export default {
  * 获取排序信息
  * @param item
  */
-function getSort(item){
+function getSort(item) {
   const { field, order } = item;
   if (field && order) {
-    let sortType = 'ascend' == order ? 'asc' : 'desc';
+    const sortType = 'ascend' == order ? 'asc' : 'desc';
     return {
       // 排序字段
       column: field,
@@ -89,5 +89,5 @@ function getSort(item){
       order: sortType,
     };
   }
-  return ''
+  return '';
 }

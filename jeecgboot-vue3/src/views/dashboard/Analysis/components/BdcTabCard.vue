@@ -16,7 +16,12 @@
         <a-tab-pane loading="true" tab="受理监管" key="1">
           <a-row>
             <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-              <Bar :chartData="barData" :option="{ title: { text: '', textStyle: { fontWeight: 'lighter' } } }" height="40vh" :seriesColor="seriesColor" />
+              <Bar
+                :chartData="barData"
+                :option="{ title: { text: '', textStyle: { fontWeight: 'lighter' } } }"
+                height="40vh"
+                :seriesColor="seriesColor"
+              />
             </a-col>
             <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
               <QuickNav :loading="loading" class="enter-y" :bordered="false" :body-style="{ padding: 0 }" />

@@ -73,7 +73,7 @@
       //注册model
       const [regModal, { openModal }] = useModal();
       //表单值
-      let {code, fieldConfig } = props;
+      let { code, fieldConfig } = props;
       // update-begin--author:liaozhiyang---date:20230811---for：【issues/675】子表字段Popup弹框数据不更新
       //唯一分组groupId
       const uniqGroupId = computed(() => (props.groupId ? `${props.groupId}_${code}_${fieldConfig[0]['source']}_${fieldConfig[0]['target']}` : ''));

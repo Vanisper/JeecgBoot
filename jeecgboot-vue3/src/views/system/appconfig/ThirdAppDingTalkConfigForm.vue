@@ -8,7 +8,7 @@
         </template>
         <div class="base-desc">从钉钉开放平台获取对接信息，即可开始集成以及同步通讯录</div>
         <div style="margin-top: 5px">
-          <a href='https://help.qiaoqiaoyun.com/expand/dingding.html' target='_blank'>如何获取对接信息?</a>
+          <a href="https://help.qiaoqiaoyun.com/expand/dingding.html" target="_blank">如何获取对接信息?</a>
         </div>
       </a-collapse-panel>
     </a-collapse>
@@ -48,12 +48,12 @@
         <div style="font-size: 16px; width: 100%"> 3.数据同步</div>
         <div style="margin-top: 20px" class="base-desc">
           从钉钉同步到本地
-          <ul style='list-style-type: disc;margin-left: 20px;'>
+          <ul style="list-style-type: disc; margin-left: 20px">
             <li>同步部门到本地</li>
             <li>
               同步部门下的用户到本地
-              <a-tooltip title='同步用户与部门文档'>
-                <a-icon @click='handleIconClick' type="question-circle" class="sync-text"/>
+              <a-tooltip title="同步用户与部门文档">
+                <a-icon @click="handleIconClick" type="question-circle" class="sync-text" />
               </a-tooltip>
             </li>
           </ul>
@@ -164,11 +164,11 @@
               }
             } else {
               if (options && options.title) {
-                Modal.warning(options)
+                Modal.warning(options);
               } else {
                 createMessage.warning({
-                  content: "同步失败，请检查对接信息录入中是否填写正确，并确认是否已开启钉钉配置！",
-                  duration: 5
+                  content: '同步失败，请检查对接信息录入中是否填写正确，并确认是否已开启钉钉配置！',
+                  duration: 5,
                 });
               }
             }
@@ -205,10 +205,10 @@
       /**
        * 钉钉同步文档
        */
-      function handleIconClick(){
-        window.open("https://help.qiaoqiaoyun.com/expand/dingdingsyn.html","_target")
+      function handleIconClick() {
+        window.open('https://help.qiaoqiaoyun.com/expand/dingdingsyn.html', '_target');
       }
-      
+
       onMounted(() => {
         let tenantId = getTenantId();
         initThirdAppConfigData({ tenantId: tenantId, thirdType: 'dingtalk' });
@@ -282,16 +282,18 @@
   }
   /*begin 兼容暗夜模式*/
   //暗黑模式下卡片的边框设置成none
-  [data-theme='dark'] .base-collapse .ant-collapse{
+  [data-theme='dark'] .base-collapse .ant-collapse {
     border: none !important;
   }
   /*end 兼容暗夜模式*/
   /*文档按钮问号样式*/
-  .sync-text{
+  .sync-text {
     margin-left: 2px;
     cursor: pointer;
     position: relative;
-    top: 2px
+    top: 2px;
   }
- :deep(.ant-collapse-borderless >.ant-collapse-item:last-child) {border-bottom-width:1px;}
+  :deep(.ant-collapse-borderless > .ant-collapse-item:last-child) {
+    border-bottom-width: 1px;
+  }
 </style>

@@ -20,7 +20,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
     const path = route.path;
     let key = path.replace(/[\/\\]/g, '_');
     // update-end--author:liaozhiyang---date:20240226---for：【QQYUN-8367】online报表配置列展示保存，影响到其他页面的table字段的显示隐藏（开发环境热更新会有此问题，生产环境无问题）
-    let cacheKey = table.getBindValues.value.tableSetting?.cacheKey;
+    const cacheKey = table.getBindValues.value.tableSetting?.cacheKey;
     if (cacheKey) {
       key += ':' + cacheKey;
     }
@@ -39,7 +39,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
       return;
     }
     isInit = true;
-    let columnCache = $ls.get(cacheKey.value);
+    const columnCache = $ls.get(cacheKey.value);
     if (columnCache && columnCache.checkedList) {
       const { checkedList, sortedList, sortableOrder, checkIndex } = columnCache;
       await nextTick();
@@ -68,7 +68,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
     const { fixedColumns } = columnCache;
     const columns = opt.plainOptions.value;
     for (const column of columns) {
-      let fixedCol = fixedColumns.find((fc) => fc.key === (column.key || column.dataIndex));
+      const fixedCol = fixedColumns.find((fc) => fc.key === (column.key || column.dataIndex));
       if (fixedCol) {
         await nextTick();
         handleColumnFixed(column, fixedCol.fixed);
@@ -81,7 +81,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
 
   /** 获取被固定的列 */
   function getFixedColumns() {
-    let fixedColumns: any[] = [];
+    const fixedColumns: any[] = [];
     const columns = opt.plainOptions.value;
     for (const column of columns) {
       if (fixedReg.test((column.fixed ?? '').toString())) {

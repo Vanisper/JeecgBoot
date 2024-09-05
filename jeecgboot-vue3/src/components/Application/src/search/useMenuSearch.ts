@@ -76,7 +76,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
           name: parent?.name ? `${parent.name} > ${name}` : name,
           path,
           icon,
-          internalOrExternal
+          internalOrExternal,
         });
       }
       if (!meta?.hideChildrenInMenu && Array.isArray(children) && children.length) {

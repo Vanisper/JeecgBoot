@@ -94,8 +94,10 @@
   align-items: stretch;
 }
 
-.ant-list .ant-list-item {padding-left: 0;padding-right: 0;}
-
+.ant-list .ant-list-item {
+  padding-left: 0;
+  padding-right: 0;
+}
 
 .ant-list-item {
   display: flex;
@@ -104,27 +106,33 @@
   padding: 12px 0;
   color: #000000d9;
 }
-/** anticon-down跟3.x保持一致*/ 
-.ant-dropdown-trigger>.anticon.anticon-down, .ant-dropdown-link>.anticon.anticon-down, .ant-dropdown-button>.anticon.anticon-down {
+/** anticon-down跟3.x保持一致*/
+.ant-dropdown-trigger > .anticon.anticon-down,
+.ant-dropdown-link > .anticon.anticon-down,
+.ant-dropdown-button > .anticon.anticon-down {
   font-size: 10px;
   vertical-align: baseline;
 }
-/** 表格排序箭头尺寸保持跟3.x一致 */ 
-.ant-table-wrapper .ant-table-column-sorter-up, .ant-table-wrapper .ant-table-column-sorter-down {
+/** 表格排序箭头尺寸保持跟3.x一致 */
+.ant-table-wrapper .ant-table-column-sorter-up,
+.ant-table-wrapper .ant-table-column-sorter-down {
   font-size: 11px;
 }
- /** 表格头部文字颜色跟3.x版本保持一致 */
-.ant-table-wrapper .ant-table-thead >tr>th, .ant-table-wrapper .ant-table-thead >tr>td {
+/** 表格头部文字颜色跟3.x版本保持一致 */
+.ant-table-wrapper .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table-thead > tr > td {
   color: #000000d9;
   font-weight: 500;
 }
-html[data-theme='dark'] .ant-table-wrapper .ant-table-thead >tr>th, .ant-table-wrapper .ant-table-thead >tr>td {
-  color:rgba(255,255,255,.65);
+html[data-theme='dark'] .ant-table-wrapper .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table-thead > tr > td {
+  color: rgba(255, 255, 255, 0.65);
 }
- /** 下拉菜单文字和图标折叠了 */
-.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-title-content, .ant-dropdown-menu-submenu .ant-dropdown-menu .ant-dropdown-menu-title-content{
+/** 下拉菜单文字和图标折叠了 */
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-title-content,
+.ant-dropdown-menu-submenu .ant-dropdown-menu .ant-dropdown-menu-title-content {
   flex: auto;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 // update-end--author:liaozhiyang---date:20231218---for：【QQYUN-6366】升级到antd4.x
 
@@ -164,11 +172,11 @@ html[data-theme='dark'] .ant-input-affix-wrapper-textarea-with-clear-btn {
 // update-end--author:liaozhiyang---date:20230108---for：【QQYUN-7855】table页码同步3.x页面效果
 
 //update-begin--author:wangshuai---date:20240429---for：修改tinymce段落下拉框的字体和样式
-.tox .tox-tbtn__select-label{
+.tox .tox-tbtn__select-label {
   font-size: 14px;
 }
 
-.tox .tox-tbtn--select{
+.tox .tox-tbtn--select {
   width: 80px !important;
 }
 
@@ -201,7 +209,7 @@ html[data-theme='dark'] {
   .ant-form:not(.jeecg-form-detail-effect) {
     .ant-input-number.ant-input-number-disabled {
       .ant-input-number-input {
-        color:rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.25);
       }
     }
   }

@@ -1,7 +1,7 @@
 <!-- 标题与字段布局 -->
 <template>
   <!-- 自定义表单 -->
-  <BasicForm @register="registerForm" @submit="handleSubmit" style="margin: 20px auto"/>
+  <BasicForm @register="registerForm" @submit="handleSubmit" style="margin: 20px auto" />
 </template>
 
 <script lang="ts" setup>

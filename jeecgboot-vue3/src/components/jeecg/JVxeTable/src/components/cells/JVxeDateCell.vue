@@ -74,8 +74,7 @@
     },
     // 【组件增强】注释详见：JVxeComponent.Enhanced
     enhanced: {
-      aopEvents: {
-      },
+      aopEvents: {},
       // update-begin--author:liaozhiyang---date:20240509---for：【QQYUN-9205】一对多(jVxetable组件date)支持年，年月，年度度，年周
       translate: {
         enabled: true,

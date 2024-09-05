@@ -39,7 +39,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { computed, defineComponent ,unref } from 'vue';
+  import { computed, defineComponent, unref } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { JVxeComponent } from '/@/components/jeecg/JVxeTable/types';
   import { useJVxeCompProps } from '/@/components/jeecg/JVxeTable/hooks';
@@ -53,7 +53,6 @@
     components: components,
     props: useJVxeCompProps(),
     setup(props: JVxeComponent.Props) {
-      
       const { createErrorModal } = useMessage();
       const setup = useFileCell(props, UploadTypeEnum.image, { multiple: true });
       // update-begin--author:liaozhiyang---date:20240604---for：【TV360X-470】jVxetable上传图片组件限制类型

@@ -11,7 +11,7 @@
   import { demoListApi } from '/@/api/demo/table';
   import { treeOptionsListApi } from '/@/api/demo/tree';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { mapTableTotalSummary } from "@/utils/common/compUtils";
+  import { mapTableTotalSummary } from '@/utils/common/compUtils';
   const columns: BasicColumn[] = [
     {
       title: '输入框',
@@ -154,8 +154,8 @@
         showIndexColumn: false,
         bordered: true,
         showSummary: true,
-        summaryFunc: onSummary
-      }); 
+        summaryFunc: onSummary,
+      });
 
       const { createMessage } = useMessage();
 
@@ -204,9 +204,7 @@
       function onSummary(tableData: Recordable[]) {
         // 可用工具方法自动计算合计
         const totals = mapTableTotalSummary(tableData, ['id']);
-        return [
-          totals
-        ];
+        return [totals];
       }
       return {
         registerTable,

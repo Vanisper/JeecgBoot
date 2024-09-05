@@ -4,10 +4,7 @@
     <BasicTitle :helpMessage="helpMessage" v-if="!slots.headerTitle && title">
       {{ title }}
     </BasicTitle>
-    <div
-      class="flex items-center flex-1 cursor-pointer justify-self-stretch justify-end"
-      v-if="search || toolbar"
-    >
+    <div class="flex items-center flex-1 cursor-pointer justify-self-stretch justify-end" v-if="search || toolbar">
       <div :class="getInputSearchCls" v-if="search">
         <InputSearch
           :placeholder="t('common.searchText')"
@@ -157,7 +154,7 @@
     () => searchValue.value,
     (v) => {
       debounceEmitChange(v);
-    },
+    }
   );
 
   watch(
@@ -166,6 +163,6 @@
       if (v !== searchValue.value) {
         searchValue.value = v;
       }
-    },
+    }
   );
 </script>

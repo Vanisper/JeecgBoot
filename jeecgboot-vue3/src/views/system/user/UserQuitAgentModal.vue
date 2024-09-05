@@ -21,7 +21,7 @@
     //重置表单
     await resetFields();
     setModalProps({ confirmLoading: true });
-    
+
     let userId = data.userId;
     //查询获取表单数据
     const res = await getUserAgent({ userName: data.userName });
@@ -35,14 +35,14 @@
     }
 
     //update-begin---author:wangshuai ---date:20230703  for：【QQYUN-5685】5、离职人员可以选自己------------
-    await updateSchema(
-      [{
-        field:'agentUserName',
-        componentProps:{
-          excludeUserIdList:[userId]
-        }
-      }]
-    )
+    await updateSchema([
+      {
+        field: 'agentUserName',
+        componentProps: {
+          excludeUserIdList: [userId],
+        },
+      },
+    ]);
     //update-end---author:wangshuai ---date:20230703  for：【QQYUN-5685】5、离职人员可以选自己------------
     //表单赋值
     await setFieldsValue({ ...data });
@@ -58,7 +58,7 @@
       //关闭弹窗
       closeModal();
       //刷新列表
-      emit('success',values.userName);
+      emit('success', values.userName);
     } finally {
       setModalProps({ confirmLoading: false });
     }

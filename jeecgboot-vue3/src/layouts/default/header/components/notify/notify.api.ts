@@ -24,4 +24,4 @@ export const editCementSend = (anntId, params?) => defHttp.put({ url: Api.editCe
 /**
  * 清空全部未读消息
  */
-export const clearAllUnReadMessage = () => defHttp.post({ url: Api.clearAllUnReadMessage },{ isTransformResponse: false });
+export const clearAllUnReadMessage = () => defHttp.post({ url: Api.clearAllUnReadMessage }, { isTransformResponse: false });

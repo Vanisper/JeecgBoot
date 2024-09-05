@@ -1,17 +1,17 @@
 <template>
   <div :class="[`${prefixCls}`]">
     <div class="my-account">第三方APP</div>
-<!--    <div class="account-row-item">-->
-<!--      <div class="account-label gray-75">企业微信绑定</div>-->
-<!--      <span>-->
-<!--        <icon-font :style="!bindEnterpriseData.sysUserId ? { color: '#9e9e9e' } : { color: '#0082EF' }" class="item-icon" type="icon-qiyeweixin3" />-->
-<!--        <span class="gray-75" style="margin-left: 12px">企业微信</span>-->
-<!--        <span class="gray-75" style="margin-left: 8px" v-if="bindEnterpriseData.realname">{{ '已绑定：' + bindEnterpriseData.realname }}</span>-->
-<!--        <span class="blue-e5 pointer" style="margin-left: 24px" @click="wechatEnterpriseBind">{{-->
-<!--          !bindEnterpriseData.sysUserId ? '绑定' : '解绑'-->
-<!--        }}</span>-->
-<!--      </span>-->
-<!--    </div>-->
+    <!--    <div class="account-row-item">-->
+    <!--      <div class="account-label gray-75">企业微信绑定</div>-->
+    <!--      <span>-->
+    <!--        <icon-font :style="!bindEnterpriseData.sysUserId ? { color: '#9e9e9e' } : { color: '#0082EF' }" class="item-icon" type="icon-qiyeweixin3" />-->
+    <!--        <span class="gray-75" style="margin-left: 12px">企业微信</span>-->
+    <!--        <span class="gray-75" style="margin-left: 8px" v-if="bindEnterpriseData.realname">{{ '已绑定：' + bindEnterpriseData.realname }}</span>-->
+    <!--        <span class="blue-e5 pointer" style="margin-left: 24px" @click="wechatEnterpriseBind">{{-->
+    <!--          !bindEnterpriseData.sysUserId ? '绑定' : '解绑'-->
+    <!--        }}</span>-->
+    <!--      </span>-->
+    <!--    </div>-->
     <div class="account-row-item">
       <div class="account-label gray-75">钉钉绑定</div>
       <span>
@@ -70,15 +70,15 @@
   const windowsIndex = ref<any>('');
   //窗口监听事件
   const receiveMessage = ref<any>('');
-  
+
   /**
    * 初始化钉钉和企业微信数据
    */
   async function initUserDetail() {
     let values = await getThirdAccountByUserId({ thirdType: 'wechat_open,dingtalk,wechat_enterprise' });
-    bindWechatData.value = "";
-    bindDingData.value = "";
-    bindEnterpriseData.value = "";
+    bindWechatData.value = '';
+    bindDingData.value = '';
+    bindEnterpriseData.value = '';
     if (values && values.result) {
       let result = values.result;
       for (let i = 0; i < result.length; i++) {
@@ -95,7 +95,7 @@
     let data = unref(bindEnterpriseData);
     if (!data.sysUserId) {
       onThirdLogin('wechat_enterprise');
-    }else{
+    } else {
       deleteAccount({ sysUserId: data.sysUserId, id: data.id }, '企业微信');
     }
   }
@@ -120,7 +120,7 @@
     let data = unref(bindWechatData);
     if (!data.sysUserId) {
       onThirdLogin('wechat_open');
-    }else{
+    } else {
       deleteAccount({ sysUserId: data.sysUserId, id: data.id }, '微信');
     }
   }
@@ -132,14 +132,14 @@
   function onThirdLogin(source) {
     let url = `${glob.uploadUrl}/sys/thirdLogin/render/${source}`;
     //窗口为不空关闭
-    console.log("unref(windowsIndex) ::",unref(windowsIndex))
-    if(unref(windowsIndex)){
+    console.log('unref(windowsIndex) ::', unref(windowsIndex));
+    if (unref(windowsIndex)) {
       //确保只有一个窗口
       windowsIndex.value.close();
       //确保只有一个监听
-      window.removeEventListener('message', unref(receiveMessage),false);
+      window.removeEventListener('message', unref(receiveMessage), false);
     }
-    
+
     windowsIndex.value = window.open(
       url,
       `login ${source}`,
@@ -156,16 +156,16 @@
           let strings = token.split(',');
           thirdUserUuid.value = strings[1];
           await bindThirdAccount();
-        }else{
-          if(token){
+        } else {
+          if (token) {
             createMessage.warning('该敲敲云账号已被其它第三方账号绑定,请解绑或绑定其它敲敲云账号');
           }
         }
       } else {
         cmsFailed();
       }
-      window.removeEventListener('message', unref(receiveMessage),false);
-      windowsIndex.value = "";
+      window.removeEventListener('message', unref(receiveMessage), false);
+      windowsIndex.value = '';
     };
     window.addEventListener('message', unref(receiveMessage), false);
   }
@@ -228,12 +228,12 @@
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
-        await deleteThirdAccount(params).then((res) =>{
-          if(res.success){
+        await deleteThirdAccount(params).then((res) => {
+          if (res.success) {
             initUserDetail();
-            createMessage.success(res.message)
-          }else{
-            createMessage.warning(res.message)
+            createMessage.success(res.message);
+          } else {
+            createMessage.warning(res.message);
           }
         });
       },
@@ -245,65 +245,65 @@
   });
 </script>
 <style lang="less">
-// update-begin-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
-@prefix-cls: ~'@{namespace}-j-user-tenant-setting-container';
-.@{prefix-cls} {
-   padding: 30px 40px 0 20px;
-  .account-row-item {
-    align-items: center;
-    /*begin 兼容暗夜模式*/
-    border-bottom: 1px solid @border-color-base;
-    /*end 兼容暗夜模式*/
-    box-sizing: border-box;
-    display: flex;
-    height: 71px;
-    position: relative;
-  }
+  // update-begin-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
+  @prefix-cls: ~'@{namespace}-j-user-tenant-setting-container';
+  .@{prefix-cls} {
+    padding: 30px 40px 0 20px;
+    .account-row-item {
+      align-items: center;
+      /*begin 兼容暗夜模式*/
+      border-bottom: 1px solid @border-color-base;
+      /*end 兼容暗夜模式*/
+      box-sizing: border-box;
+      display: flex;
+      height: 71px;
+      position: relative;
+    }
 
-  .account-label {
-    text-align: left;
-    width: 160px;
-  }
+    .account-label {
+      text-align: left;
+      width: 160px;
+    }
 
-  .gray-75 {
-    /*begin 兼容暗夜模式*/
-    color: @text-color !important;
-    /*end 兼容暗夜模式*/
-  }
+    .gray-75 {
+      /*begin 兼容暗夜模式*/
+      color: @text-color !important;
+      /*end 兼容暗夜模式*/
+    }
 
-  .pointer {
-    cursor: pointer;
-  }
+    .pointer {
+      cursor: pointer;
+    }
 
-  .blue-e5 {
-    color: #1e88e5;
-  }
+    .blue-e5 {
+      color: #1e88e5;
+    }
 
-  .phone-margin {
-    margin-left: 24px;
-    margin-right: 24px;
-  }
+    .phone-margin {
+      margin-left: 24px;
+      margin-right: 24px;
+    }
 
-  .clearfix:after {
-    clear: both;
-  }
+    .clearfix:after {
+      clear: both;
+    }
 
-  .clearfix:before {
-    content: '';
-    display: table;
-  }
+    .clearfix:before {
+      content: '';
+      display: table;
+    }
 
-  .my-account {
-    font-size: 17px;
-    font-weight: 700 !important;
-    /*begin 兼容暗夜模式*/
-    color: @text-color !important;
-    /*end 兼容暗夜模式*/
-    margin-bottom: 20px;
+    .my-account {
+      font-size: 17px;
+      font-weight: 700 !important;
+      /*begin 兼容暗夜模式*/
+      color: @text-color !important;
+      /*end 兼容暗夜模式*/
+      margin-bottom: 20px;
+    }
+    .item-icon {
+      font-size: 16px !important;
+    }
   }
-  .item-icon {
-    font-size: 16px !important;
-  }
-}
-// update-end-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
+  // update-end-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
 </style>

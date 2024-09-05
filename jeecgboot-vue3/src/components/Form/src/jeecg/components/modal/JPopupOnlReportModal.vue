@@ -82,7 +82,7 @@
         loading: true,
       }),
     },
-    props: ['multi', 'code', 'sorter', 'groupId', 'param','showAdvancedButton'],
+    props: ['multi', 'code', 'sorter', 'groupId', 'param', 'showAdvancedButton'],
     emits: ['ok', 'register'],
     setup(props, { emit, refs }) {
       const { createMessage } = useMessage();
@@ -133,7 +133,7 @@
           queryParam,
           dictOptions,
         },
-      ] = usePopBiz(getBindValue,tableRef);
+      ] = usePopBiz(getBindValue, tableRef);
 
       const showSearchFlag = computed(() => unref(queryInfo) && unref(queryInfo).length > 0);
       /**
@@ -287,7 +287,7 @@
       white-space: nowrap;
     }
   }
-  :deep(.jeecg-basic-table .ant-table-wrapper .ant-table-title){
+  :deep(.jeecg-basic-table .ant-table-wrapper .ant-table-title) {
     min-height: 0;
   }
 </style>

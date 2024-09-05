@@ -43,7 +43,7 @@
   import TenantPackList from '../pack/TenantPackList.vue';
   import { getTenantId } from '/@/utils/auth';
   import { useUserStore } from '/@/store/modules/user';
-  import { tenantSaasMessage } from "@/utils/common/compUtils";
+  import { tenantSaasMessage } from '@/utils/common/compUtils';
 
   const { createMessage } = useMessage();
   const [registerModal, { openModal }] = useModal();
@@ -66,8 +66,8 @@
         width: 150,
         fixed: 'right',
       },
-      rowSelection:{
-        type: "radio"
+      rowSelection: {
+        type: 'radio',
       },
       beforeFetch: (params) => {
         return Object.assign(params, { userTenantStatus: '1,3,4' });
@@ -128,7 +128,7 @@
     packModal(true, {
       tenantId: unref(selectedRowKeys.value.join(',')),
       //我的租户不显示新增和编辑产品包
-      showPackAddAndEdit: false
+      showPackAddAndEdit: false,
     });
   }
 
@@ -139,8 +139,8 @@
     (selectedRowKeys.value = []) && reload();
   }
 
-  onMounted(()=>{
+  onMounted(() => {
     //提示信息
-    tenantSaasMessage('我的租户')
-  })
+    tenantSaasMessage('我的租户');
+  });
 </script>

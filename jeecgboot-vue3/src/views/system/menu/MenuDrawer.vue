@@ -10,7 +10,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { list, saveOrUpdateMenu } from './menu.api';
   import { useDrawerAdaptiveWidth } from '/@/hooks/jeecg/useAdaptiveWidth';
-  import { useI18n } from "/@/hooks/web/useI18n";
+  import { useI18n } from '/@/hooks/web/useI18n';
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
   const { adaptiveWidth } = useDrawerAdaptiveWidth();
@@ -118,10 +118,10 @@
   }
 
   /**
-  * 2024-03-06
-  * liaozhiyang
-  * 翻译菜单名称
-  */
+   * 2024-03-06
+   * liaozhiyang
+   * 翻译菜单名称
+   */
   function translateMenu(data, key) {
     if (data?.length) {
       const { t } = useI18n();

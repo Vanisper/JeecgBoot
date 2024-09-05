@@ -92,7 +92,7 @@
         }
         if (schema.component === 'Divider') {
           //update-begin---author:wangshuai---date:2023-09-22---for:【QQYUN-6603】分割线标题位置显示不正确---
-          componentProps = Object.assign({ type: 'horizontal',orientation:'left', plain: true, }, componentProps);
+          componentProps = Object.assign({ type: 'horizontal', orientation: 'left', plain: true }, componentProps);
           //update-end---author:wangshuai---date:2023-09-22---for:【QQYUN-6603】分割线标题位置显示不正确---
         }
         return componentProps as Recordable;
@@ -352,7 +352,6 @@
         const propsData: Recordable = {
           allowClear: true,
           getPopupContainer: (trigger: Element) => {
-
             return trigger?.parentNode;
           },
           size,
@@ -461,7 +460,7 @@
               label={renderLabelHelpMessage()}
               rules={handleRules()}
               // update-begin--author:liaozhiyang---date:20240514---for：【issues/1244】标识了必填，但是必填标识没显示
-              validateFirst = { true }
+              validateFirst={true}
               // update-end--author:liaozhiyang---date:20240514---for：【issues/1244】标识了必填，但是必填标识没显示
               labelCol={labelCol}
               wrapperCol={wrapperCol}

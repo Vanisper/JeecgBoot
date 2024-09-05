@@ -57,10 +57,8 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
   // The following plugins only work in the production environment
   if (isBuild) {
-    
     // rollup-plugin-gzip
     vitePlugins.push(configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE));
-
   }
 
   // //vite-plugin-theme【预编译加载插件，解决vite首次打开界面加载慢问题】

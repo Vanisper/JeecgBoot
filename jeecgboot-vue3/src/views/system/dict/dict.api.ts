@@ -65,7 +65,7 @@ export const batchDeleteDict = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdateDict = (params, isUpdate) => {
-  let url = isUpdate ? Api.edit : Api.save;
+  const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
 /**
@@ -115,7 +115,7 @@ export const deleteItem = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdateDictItem = (params, isUpdate) => {
-  let url = isUpdate ? Api.itemEdit : Api.itemSave;
+  const url = isUpdate ? Api.itemEdit : Api.itemSave;
   return defHttp.post({ url: url, params });
 };
 /**

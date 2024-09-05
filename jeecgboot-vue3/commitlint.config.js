@@ -10,6 +10,7 @@ module.exports = {
     'type-enum': [
       2,
       'always',
+      // eslint-disable-next-line prettier/prettier
       [
         'feat',
         'fix',

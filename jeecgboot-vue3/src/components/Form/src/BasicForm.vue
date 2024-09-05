@@ -111,7 +111,7 @@
           prefixCls,
           {
             [`${prefixCls}--compact`]: unref(getProps).compact,
-            'jeecg-form-detail-effect': unref(getProps).disabled
+            'jeecg-form-detail-effect': unref(getProps).disabled,
           },
         ];
       });
@@ -125,7 +125,7 @@
         };
       });
 
-      const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable));
+      const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) }) as Recordable);
 
       const getSchema = computed((): FormSchema[] => {
         const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
@@ -134,22 +134,22 @@
           // handle date type
           if (defaultValue && dateItemType.includes(component)) {
             //update-begin---author:wangshuai ---date:20230410  for：【issues/435】代码生成的日期控件赋默认值报错------------
-            let valueFormat:string = "";
-            if(componentProps){
+            let valueFormat: string = '';
+            if (componentProps) {
               valueFormat = componentProps?.valueFormat;
             }
-            if(!valueFormat){
-              console.warn("未配置valueFormat,可能导致格式化错误！");
+            if (!valueFormat) {
+              console.warn('未配置valueFormat,可能导致格式化错误！');
             }
             //update-end---author:wangshuai ---date:20230410  for：【issues/435】代码生成的日期控件赋默认值报错------------
             if (!Array.isArray(defaultValue)) {
               //update-begin---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
-              if(valueFormat){
+              if (valueFormat) {
                 // schema.defaultValue = dateUtil(defaultValue).format(valueFormat);
                 // update-begin--author:liaozhiyang---date:20240529---for：【TV360X-346 】时间组件填写默认值有问题
                 schema.defaultValue = dateUtil(defaultValue, valueFormat).format(valueFormat);
                 // update-end--author:liaozhiyang---date:20240529---for：【TV360X-346 】时间组件填写默认值有问题
-              }else{
+              } else {
                 schema.defaultValue = dateUtil(defaultValue);
               }
               //update-end---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
@@ -157,11 +157,11 @@
               const def: dayjs.Dayjs[] = [];
               defaultValue.forEach((item) => {
                 //update-begin---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
-                if(valueFormat){
+                if (valueFormat) {
                   // update-begin--author:liaozhiyang---date:20240529---for：【TV360X-346 】时间组件填写默认值有问题
                   def.push(dateUtil(item, valueFormat).format(valueFormat));
                   // update-end--author:liaozhiyang---date:20240529---for：【TV360X-346 】时间组件填写默认值有问题
-                }else{
+                } else {
                   def.push(dateUtil(item));
                 }
                 //update-end---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
@@ -283,7 +283,7 @@
         //   validateFields([key]).catch((_) => {});
         // }
         // update-end--author:liaozhiyang---date:20230922---for：【issues/752】表单校验dynamicRules 无法 使用失去焦点后校验 trigger: 'blur'
-        if(props.autoSearch === true){
+        if (props.autoSearch === true) {
           onFormSubmitWhenChange();
         }
       }
@@ -383,7 +383,7 @@
       }
     }
     /*【美化表单】form的字体改小一号*/
-/*    .ant-form-item-label > label{
+    /*    .ant-form-item-label > label{
       font-size: 13px;
     }
     .ant-form-item .ant-select {
@@ -399,7 +399,7 @@
       font-size: 13px;
     }*/
     /*【美化表单】form的字体改小一号*/
-    
+
     .ant-form-explain {
       font-size: 14px;
     }
@@ -412,7 +412,9 @@
     // update-begin--author:liaozhiyang---date:20231017---for：【QQYUN-6566】BasicForm支持一行显示(inline)
     &.ant-form-inline {
       & > .ant-row {
-        .ant-col { width:auto !important; }
+        .ant-col {
+          width: auto !important;
+        }
       }
     }
     // update-end--author:liaozhiyang---date:20231017---for：【QQYUN-6566】BasicForm支持一行显示(inline)

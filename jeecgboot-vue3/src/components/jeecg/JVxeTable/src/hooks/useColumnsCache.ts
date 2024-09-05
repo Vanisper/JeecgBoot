@@ -68,7 +68,7 @@ export function useColumnsCache({ cacheColumnsKey, refs }: any) {
   const getHideColumn = (fullColumn, columnCache) => {
     const result: any = [];
     if (columnCache?.length) {
-    console.log('--fullColumn:',fullColumn);
+      console.log('--fullColumn:', fullColumn);
       columnCache.forEach((key) => {
         const column = fullColumn.find((item) => item?.params?.key === key);
         if (column) {

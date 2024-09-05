@@ -14,7 +14,7 @@
     <a-button @click="setProps({ compact: false })" class="mr-2"> 还原正常间距 </a-button>
   </div>
   <!-- 自定义表单 -->
-  <BasicForm @register="registerForm" style="margin-top: 20px;" />
+  <BasicForm @register="registerForm" style="margin-top: 20px" />
 </template>
 
 <script lang="ts" setup>

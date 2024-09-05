@@ -32,13 +32,13 @@
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     //重置表单
     await resetFields();
-    setModalProps({ confirmLoading: false, showOkBtn: !props.isDisabled});
+    setModalProps({ confirmLoading: false, showOkBtn: !props.isDisabled });
     isUpdate.value = !!data?.isUpdate;
-    if(data.createBy){
-      await setFieldsValue({createBy: data.createBy})
+    if (data.createBy) {
+      await setFieldsValue({ createBy: data.createBy });
     }
-    if(data.createTime){
-      await setFieldsValue({createTime: data.createTime})
+    if (data.createTime) {
+      await setFieldsValue({ createTime: data.createTime });
     }
     if (unref(isUpdate)) {
       //获取详情

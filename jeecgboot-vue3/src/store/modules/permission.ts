@@ -128,7 +128,7 @@ export const usePermissionStore = defineStore({
       const codeList = systemPermission.codeList;
       this.setPermCodeList(codeList);
       this.setAuthData(systemPermission);
-      
+
       //菜单路由
       const routeList = systemPermission.menu;
       return routeList;
@@ -211,7 +211,7 @@ export const usePermissionStore = defineStore({
         // 后台菜单构建
         case PermissionModeEnum.BACK:
           const { createMessage, createWarningModal } = useMessage();
-          console.log(" --- 构建后台路由菜单 --- ")
+          console.log(' --- 构建后台路由菜单 --- ');
           // 菜单加载提示
           // createMessage.loading({
           //   content: t('sys.app.menuLoading'),

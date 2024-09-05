@@ -2,13 +2,13 @@ import { useGlobSetting } from '/@/hooks/setting';
 import { merge, random } from 'lodash-es';
 import { isArray } from '/@/utils/is';
 import { FormSchema } from '/@/components/Form';
-import { reactive } from "vue";
-import { getTenantId, getToken } from "/@/utils/auth";
-import { useUserStoreWithOut } from "/@/store/modules/user";
+import { reactive } from 'vue';
+import { getTenantId, getToken } from '/@/utils/auth';
+import { useUserStoreWithOut } from '/@/store/modules/user';
 
-import { Modal } from "ant-design-vue";
-import { defHttp } from "@/utils/http/axios";
-import { useI18n } from "@/hooks/web/useI18n";
+import { Modal } from 'ant-design-vue';
+import { defHttp } from '@/utils/http/axios';
+import { useI18n } from '@/hooks/web/useI18n';
 
 const globSetting = useGlobSetting();
 const baseApiUrl = globSetting.domainUrl;
@@ -22,9 +22,9 @@ export const getFileAccessHttpUrl = (fileUrl, prefix = 'http') => {
   try {
     if (fileUrl && fileUrl.length > 0 && !fileUrl.startsWith(prefix)) {
       //判断是否是数组格式
-      let isArray = fileUrl.indexOf('[') != -1;
+      const isArray = fileUrl.indexOf('[') != -1;
       if (!isArray) {
-        let prefix = `${baseApiUrl}/sys/common/static/`;
+        const prefix = `${baseApiUrl}/sys/common/static/`;
         // 判断是否已包含前缀
         if (!fileUrl.startsWith(prefix)) {
           result = `${prefix}${fileUrl}`;
@@ -39,7 +39,7 @@ export const getFileAccessHttpUrl = (fileUrl, prefix = 'http') => {
  * 触发 window.resize
  */
 export function triggerWindowResizeEvent() {
-  let event: any = document.createEvent('HTMLEvents');
+  const event: any = document.createEvent('HTMLEvents');
   event.initEvent('resize', true, true);
   event.eventType = 'message';
   window.dispatchEvent(event);
@@ -67,7 +67,7 @@ export function randomString(length: number, chats?: string) {
   }
   let str = '';
   for (let i = 0; i < length; i++) {
-    let num = random(0, chats.length - 1);
+    const num = random(0, chats.length - 1);
     str += chats[num];
   }
   return str;
@@ -141,7 +141,7 @@ export const toTree = (array, startPid, currentDept, opt) => {
  * @param fieldKeys 要计算合计的列字段
  */
 export function mapTableTotalSummary(tableData: Recordable[], fieldKeys: string[]) {
-  let totals: any = { _row: '合计', _index: '合计' };
+  const totals: any = { _row: '合计', _index: '合计' };
   fieldKeys.forEach((key) => {
     totals[key] = tableData.reduce((prev, next) => {
       // update-begin--author:liaozhiyang---date:20240118---for：【QQYUN-7891】PR 合计工具方法，转换为Nuber类型再计算
@@ -167,10 +167,11 @@ export function mapTableTotalSummary(tableData: Recordable[], fieldKeys: string[
  * @param delay 防抖的毫秒数
  * @returns {Function}
  */
-export function simpleDebounce(fn, delay = 100) {
+export function simpleDebounce(fn: Function, delay = 100): Function {
   let timer: any | null = null;
   return function () {
-    let args = arguments;
+    // eslint-disable-next-line prefer-rest-params
+    const args = arguments;
     if (timer) {
       clearTimeout(timer);
     }
@@ -225,8 +226,8 @@ export function dateFormat(date, block) {
  * 目前使用的地方：JVxeTable Span模式
  */
 export function getEventPath(event) {
-  let target = event.target;
-  let path = (event.composedPath && event.composedPath()) || event.path;
+  const target = event.target;
+  const path = (event.composedPath && event.composedPath()) || event.path;
 
   if (path != null) {
     return path.indexOf(window) < 0 ? path.concat(window) : path;
@@ -236,7 +237,7 @@ export function getEventPath(event) {
     return [window];
   }
 
-  let getParents = (node, memo) => {
+  const getParents = (node, memo) => {
     const parentNode = node.parentNode;
 
     if (!parentNode) {
@@ -256,7 +257,7 @@ export function getEventPath(event) {
  * @returns {boolean} 成功 push 返回 true，不处理返回 false
  */
 export function pushIfNotExist(array, value, key?) {
-  for (let item of array) {
+  for (const item of array) {
     if (key && item[key] === value[key]) {
       return false;
     } else if (item === value) {
@@ -276,7 +277,7 @@ export function filterObj(obj) {
     return;
   }
 
-  for (let key in obj) {
+  for (const key in obj) {
     if (obj.hasOwnProperty(key) && (obj[key] == null || obj[key] == undefined || obj[key] === '')) {
       delete obj[key];
     }
@@ -300,13 +301,13 @@ export function underLine2CamelCase(string: string) {
  */
 export function findTree(treeList: any[], fn: Fn, childrenKey = 'children') {
   for (let i = 0; i < treeList.length; i++) {
-    let item = treeList[i];
+    const item = treeList[i];
     if (fn(item, i, treeList)) {
       return item;
     }
-    let children = item[childrenKey];
+    const children = item[childrenKey];
     if (isArray(children)) {
-      let findResult = findTree(children, fn, childrenKey);
+      const findResult = findTree(children, fn, childrenKey);
       if (findResult) {
         return findResult;
       }
@@ -343,37 +344,37 @@ export function stringIsNull(str) {
  * @param node
  */
 export function getAutoScrollContainer(node: HTMLElement) {
-  let element: Nullable<HTMLElement> = node
+  let element: Nullable<HTMLElement> = node;
   while (element != null) {
     if (element.classList.contains('scrollbar__view')) {
       // 判断是否有滚动条
       if (element.clientHeight < element.scrollHeight) {
         // 有滚动条时，挂载到父级，解决滚动问题
-        return node.parentElement
+        return node.parentElement;
       } else {
         // 无滚动条时，挂载到body上，解决下拉框遮盖问题
-        return document.body
+        return document.body;
       }
     } else {
-      element = element.parentElement
+      element = element.parentElement;
     }
   }
   // 不在弹窗内，走默认逻辑
-  return node.parentElement
+  return node.parentElement;
 }
 
 /**
  * 判断子菜单是否全部隐藏
  * @param menuTreeItem
  */
-export  function checkChildrenHidden(menuTreeItem){
+export function checkChildrenHidden(menuTreeItem) {
   //是否是聚合路由
-  let alwaysShow=menuTreeItem.alwaysShow;
-  if(alwaysShow){
+  const alwaysShow = menuTreeItem.alwaysShow;
+  if (alwaysShow) {
     return false;
   }
-  if(!menuTreeItem.children){
-    return false
+  if (!menuTreeItem.children) {
+    return false;
   }
   return menuTreeItem.children?.find((item) => item.hideMenu == false) != null;
 }
@@ -404,7 +405,7 @@ export function calculateFileSize(fileSize, unit?) {
  * 获取上传header
  */
 export function getHeaders() {
-  let tenantId = getTenantId();
+  const tenantId = getTenantId();
   return reactive({
     'X-Access-Token': getToken(),
     'X-Tenant-Id': tenantId ? tenantId : '0',
@@ -417,7 +418,7 @@ export function getUserInfoByExpression(expression) {
     return expression;
   }
   const userStore = useUserStoreWithOut();
-  let userInfo = userStore.getUserInfo;
+  const userInfo = userStore.getUserInfo;
   if (userInfo) {
     switch (expression) {
       case 'sysUserId':
@@ -447,7 +448,7 @@ export function replaceUserInfoByExpression(expression: string | any[]) {
     return expression;
   }
   const isString = typeof expression === 'string';
-  const isArray = Array.isArray(expression)
+  const isArray = Array.isArray(expression);
   if (!isString && !isArray) {
     return expression;
   }
@@ -456,10 +457,10 @@ export function replaceUserInfoByExpression(expression: string | any[]) {
     if (typeof str !== 'string') {
       return str;
     }
-    let result = str.match(reg);
+    const result = str.match(reg);
     if (result && result.length > 0) {
       result.forEach((item) => {
-        let userInfo = getUserInfoByExpression(item.substring(2, item.length - 1));
+        const userInfo = getUserInfoByExpression(item.substring(2, item.length - 1));
         str = str.replace(item, userInfo);
       });
     }
@@ -471,35 +472,35 @@ export function replaceUserInfoByExpression(expression: string | any[]) {
 
 /**
  * 设置租户缓存，当租户退出的时候
- * 
+ *
  * @param tenantId
  */
-export async function userExitChangeLoginTenantId(tenantId){
+export async function userExitChangeLoginTenantId(tenantId) {
   const userStore = useUserStoreWithOut();
   //step 1 获取用户租户
-  const url = '/sys/tenant/getCurrentUserTenant'
+  const url = '/sys/tenant/getCurrentUserTenant';
   let currentTenantId = null;
   const data = await defHttp.get({ url });
-  if(data && data.list){
-    let arr = data.list;
-    if(arr.length>0){
+  if (data && data.list) {
+    const arr = data.list;
+    if (arr.length > 0) {
       //step 2.判断当前id是否存在用户租户中
-      let filterTenantId = arr.filter((item) => item.id == tenantId);
+      const filterTenantId = arr.filter((item) => item.id == tenantId);
       //存在说明不是退出的不是当前租户，还用用来的租户即可
-      if(filterTenantId && filterTenantId.length>0){
+      if (filterTenantId && filterTenantId.length > 0) {
         currentTenantId = tenantId;
-      }else{
+      } else {
         //不存在默认第一个
-        currentTenantId = arr[0].id
+        currentTenantId = arr[0].id;
       }
     }
   }
-  let loginTenantId = getTenantId();
+  const loginTenantId = getTenantId();
   userStore.setTenant(currentTenantId);
 
   //update-begin---author:wangshuai---date:2023-11-07---for:【QQYUN-7005】退租户，判断退出的租户ID与当前租户ID一致，再刷新---
   //租户为空，说明没有租户了，需要刷新页面。或者当前租户和退出的租户一致则需要刷新浏览器
-  if(!currentTenantId || tenantId == loginTenantId){
+  if (!currentTenantId || tenantId == loginTenantId) {
     window.location.reload();
   }
   //update-end---author:wangshuai---date:2023-11-07---for:【QQYUN-7005】退租户，判断退出的租户ID与当前租户ID一致，再刷新---
@@ -507,20 +508,20 @@ export async function userExitChangeLoginTenantId(tenantId){
 
 /**
  * 我的租户模块需要开启多租户提示
- * 
+ *
  * @param title 标题
  */
-export function tenantSaasMessage(title){
-  let tenantId = getTenantId();
-  if(!tenantId){
+export function tenantSaasMessage(title) {
+  const tenantId = getTenantId();
+  if (!tenantId) {
     Modal.confirm({
-      title:title,
+      title: title,
       content: '此菜单需要在多租户模式下使用，否则数据会出现混乱',
       okText: '确认',
       okType: 'danger',
       // @ts-ignore
       cancelButtonProps: { style: { display: 'none' } },
-    })
+    });
   }
 }
 
@@ -533,16 +534,16 @@ export function sameDay(dateStr) {
     return false;
   }
   // 获取当前日期
-  let currentDate = new Date();
-  let currentDay = currentDate.getDate();
-  let currentMonth = currentDate.getMonth();
-  let currentYear = currentDate.getFullYear();
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
 
   //创建另一个日期进行比较
-  let otherDate = new Date(dateStr);
-  let otherDay = otherDate.getDate();
-  let otherMonth = otherDate.getMonth();
-  let otherYear = otherDate.getFullYear();
+  const otherDate = new Date(dateStr);
+  const otherDay = otherDate.getDate();
+  const otherMonth = otherDate.getMonth();
+  const otherYear = otherDate.getFullYear();
 
   //比较日期
   if (currentDay === otherDay && currentMonth === otherMonth && currentYear === otherYear) {
@@ -551,7 +552,6 @@ export function sameDay(dateStr) {
     return false;
   }
 }
-
 
 /**
  * 翻译菜单名称

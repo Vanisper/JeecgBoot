@@ -43,7 +43,7 @@
           },
         ];
       }
-      const getBasicColumns = () :BasicColumn[] => {
+      const getBasicColumns = (): BasicColumn[] => {
         return [
           {
             title: 'ID',

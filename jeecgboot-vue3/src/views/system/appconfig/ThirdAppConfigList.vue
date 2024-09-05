@@ -98,7 +98,7 @@
       color: #333 !important;
     }
   }
-  .empty-image{
+  .empty-image {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -131,10 +131,10 @@
       background-color: @component-background;
     }
 
-    .ant-collapse{
+    .ant-collapse {
       background-color: @component-background;
     }
   }
   /*end 兼容暗夜模式*/
-/* update-end-author:liusq date:20230625 for: [issues/563]暗色主题部分失效*/
+  /* update-end-author:liusq date:20230625 for: [issues/563]暗色主题部分失效*/
 </style>

@@ -65,7 +65,7 @@ export const useCodeHinting = (CodeMirror, keywords, language) => {
             .filter((item) => {
               const { text } = item;
               const index = findIdx(text, str);
-              let result = text.startsWith('.') ? index === 1 : index === 0;
+              const result = text.startsWith('.') ? index === 1 : index === 0;
               return result;
             })
             .sort((a, b) => {

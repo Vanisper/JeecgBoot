@@ -55,7 +55,7 @@ export const batchDelete = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdate = (params, isUpdate) => {
-  let url = isUpdate ? Api.edit : Api.save;
+  const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
 
@@ -95,7 +95,7 @@ export const deleteBatchCustomer = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdateCustomer = (params, isUpdate) => {
-  let url = isUpdate ? Api.editCustomer : Api.saveCustomer;
+  const url = isUpdate ? Api.editCustomer : Api.saveCustomer;
   return defHttp.post({ url: url, params });
 };
 /**
@@ -134,6 +134,6 @@ export const deleteBatchTicket = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdateTicket = (params, isUpdate) => {
-  let url = isUpdate ? Api.editTicket : Api.saveTicket;
+  const url = isUpdate ? Api.editTicket : Api.saveTicket;
   return defHttp.post({ url: url, params });
 };

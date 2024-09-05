@@ -27,12 +27,12 @@
   import codeImage from '@/assets/images/checkcode.png';
   import { getCodeInfo } from '@/api/sys/user';
   import { defHttp } from '@/utils/http/axios';
-  import {useMessage} from "@/hooks/web/useMessage";
+  import { useMessage } from '@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'CaptchaModal',
     components: { BasicModal, BasicForm },
-    emits: ['ok','register'],
+    emits: ['ok', 'register'],
     setup(props, { emit }) {
       const title = ref<string>('验证码');
       const schemas: FormSchema[] = [
@@ -48,8 +48,8 @@
       const [registerForm, { resetFields, validate }] = useForm({
         schemas: schemas,
         showActionButtonGroup: false,
-        baseRowStyle: { "justify-content": 'center', "display": "grid", "margin-top": "10px" },
-        rowProps: { "justify": "center" },
+        baseRowStyle: { 'justify-content': 'center', display: 'grid', 'margin-top': '10px' },
+        rowProps: { justify: 'center' },
         labelCol: { span: 24 },
         wrapperCol: { span: 24 },
       });
@@ -70,7 +70,7 @@
         checkKey: -1,
       });
       const { createMessage } = useMessage();
-      
+
       /**
        * 获取验证码
        */
@@ -88,18 +88,21 @@
        */
       async function handleSubmit() {
         let values = await validate();
-        defHttp.post({ url: '/sys/smsCheckCaptcha', params: { captcha: values.captcha, checkKey: randCodeData.checkKey } }, { isTransformResponse: false }).then((res)=>{
-          if(res.success){
-            emit('ok');
-            closeModal();
-          }else{
+        defHttp
+          .post({ url: '/sys/smsCheckCaptcha', params: { captcha: values.captcha, checkKey: randCodeData.checkKey } }, { isTransformResponse: false })
+          .then((res) => {
+            if (res.success) {
+              emit('ok');
+              closeModal();
+            } else {
+              createMessage.warning(res.message);
+              getCaptchaCode();
+            }
+          })
+          .catch((res) => {
             createMessage.warning(res.message);
             getCaptchaCode();
-          }
-        }).catch((res) =>{
-          createMessage.warning(res.message);
-          getCaptchaCode();
-        });
+          });
       }
 
       /**
@@ -127,7 +130,7 @@
   .margin-left10 {
     margin-left: 10px;
   }
-  :deep(.ant-row){
+  :deep(.ant-row) {
     display: block;
   }
 </style>

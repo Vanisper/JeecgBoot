@@ -12,7 +12,7 @@ export function useTableForm(
 ) {
   const getFormProps = computed((): Partial<FormProps> => {
     const { formConfig } = unref(propsRef);
-    const { submitButtonOptions, autoSubmitOnEnter} = formConfig || {};
+    const { submitButtonOptions, autoSubmitOnEnter } = formConfig || {};
     return {
       showAdvancedButton: true,
       ...formConfig,

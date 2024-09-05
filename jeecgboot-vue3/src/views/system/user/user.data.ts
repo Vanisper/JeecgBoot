@@ -95,7 +95,7 @@ export const searchFormSchema: FormSchema[] = [
     label: '名字',
     field: 'realname',
     component: 'JInput',
-   //colProps: { span: 6 },
+    //colProps: { span: 6 },
   },
   {
     label: '性别',
@@ -123,7 +123,7 @@ export const searchFormSchema: FormSchema[] = [
       placeholder: '请选择状态',
       stringToNumber: true,
     },
-   //colProps: { span: 6 },
+    //colProps: { span: 6 },
   },
 ];
 
@@ -147,7 +147,7 @@ export const formSchema: FormSchema[] = [
     label: '登录密码',
     field: 'password',
     component: 'StrengthMeter',
-    componentProps:{
+    componentProps: {
       autocomplete: 'new-password',
     },
     rules: [
@@ -221,7 +221,7 @@ export const formSchema: FormSchema[] = [
             },
           ]);
           //update-begin---author:wangshuai---date:2024-05-11---for:【issues/1222】用户编辑界面“所属部门”与“负责部门”联动出错整---
-          if(!values){
+          if (!values) {
             formModel.departIds = [];
             return;
           }

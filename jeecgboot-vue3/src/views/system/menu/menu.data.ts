@@ -3,7 +3,7 @@ import { FormSchema } from '/@/components/Table';
 import { h } from 'vue';
 import { Icon } from '/@/components/Icon';
 import { duplicateCheck } from '../user/user.api';
-import { ajaxGetDictItems ,checkPermDuplication } from './menu.api';
+import { ajaxGetDictItems, checkPermDuplication } from './menu.api';
 import { render } from '/@/utils/common/renderUtils';
 
 const isDir = (type) => type === 0;
@@ -102,7 +102,7 @@ export const formSchema: FormSchema[] = [
             },
           ]);
           //update-begin---author:wangshuai ---date:20220729  for：[VUEN-1834]只有一级菜单，才默认值，子菜单的时候，清空------------
-          if (isMenu(e) && !formModel.id && (formModel.component=='layouts/default/index' || formModel.component=='layouts/RouteView')) {
+          if (isMenu(e) && !formModel.id && (formModel.component == 'layouts/default/index' || formModel.component == 'layouts/RouteView')) {
             formModel.component = '';
           }
           //update-end---author:wangshuai ---date:20220729  for：[VUEN-1834]只有一级菜单，才默认值，子菜单的时候，清空------------
@@ -144,8 +144,8 @@ export const formSchema: FormSchema[] = [
     //update-begin-author:liusq date:2023-06-06 for: [issues/5008]子表数据权限设置不生效
     ifShow: ({ values }) => !(values.component === ComponentTypes.IFrame && values.internalOrExternal),
     //update-begin-author:zyf date:2022-11-02 for: 聚合路由允许路径重复
-     dynamicRules: ({ model, schema,values }) => {
-       return checkPermDuplication(model, schema,  values.menuType !== 2?true:false);
+    dynamicRules: ({ model, schema, values }) => {
+      return checkPermDuplication(model, schema, values.menuType !== 2 ? true : false);
     },
     //update-end-author:zyf date:2022-11-02 for: 聚合路由允许路径重复
     //update-end-author:liusq date:2022-06-06 for:  [issues/5008]子表数据权限设置不生效
@@ -157,7 +157,7 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       placeholder: '请输入前端组件',
     },
-    defaultValue:'layouts/default/index',
+    defaultValue: 'layouts/default/index',
     required: true,
     ifShow: ({ values }) => !isButton(values.menuType),
   },

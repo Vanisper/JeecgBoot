@@ -58,10 +58,10 @@ export function useFormEvents({
       let value = values[key];
 
       //antd3升级后，online表单时间控件选中值报js错 TypeError: Reflect.has called on non-object
-      if(!(values instanceof Object)){
+      if (!(values instanceof Object)) {
         return;
       }
-      
+
       const hasKey = Reflect.has(values, key);
 
       value = handleInputNumberValue(schema?.component, value);
@@ -242,9 +242,9 @@ export function useFormEvents({
       const values = await validate();
       //update-begin---author:zhangdaihao   Date:20140212  for：[bug号]树机构调整------------
       //--updateBy-begin----author:zyf---date:20211206------for:对查询表单提交的数组处理成字符串------
-      for (let key in values) {
+      for (const key in values) {
         if (values[key] instanceof Array) {
-          let valueType = getValueType(getProps, key);
+          const valueType = getValueType(getProps, key);
           if (valueType === 'string') {
             values[key] = values[key].join(',');
           }
@@ -256,7 +256,7 @@ export function useFormEvents({
     } catch (error) {
       //update-begin-author:taoyan date:2022-11-4 for: 列表查询表单会触发校验错误导致重置失败，原因不明
       emit('submit', {});
-      console.error('query form validate error, please ignore!', error)
+      console.error('query form validate error, please ignore!', error);
       //throw new Error(error);
       //update-end-author:taoyan date:2022-11-4 for: 列表查询表单会触发校验错误导致重置失败，原因不明
     }

@@ -25,7 +25,7 @@ export default defineComponent({
       () => props.vNode,
       (_vNode, old) => {
         if (props.effect && old != null) {
-          let topLayer = renderSpan(old, 'top');
+          const topLayer = renderSpan(old, 'top');
           effectList.value.push(topLayer);
         }
       },
@@ -37,13 +37,13 @@ export default defineComponent({
       if (props.vNode == null) {
         return null;
       }
-      let bottom = renderSpan(props.vNode, 'bottom');
+      const bottom = renderSpan(props.vNode, 'bottom');
       // 启用了特效，并且有旧数据，就渲染特效顶层
       if (innerEffect.value && effectList.value.length > 0) {
         emit('effectBegin');
         // 1.4s 以后关闭特效
         window.setTimeout(() => {
-          let item = effectList.value[effectIdx.value];
+          const item = effectList.value[effectIdx.value];
           if (item && item.elm) {
             // 特效结束后，展示先把 display 设为 none，而不是直接删掉该元素，
             // 目的是为了防止页面重新渲染，导致动画重置
@@ -65,14 +65,13 @@ export default defineComponent({
 
     // 渲染内容 span
     function renderSpan(vNode, layer) {
-      let options = {
+      const options = {
         key: layer + effectIdx.value + randomString(6),
         class: ['j-vxe-reload-effect-span', `layer-${layer}`],
         style: {},
         // update-begin--author:liaozhiyang---date:20240424---for：【issues/1175】解决vxetable鼠标hover之后title显示不对的问题
         title: vNode,
         // update-end--author:liaozhiyang---date:20240424---for：【issues/1175】解决vxetable鼠标hover之后title显示不对的问题
-
       };
       if (layer === 'top') {
         // 最新渲染的在下面

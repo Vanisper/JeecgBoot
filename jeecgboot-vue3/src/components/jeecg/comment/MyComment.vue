@@ -1,7 +1,21 @@
 <template>
-  <div :class="{'comment-active': commentActive}" class="comment-main" @click="handleClickBlank">
-    <textarea ref="commentRef" v-model="myComment" @keyup.enter="sendComment" @input="handleCommentChange" @blur="handleBlur" class="comment-content" :rows="3" placeholder="请输入你的评论，可以@成员" />
-    <div class="comment-content comment-html-shower" :class="{'no-content':noConent, 'top-div': showHtml, 'bottom-div': showHtml == false }" v-html="commentHtml" @click="handleClickHtmlShower"></div>
+  <div :class="{ 'comment-active': commentActive }" class="comment-main" @click="handleClickBlank">
+    <textarea
+      ref="commentRef"
+      v-model="myComment"
+      @keyup.enter="sendComment"
+      @input="handleCommentChange"
+      @blur="handleBlur"
+      class="comment-content"
+      :rows="3"
+      placeholder="请输入你的评论，可以@成员"
+    />
+    <div
+      class="comment-content comment-html-shower"
+      :class="{ 'no-content': noConent, 'top-div': showHtml, 'bottom-div': showHtml == false }"
+      v-html="commentHtml"
+      @click="handleClickHtmlShower"
+    ></div>
     <div class="comment-buttons" v-if="commentActive">
       <div style="cursor: pointer">
         <Tooltip title="选择@用户">
@@ -24,28 +38,29 @@
     </div>
     <upload-chunk ref="uploadRef" :visible="uploadVisible" @select="selectFirstFile"></upload-chunk>
   </div>
-  <UserSelectModal  rowKey="username" @register="registerModal" @selected="setValue" :multi="false"></UserSelectModal>
+  <UserSelectModal rowKey="username" @register="registerModal" @selected="setValue" :multi="false"></UserSelectModal>
   <a-modal v-model:open="visibleEmoji" :footer="null" wrapClassName="emoji-modal" :closable="false" :width="490">
     <template #title>
       <span></span>
     </template>
     <Picker
-      :pickerStyles="pickerStyles" 
-      :i18n="optionsName" 
+      :pickerStyles="pickerStyles"
+      :i18n="optionsName"
       :data="emojiIndex"
       emoji="grinning"
-      :showPreview="false" 
-      :infiniteScroll="false" 
-      :showSearch="false" 
-      :showSkinTones="false" 
-      set="apple" 
-      @select="showEmoji">
+      :showPreview="false"
+      :infiniteScroll="false"
+      :showSearch="false"
+      :showSkinTones="false"
+      set="apple"
+      @select="showEmoji"
+    >
     </Picker>
   </a-modal>
 </template>
 
 <script lang="ts">
-  import {ref, watch, computed, inject} from 'vue';
+  import { ref, watch, computed, inject } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { UserAddOutlined, PaperClipOutlined, SmileOutlined } from '@ant-design/icons-vue';
   import { Tooltip } from 'ant-design-vue';
@@ -53,7 +68,7 @@
   import { useModal } from '/@/components/Modal';
   import UploadChunk from './UploadChunk.vue';
   import 'emoji-mart-vue-fast/css/emoji-mart.css';
-  import {getGloablEmojiIndex, useEmojiHtml} from './useComment';
+  import { getGloablEmojiIndex, useEmojiHtml } from './useComment';
 
   const optionsName = {
     categories: {
@@ -157,7 +172,7 @@
               myComment.value = '@' + str;
             } else {
               if (temp.endsWith('@')) {
-                myComment.value = temp + str +' ';
+                myComment.value = temp + str + ' ';
               } else {
                 myComment.value = '@' + str + ' ' + temp + ' ';
               }
@@ -169,7 +184,7 @@
             //update-end---author:wangshuai---date:2024-01-22---for:【QQYUN-8002】选完人，鼠标应该放到后面并在前面加上空格---
           }
         }
-        closeModal();        
+        closeModal();
       }
 
       function handleCommentChange() {
@@ -191,7 +206,7 @@
         myComment.value = temp;
         emojiButton.value.click();
       }
-      
+
       const visibleEmoji = ref(false);
       function showEmoji(e) {
         let temp = myComment.value || '';
@@ -211,7 +226,7 @@
       }
 
       const pickerStyles = {
-        width: '490px'
+        width: '490px',
         /* height: '350px',
         top: '0px',
         left: '-75px',
@@ -231,9 +246,9 @@
         e.stopPropagation();
         visibleEmoji.value = !visibleEmoji.value;
       }
-      
+
       //const emojiIndex = inject('$globalEmojiIndex')
-      const emojiIndex = getGloablEmojiIndex()
+      const emojiIndex = getGloablEmojiIndex();
       const { getHtml } = useEmojiHtml(emojiIndex);
 
       const commentHtml = computed(() => {
@@ -256,27 +271,27 @@
       function handleBlur() {
         showHtml.value = true;
       }
-      
+
       const commentActive = ref(false);
-      const noConent = computed(()=>{
-        if(myComment.value.length>0){
+      const noConent = computed(() => {
+        if (myComment.value.length > 0) {
           return false;
         }
         return true;
       });
-      function changeActive(){
-        if(myComment.value.length==0){
-          commentActive.value = false
+      function changeActive() {
+        if (myComment.value.length == 0) {
+          commentActive.value = false;
           uploadVisible.value = false;
         }
       }
-      
-      function selectFirstFile(fileName){
-        if(myComment.value.length==0){
+
+      function selectFirstFile(fileName) {
+        if (myComment.value.length == 0) {
           myComment.value = fileName;
         }
       }
-      
+
       return {
         myComment,
         sendComment,
@@ -306,7 +321,7 @@
         commentActive,
         noConent,
         changeActive,
-        selectFirstFile
+        selectFirstFile,
       };
     },
   };
@@ -370,39 +385,39 @@
     }
   }
 
-  .emoji-modal  {
-   > .ant-modal{
+  .emoji-modal {
+    > .ant-modal {
       right: 25% !important;
       margin-right: 16px !important;
     }
-    .ant-modal-header{
+    .ant-modal-header {
       padding: 0 !important;
     }
-    .emoji-mart-bar{
+    .emoji-mart-bar {
       display: none;
     }
-    h3.emoji-mart-category-label{
-    /*  display: none;*/
+    h3.emoji-mart-category-label {
+      /*  display: none;*/
       border-bottom: 1px solid #eee;
     }
   }
-  
-  .comment-active{
+
+  .comment-active {
     border-color: @primary-color !important;
     // box-shadow: 0 1px 1px 0 #90caf9, 0 1px 6px 0 #90caf9;
   }
-  .no-content{
-    color: #a1a1a1
+  .no-content {
+    color: #a1a1a1;
   }
-  
+
   /**聊天表情本地化*/
   .emoji-type-image.emoji-set-apple {
-    background-image: url("./image/emoji.png");
+    background-image: url('./image/emoji.png');
   }
   // update-begin--author:liaozhiyang---date:20240327---for：【QQYUN-8639】暗黑主题适配
   html[data-theme='dark'] {
     .emoji-type-image.emoji-set-apple {
-      background-image: url("./image/emoji_native.png");
+      background-image: url('./image/emoji_native.png');
     }
     .comment-main {
       border-color: rgba(253, 253, 253, 0.12);
@@ -412,7 +427,7 @@
       color: rgba(255, 255, 255, 0.85);
       border-color: rgba(253, 253, 253, 0.12);
     }
-    .comment-buttons{
+    .comment-buttons {
       border-color: rgba(253, 253, 253, 0.12);
     }
   }

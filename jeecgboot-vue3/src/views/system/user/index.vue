@@ -5,7 +5,9 @@
       <!--插槽:table标题-->
       <template #tableTitle>
         <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls" :disabled="isDisabledAuth('system:user:export')"> 导出</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls" :disabled="isDisabledAuth('system:user:export')">
+          导出</a-button
+        >
         <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
         <a-button type="primary" @click="openModal(true, {})" preIcon="ant-design:hdd-outlined"> 回收站</a-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
@@ -53,13 +55,12 @@
 
 <script lang="ts" name="system-user" setup>
   //ts语法
-  import { ref, computed, unref } from 'vue';
+  import { unref } from 'vue';
   import { BasicTable, TableAction, ActionItem } from '/@/components/Table';
   import UserDrawer from './UserDrawer.vue';
   import UserRecycleBinModal from './UserRecycleBinModal.vue';
   import PasswordModal from './PasswordModal.vue';
   import UserAgentModal from './UserAgentModal.vue';
-  import JThirdAppButton from '/@/components/jeecg/thirdApp/JThirdAppButton.vue';
   import UserQuitAgentModal from './UserQuitAgentModal.vue';
   import UserQuitModal from './UserQuitModal.vue';
   import { useDrawer } from '/@/components/Drawer';
@@ -67,8 +68,8 @@
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { columns, searchFormSchema } from './user.data';
-  import { listNoCareTenant, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch } from './user.api';
-  import {usePermission} from "/@/hooks/web/usePermission";
+  import { list, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch } from './user.api';
+  import { usePermission } from '/@/hooks/web/usePermission';
 
   const { createMessage, createConfirm } = useMessage();
   const { isDisabledAuth } = usePermission();
@@ -90,7 +91,7 @@
     designScope: 'user-list',
     tableProps: {
       title: '用户列表',
-      api: listNoCareTenant,
+      api: list,
       columns: columns,
       size: 'small',
       formConfig: {

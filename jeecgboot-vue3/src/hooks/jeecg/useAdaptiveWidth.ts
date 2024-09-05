@@ -41,7 +41,7 @@ export function useAdaptiveWidth(widthConfig = defWidthConfig, assign = true, de
     for (const key of configKeys) {
       try {
         // 通过js运算
-        let flag = new Function(`return ${innerWidth} ${key}`)();
+        const flag = new Function(`return ${innerWidth} ${key}`)();
         if (flag) {
           width = widthConfigAssign[key];
           break;

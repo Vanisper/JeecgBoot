@@ -134,23 +134,26 @@
         let headers = {
           'Content-Type': 'multipart/form-data;boundary = ' + new Date().getTime(),
         };
-        defHttp.post({ url: props.url, params: formData, headers }, { isTransformResponse: false }).then((res) => {
-          uploading.value = false;
-          if (res.success) {
-            if (res.code == 201) {
-              errorTip(res.message, res.result);
+        defHttp
+          .post({ url: props.url, params: formData, headers }, { isTransformResponse: false })
+          .then((res) => {
+            uploading.value = false;
+            if (res.success) {
+              if (res.code == 201) {
+                errorTip(res.message, res.result);
+              } else {
+                createMessage.success(res.message);
+              }
+              handleClose();
+              reset();
+              emit('ok');
             } else {
-              createMessage.success(res.message);
+              createMessage.warning(res.message);
             }
-            handleClose();
-            reset();
-            emit('ok');
-          } else {
-            createMessage.warning(res.message);
-          }
-        }).catch(() => {
-          uploading.value = false;
-        });
+          })
+          .catch(() => {
+            uploading.value = false;
+          });
       }
 
       //错误信息提示

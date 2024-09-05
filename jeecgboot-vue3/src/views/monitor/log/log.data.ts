@@ -74,12 +74,12 @@ export const exceptionColumns: BasicColumn[] = [
     dataIndex: 'username',
     width: 60,
     customRender: ({ record }) => {
-      let pname = record.username;
-      let pid = record.userid;
-      if(!pname && !pid){
-        return "";
+      const pname = record.username;
+      const pid = record.userid;
+      if (!pname && !pid) {
+        return '';
       }
-      return pname + " (账号: "+ pid + " )";
+      return pname + ' (账号: ' + pid + ' )';
     },
   },
   {

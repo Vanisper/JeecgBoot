@@ -18,7 +18,7 @@ export function useTable(tableProps?: Props): [
   (instance: TableActionType, formInstance: UseTableMethod) => void,
   TableActionType & {
     getForm: () => FormActionType;
-  }
+  },
 ] {
   const tableRef = ref<Nullable<TableActionType>>(null);
   const loadedRef = ref<Nullable<boolean>>(false);
@@ -61,8 +61,8 @@ export function useTable(tableProps?: Props): [
     }
     return table as TableActionType;
   }
-  
-  function getTableRef(){
+
+  function getTableRef() {
     return tableRef;
   }
 
@@ -161,7 +161,7 @@ export function useTable(tableProps?: Props): [
     },
     getTableRef: () => {
       return getTableRef();
-    }
+    },
   };
 
   return [register, methods];

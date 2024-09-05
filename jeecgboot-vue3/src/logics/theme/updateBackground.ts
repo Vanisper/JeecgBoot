@@ -62,7 +62,7 @@ export function updateSidebarBgColor(color?: string) {
     }
   }
   // update-begin--author:liaozhiyang---date:20230811---for：【QQYUN-5922】logo背景色渐变
-  let findIndex = SIDE_BAR_BG_COLOR_LIST.findIndex((item) => item === color);
+  const findIndex = SIDE_BAR_BG_COLOR_LIST.findIndex((item) => item === color);
   setCssVar(SIDER_LOGO_BG_COLOR, findIndex == -1 ? 'linear-gradient(180deg, #000000, #282828)' : SIDER_LOGO_BG_COLOR_LIST[findIndex]);
   // update-end--author:liaozhiyang---date:20230811---for：【QQYUN-5922】llogo背景色渐变
   setCssVar(SIDER_DARK_BG_COLOR, color);
@@ -76,7 +76,7 @@ export function updateSidebarBgColor(color?: string) {
   let isThemeBright = false;
   if (['#fff', '#ffffff'].includes(color!.toLowerCase()) && !darkMode) {
     theme = ThemeEnum.LIGHT;
-  } else if (['#009688', '#e74c3c','#037bd5'].includes(color!.toLowerCase()) && !darkMode) {
+  } else if (['#009688', '#e74c3c', '#037bd5'].includes(color!.toLowerCase()) && !darkMode) {
     theme = ThemeEnum.DARK;
     isThemeBright = true;
   } else {

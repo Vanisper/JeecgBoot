@@ -67,7 +67,7 @@
       watchEffect(() => {
         props.chartData && initCharts();
       });
-      
+
       function initCharts() {
         if (props.option) {
           Object.assign(option, cloneDeep(props.option));

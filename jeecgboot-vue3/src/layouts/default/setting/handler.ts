@@ -1,4 +1,4 @@
-import { HandlerEnum, tabsThemeOptions} from './enum';
+import { HandlerEnum, tabsThemeOptions } from './enum';
 import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
 import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
 import { updateGrayMode } from '/@/logics/theme/updateGrayMode';

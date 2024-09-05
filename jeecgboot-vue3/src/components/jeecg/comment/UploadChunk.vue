@@ -18,7 +18,7 @@
             <div class="content">
               <!-- 图片 -->
               <div v-if="isImage(item)" class="content-top" style="height: 100%">
-                <div class="content-image" :style="{'height':'100%', 'backgroundImage': 'url('+getImageSrc(item)+')'}">
+                <div class="content-image" :style="{ height: '100%', backgroundImage: 'url(' + getImageSrc(item) + ')' }">
                   <!--  <img style="height: 100%;" :src="getImageSrc(item)">-->
                 </div>
               </div>
@@ -32,7 +32,7 @@
                 </div>
               </template>
             </div>
-            <div class="layer" :class="{'layer-image':isImage(item)}">
+            <div class="layer" :class="{ 'layer-image': isImage(item) }">
               <div class="next" @click="viewImage(item)">
                 <div class="text">{{ item.name }} </div>
               </div>
@@ -46,11 +46,11 @@
             </div>
           </div>
         </div>
-        <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div> <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div>
+        <div class="item empty"></div><div class="item empty"></div><div class="item empty"></div> <div class="item empty"></div
+        ><div class="item empty"></div><div class="item empty"></div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -58,8 +58,8 @@
   import { useFileList } from './useComment';
   import { Tooltip } from 'ant-design-vue';
   import { UploadOutlined, FolderOutlined, DownloadOutlined, PaperClipOutlined, DeleteOutlined } from '@ant-design/icons-vue';
-  import {useModal} from "/@/components/Modal";
-  
+  import { useModal } from '/@/components/Modal';
+
   export default {
     name: 'UploadChunk',
     components: {
@@ -76,41 +76,44 @@
         default: false,
       },
     },
-    emits:['select'],
-    setup(_p, {emit}) {
+    emits: ['select'],
+    setup(_p, { emit }) {
       const { selectFileList, beforeUpload, handleRemove, getBackground, isImage, getImageSrc, viewImage } = useFileList();
 
       const [registerModel, { openModal }] = useModal();
-      
+
       function getUploadFileList() {
         let list = toRaw(selectFileList.value);
         console.log(list);
         return list;
       }
-      
-      function clear(){
+
+      function clear() {
         selectFileList.value = [];
       }
-      
-      watch(()=>selectFileList.value, (arr)=>{
-        if(arr && arr.length>0){
-          let name = arr[0].name;
-          if(name){
-            emit('select', name)
+
+      watch(
+        () => selectFileList.value,
+        (arr) => {
+          if (arr && arr.length > 0) {
+            let name = arr[0].name;
+            if (name) {
+              emit('select', name);
+            }
           }
         }
-      });
+      );
 
       function showFileModal() {
-        openModal(true, {})
+        openModal(true, {});
       }
 
       function onSelectFileOk(temp) {
         let arr = selectFileList.value;
         arr.push({
           ...temp,
-          exist: true
-        })
+          exist: true,
+        });
         selectFileList.value = arr;
       }
 
@@ -121,12 +124,12 @@
         getBackground,
         getUploadFileList,
         clear,
-        isImage, 
-        getImageSrc, 
+        isImage,
+        getImageSrc,
         viewImage,
         registerModel,
         showFileModal,
-        onSelectFileOk
+        onSelectFileOk,
       };
     },
   };

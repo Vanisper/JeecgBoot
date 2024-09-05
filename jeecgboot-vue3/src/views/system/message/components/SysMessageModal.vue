@@ -43,7 +43,7 @@
                   transform: activeKey == 'all' ? 'translate3d(130px, 0px, 0px)' : 'translate3d(215px, 0px, 0px)',
                   display: 'block',
                   width: '88px',
-                  height: '1px'
+                  height: '1px',
                 }"
               ></div>
             </div>
@@ -57,15 +57,14 @@
               <template #content>
                 <div>
                   <span class="search-label">回复、提到我的人?：</span>
-                  <span style="display: inline-block;">
+                  <span style="display: inline-block">
                     <div v-if="searchParams.fromUser" class="selected-user">
-                      <span>{{searchParams.realname}}</span>
-                      <span class="clear-user-icon"><close-outlined style="font-size: 12px" @click="clearSearchParamsUser"/></span>
+                      <span>{{ searchParams.realname }}</span>
+                      <span class="clear-user-icon"><close-outlined style="font-size: 12px" @click="clearSearchParamsUser" /></span>
                     </div>
                     <a-button v-else type="dashed" shape="circle" @click="openSelectPerson">
                       <plus-outlined />
                     </a-button>
-                    
                   </span>
                 </div>
                 <div class="search-date">
@@ -82,13 +81,13 @@
                   </div>
                 </div>
               </template>
-              
+
               <span v-if="conditionStr" class="anticon filtera">
                 <filter-outlined />
-                <span style="font-size:12px;margin-left: 3px">{{conditionStr}}</span>
-                <span style="display: flex;margin:0 5px;"><close-outlined style="font-size: 12px" @click="clearAll"/></span>
+                <span style="font-size: 12px; margin-left: 3px">{{ conditionStr }}</span>
+                <span style="display: flex; margin: 0 5px"><close-outlined style="font-size: 12px" @click="clearAll" /></span>
               </span>
-              <filter-outlined v-else/>
+              <filter-outlined v-else />
             </a-popover>
             <close-outlined @click="closeModal" />
           </div>
@@ -103,20 +102,27 @@
         </template>
 
         <a-tab-pane tab="全部消息" key="all" forceRender>
-          <sys-message-list ref="allMessageRef" @close="hrefThenClose" @detail="showDetailModal"/>
+          <sys-message-list ref="allMessageRef" @close="hrefThenClose" @detail="showDetailModal" />
         </a-tab-pane>
 
         <!-- 标星 -->
         <a-tab-pane tab="标星消息" key="star" forceRender>
-          <sys-message-list ref="starMessageRef" star @close="hrefThenClose" @detail="showDetailModal"/>
+          <sys-message-list ref="starMessageRef" star @close="hrefThenClose" @detail="showDetailModal" />
         </a-tab-pane>
       </a-tabs>
     </div>
   </BasicModal>
 
-  <user-select-modal isRadioSelection :showButton="false" labelKey="realname" rowKey="username" @register="regModal" @getSelectResult="getSelectedUser"></user-select-modal>
+  <user-select-modal
+    isRadioSelection
+    :showButton="false"
+    labelKey="realname"
+    rowKey="username"
+    @register="regModal"
+    @getSelectResult="getSelectedUser"
+  ></user-select-modal>
 
-  <DetailModal @register="registerDetail" :zIndex="1001"/>
+  <DetailModal @register="registerDetail" :zIndex="1001" />
 </template>
 
 <script>
@@ -125,10 +131,10 @@
   import JSelectUser from '/@/components/Form/src/jeecg/components/JSelectUser.vue';
   import { ref, unref, reactive, computed } from 'vue';
   // import SysMessageList from './SysMessageList.vue'
-  import UserSelectModal from '/@/components/Form/src/jeecg/components/modal/UserSelectModal.vue'
+  import UserSelectModal from '/@/components/Form/src/jeecg/components/modal/UserSelectModal.vue';
   import DetailModal from '/@/views/monitor/mynews/DetailModal.vue';
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
-  
+
   export default {
     name: 'SysMessageModal',
     components: {
@@ -141,10 +147,10 @@
       SysMessageList: createAsyncComponent(() => import('./SysMessageList.vue')),
       UserSelectModal,
       PlusOutlined,
-      DetailModal
+      DetailModal,
     },
-    emits:['register', 'refresh'],
-    setup(_p, {emit}) {
+    emits: ['register', 'refresh'],
+    setup(_p, { emit }) {
       const allMessageRef = ref();
       const starMessageRef = ref();
       const activeKey = ref('all');
@@ -155,7 +161,7 @@
       function handleChangePanel(key) {
         activeKey.value = key;
       }
-      
+
       // 查询区域存储值
       const searchParams = reactive({
         fromUser: '',
@@ -164,29 +170,29 @@
         rangeDate: [],
       });
 
-      function loadData(){
+      function loadData() {
         let params = {
           fromUser: searchParams.fromUser,
           rangeDateKey: searchParams.rangeDateKey,
           rangeDate: searchParams.rangeDate,
-        }
-        if(activeKey.value == 'all'){
+        };
+        if (activeKey.value == 'all') {
           getRefPromise(allMessageRef).then(() => {
             allMessageRef.value.reload(params);
           });
-        }else{
+        } else {
           starMessageRef.value.reload(params);
         }
       }
-      
+
       //useModalInner
       const [registerModal, { closeModal }] = useModalInner(async (data) => {
         //每次弹窗打开 加载最新的数据
         loadData();
       });
-      
+
       const showSearch = ref(false);
-      
+
       function handleChangeSearchPerson(value, a) {
         console.log('选择改变', value, a);
         showSearch.value = true;
@@ -205,23 +211,23 @@
       ]);
       function handleClickDateTag(item) {
         for (let a of dateTags) {
-          if(a.key != item.key){
+          if (a.key != item.key) {
             a.active = false;
           }
         }
         item.active = !item.active;
-        if(item.active == false){
-          searchParams.rangeDateKey = ''
-        }else{
+        if (item.active == false) {
+          searchParams.rangeDateKey = '';
+        } else {
           searchParams.rangeDateKey = item.key;
         }
         if (item.key == 'zdy') {
           // 自定义日期查询走的是 handleChangeSearchDate
-          if(item.active == false){
-            searchParams.rangeDate = []
+          if (item.active == false) {
+            searchParams.rangeDate = [];
             loadData();
           }
-        }else{
+        } else {
           loadData();
         }
       }
@@ -236,51 +242,51 @@
       });
       const searchRangeDate = ref([]);
       function handleChangeSearchDate(_value, dateStringArray) {
-        searchParams.rangeDate = [...dateStringArray]
+        searchParams.rangeDate = [...dateStringArray];
         loadData();
       }
-      
-      function hrefThenClose(id){
-        emit('refresh', id)
-       // closeModal();
+
+      function hrefThenClose(id) {
+        emit('refresh', id);
+        // closeModal();
       }
-      
+
       // 有查询条件值的时候显示该字符串
-      const conditionStr = computed(()=>{
+      const conditionStr = computed(() => {
         const { fromUser, rangeDateKey, realname } = searchParams;
-        if(!fromUser && !rangeDateKey){
-          return ''
+        if (!fromUser && !rangeDateKey) {
+          return '';
         }
         let arr = [];
-        if(fromUser){
-          arr.push(realname)
+        if (fromUser) {
+          arr.push(realname);
         }
-        if(rangeDateKey){
-          let rangDates = dateTags.filter(item=>item.key == rangeDateKey);
-          if(rangDates && rangDates.length>0){
-            arr.push(rangDates[0].text)
+        if (rangeDateKey) {
+          let rangDates = dateTags.filter((item) => item.key == rangeDateKey);
+          if (rangDates && rangDates.length > 0) {
+            arr.push(rangDates[0].text);
           }
         }
-        return arr.join('、')
+        return arr.join('、');
       });
 
       //注册model
       const [regModal, { openModal }] = useModal();
 
-      function getSelectedUser(options, value){
-        if(options && options.length>0){
-          searchParams.fromUser = value
+      function getSelectedUser(options, value) {
+        if (options && options.length > 0) {
+          searchParams.fromUser = value;
           searchParams.realname = options[0].label;
         }
       }
-      
-      function openSelectPerson(){
-        openModal(true, {})
+
+      function openSelectPerson() {
+        openModal(true, {});
       }
-      
-      function clearSearchParamsUser(){
-        searchParams.fromUser = ''
-        searchParams.realname = ''
+
+      function clearSearchParamsUser() {
+        searchParams.fromUser = '';
+        searchParams.realname = '';
       }
 
       function getRefPromise(componentRef) {
@@ -297,12 +303,12 @@
           })();
         });
       }
-      
-      function clearAll(){
-        searchParams.fromUser='';
-        searchParams.realname='';
-        searchParams.rangeDateKey='';
-        searchParams.rangeDate=[];
+
+      function clearAll() {
+        searchParams.fromUser = '';
+        searchParams.realname = '';
+        searchParams.rangeDateKey = '';
+        searchParams.rangeDate = [];
         for (let a of dateTags) {
           a.active = false;
         }
@@ -310,8 +316,8 @@
       }
 
       const [registerDetail, { openModal: openDetailModal }] = useModal();
-      function showDetailModal(record){
-        openDetailModal(true, {record: unref(record), isUpdate: true})
+      function showDetailModal(record) {
+        openDetailModal(true, { record: unref(record), isUpdate: true });
       }
       return {
         conditionStr,
@@ -320,7 +326,7 @@
         openSelectPerson,
         clearSearchParamsUser,
         clearAll,
-        
+
         registerModal,
         activeKey,
         handleChangePanel,
@@ -340,21 +346,22 @@
         allMessageRef,
         starMessageRef,
         registerDetail,
-        showDetailModal
-     
+        showDetailModal,
       };
     },
   };
 </script>
 
 <style lang="less">
-
-  @keyframes move22{
-    0%{ transform:translateY(0px); }
-    100%{transform:translateY(600px);}
+  @keyframes move22 {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(600px);
+    }
   }
 
-  
   .sys-msg-modal {
     .ant-modal-header {
       padding-bottom: 0;
@@ -369,7 +376,7 @@
       position: absolute;
       right: 10px;
       top: calc(100% - 600px);
-/*      animation-name: move22;
+      /*      animation-name: move22;
       animation-duration:0.8s;
       animation-timing-function:ease;*/
     }
@@ -383,20 +390,20 @@
       display: inline-block;
       width: 220px;
       vertical-align: top;
-      
+
       .icons {
         display: flex;
         height: 100%;
         flex-direction: row;
         justify-content: flex-end;
-  
+
         > span.anticon {
           padding: 10px;
           display: inline-block;
           cursor: pointer;
         }
 
-        > span.filtera{
+        > span.filtera {
           //background-color: #d3eafd;
           background-color: #eff1f2;
           border-radius: 4px;
@@ -407,15 +414,13 @@
           line-height: 25px;
           //color: #2196f3;
           display: flex;
-          
-          >span.anticon{
+
+          > span.anticon {
             height: auto;
             line-height: 9px;
             display: inline-block;
           }
         }
-
-    
       }
     }
     .ant-tabs-nav-wrap {
@@ -443,8 +448,8 @@
         outline: none;
         cursor: pointer;
       }
-      .ant-tabs-tab+.ant-tabs-tab {
-         margin: 0 0 0 32px;
+      .ant-tabs-tab + .ant-tabs-tab {
+        margin: 0 0 0 32px;
       }
       .ant-tabs-ink-bar {
         background: @primary-color;
@@ -512,11 +517,11 @@
     }
   }
 
-  .selected-user{
+  .selected-user {
     background: #f5f5f5;
     padding: 2px 14px;
     border-radius: 30px;
-    .clear-user-icon{
+    .clear-user-icon {
       margin-left: 5px;
     }
   }

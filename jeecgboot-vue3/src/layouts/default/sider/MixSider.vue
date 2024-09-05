@@ -63,7 +63,7 @@
 <script lang="ts">
   import type { Menu } from '/@/router/types';
   import type { CSSProperties } from 'vue';
-  import { computed, defineComponent, onMounted, ref, unref, watch} from 'vue';
+  import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue';
   import type { RouteLocationNormalized } from 'vue-router';
   import { ScrollContainer } from '/@/components/Container';
   import { SimpleMenu, SimpleMenuTag } from '/@/components/SimpleMenu';
@@ -531,7 +531,9 @@
         justify-content: space-between;
 
         text-align: center;
-        .text {flex: 1;}
+        .text {
+          flex: 1;
+        }
 
         &.show {
           min-width: 130px;

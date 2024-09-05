@@ -94,7 +94,7 @@ function onMessage(e) {
   console.debug('[WebSocket] -----接收消息-------', e.data);
   try {
     //update-begin---author:wangshuai---date:2024-05-07---for:【issues/1161】前端websocket因心跳导致监听不起作用---
-    if(e==='ping'){
+    if (e === 'ping') {
       return;
     }
     //update-end---author:wangshuai---date:2024-05-07---for:【issues/1161】前端websocket因心跳导致监听不起作用---
@@ -110,7 +110,6 @@ function onMessage(e) {
     console.error('[WebSocket] data解析失败：', err);
   }
 }
-
 
 /**
  * 添加 WebSocket 消息监听
