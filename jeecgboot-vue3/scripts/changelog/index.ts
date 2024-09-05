@@ -32,13 +32,13 @@ type Log = {
   /* 描述 */
   desc: string;
   /* 主题 */
-  reg: string;
+  reg?: string;
   /* commit主要内容 */
-  subject: string;
+  subject?: string;
   /* commit类型 */
-  type: string;
+  type?: string;
   /* commit作用域 ｜ 文件或者模块 */
-  scope: string;
+  scope?: string;
 };
 
 type CommitInfo = {
@@ -195,11 +195,11 @@ const main = async () => {
 
     /** 功能新增 */
     const featData = item.content
-      .filter((item) => item.type === 'feat' || item.subject.includes('Merge'))
+      .filter((item) => item.type === 'feat' || item.subject?.includes('Merge'))
       .map(
         (item) =>
           `* **${item.scope || 'all'}:** ${
-            item.subject.includes('Merge')
+            item.subject?.includes('Merge')
               ? // biome-ignore lint/style/useTemplate: <explanation>
                 ' ' + replacePull(item.subject)
               : item.subject
