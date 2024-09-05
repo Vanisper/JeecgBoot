@@ -8,5 +8,5 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["tests/**/*.ts", "build/**/*.ts", "build/**/*.d.ts", "**/enums/**.ts" , "mock/**/*.*ts", "vite.config.*ts", "types/**/*.d.ts", "types/**/*.ts", "build/generate/generateModifyVars.ts"]
+  "include": ["tests/**/*.ts", "commitlint.config.ts", "scripts/**/*.ts", "scripts/**/*.d.ts", "build/**/*.ts", "build/**/*.d.ts", "**/enums/**.ts" , "mock/**/*.*ts", "vite.config.*ts", "types/**/*.d.ts", "types/**/*.ts", "build/generate/generateModifyVars.ts"]
 }

@@ -26,6 +26,7 @@ module.exports = defineConfig({
   ],
   rules: {
     'vue/script-setup-uses-vars': 'error',
+    '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
@@ -56,6 +57,10 @@ module.exports = defineConfig({
     // ],
     'space-before-function-paren': 'off',
 
+    'jest/no-commented-out-tests': 'off',
+
+    'vue/multi-word-component-names': 'off',
+    'vue/prefer-import-from-vue': 'off',
     'vue/attributes-order': 'off',
     'vue/one-component-per-file': 'off',
     'vue/html-closing-bracket-newline': 'off',
