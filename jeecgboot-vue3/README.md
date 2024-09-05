@@ -7,6 +7,27 @@
 
 ## 使用
 
+``` shell
+# 切换到目标目录
+cd ~/Documents/Projects/jeecgboot-vue3-demo
+
+# 下载指定分支的 ZIP 文件
+curl -L -o repo.zip https://github.com/Vanisper/JeecgBoot/archive/refs/heads/development.zip
+
+# 解压缩 ZIP 文件
+unzip repo.zip
+
+# 移动指定目录的内容到当前目录
+# mv JeecgBoot-development/jeecgboot-vue3/* .
+rsync -av --progress JeecgBoot-development/jeecgboot-vue3/ .
+
+# 删除解压缩的文件夹和 ZIP 文件
+rm -rf JeecgBoot-development repo.zip
+```
+
+
+> 以下方案暂时废弃，因为无法保证子目录的完整性，会丢失一些以 `.` 开头的文件，例如 `.gitignore`、`.editorconfig`、`.vscode` 等。
+
 ```shell
 # 初始化一个新的 Git 仓库
 git init <target_directory>
